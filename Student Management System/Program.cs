@@ -216,10 +216,33 @@ namespace StudentManagementSystem
             Console.Write("Enter Subject: ");
             t.Subject = Console.ReadLine();
 
-            Console.Write("Set Username for login: ");
-            t.Username = Console.ReadLine();
-            Console.Write("Set Password: ");
-            t.Password = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Set Username for login: ");
+                string username = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(username))
+                {
+                    t.Username = username;
+                    break;
+                }
+
+                Console.WriteLine("Username cannot be empty!");
+            }
+
+            while (true)
+            {
+                Console.Write("Set Password: ");
+                string password = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(password))
+                {
+                    t.Password = password;
+                    break;
+                }
+
+                Console.WriteLine("Password cannot be empty!");
+            }
 
             teachers.Add(t);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -290,10 +313,33 @@ namespace StudentManagementSystem
             int.TryParse(Console.ReadLine(), out int age);
             s.Age = age;
 
-            Console.Write("Set Username for login: ");
-            s.Username = Console.ReadLine();
-            Console.Write("Set Password: ");
-            s.Password = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Set Username for login: ");
+                string username = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(username))
+                {
+                    s.Username = username;
+                    break;
+                }
+
+                Console.WriteLine("Username cannot be empty!");
+            }
+
+            while (true)
+            {
+                Console.Write("Set Password: ");
+                string password = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(password))
+                {
+                    s.Password = password;
+                    break;
+                }
+
+                Console.WriteLine("Password cannot be empty!");
+            }
 
             students.Add(s);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -452,21 +498,37 @@ namespace StudentManagementSystem
         static void UploadAssignment(Teacher teacher)
         {
             Console.Clear();
-            Console.WriteLine("======= UPLOAD ASSIGNMENT =======\n");
+            Console.WriteLine("======= CREATE ASSIGNMENT =======\n");
 
-            Assignment a = new Assignment();
+            Assignment assignment = new Assignment();
 
-            Console.Write("Enter Title: ");
-            a.Title = Console.ReadLine();
-            Console.Write("Enter Description: ");
-            a.Description = Console.ReadLine();
+            Console.Write("Enter Assignment Title: ");
+            assignment.Title = Console.ReadLine();
+
             Console.Write("Enter Total Marks: ");
             int.TryParse(Console.ReadLine(), out int marks);
-            a.TotalMarks = marks;
+            assignment.TotalMarks = marks;
 
-            teacher.Assignments.Add(a);
+            Console.WriteLine("\nNow add questions for this assignment.");
+
+            while (true)
+            {
+                Console.Write("Enter Question Description: ");
+                string question = Console.ReadLine();
+
+                assignment.Description += "\n- " + question;
+
+                Console.Write("Add another question? (yes/no): ");
+                string more = Console.ReadLine().ToLower();
+
+                if (more != "yes")
+                    break;
+            }
+
+            teacher.Assignments.Add(assignment);
+
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nAssignment uploaded successfully!");
+            Console.WriteLine("\nAssignment created successfully!");
             Console.ReadKey();
         }
 
@@ -475,50 +537,71 @@ namespace StudentManagementSystem
             Console.Clear();
             Console.WriteLine("======= UPLOAD QUIZ =======\n");
 
-            Quiz q = new Quiz();
-
-            Console.Write("Enter Question: ");
-            q.Question = Console.ReadLine();
-
-            Console.Write("Is this MCQ Quiz? (yes/no): ");
-            string type = Console.ReadLine().ToLower();
-
-            if (type == "yes")
+            while (true)
             {
-                q.IsMCQ = true;
+                Quiz q = new Quiz();
 
-                Console.Write("Option A: ");
-                q.OptionA = Console.ReadLine();
+                Console.Write("Enter Question: ");
+                q.Question = Console.ReadLine();
 
-                Console.Write("Option B: ");
-                q.OptionB = Console.ReadLine();
+                Console.Write("Is this MCQ Quiz? (yes/no): ");
+                string type = Console.ReadLine().ToLower();
 
-                Console.Write("Option C: ");
-                q.OptionC = Console.ReadLine();
+                if (type == "yes")
+                {
+                    q.IsMCQ = true;
 
-                Console.Write("Option D: ");
-                q.OptionD = Console.ReadLine();
+                    Console.Write("Option A: ");
+                    q.OptionA = Console.ReadLine();
 
-                Console.Write("Correct Answer (A/B/C/D): ");
-                q.CorrectAnswer = Console.ReadLine().ToUpper();
+                    Console.Write("Option B: ");
+                    q.OptionB = Console.ReadLine();
+
+                    Console.Write("Option C: ");
+                    q.OptionC = Console.ReadLine();
+
+                    Console.Write("Option D: ");
+                    q.OptionD = Console.ReadLine();
+
+                    while (true)
+                    {
+                        Console.Write("Correct Answer (A/B/C/D): ");
+                        string ans = Console.ReadLine().ToUpper();
+
+                        if (ans == "A" || ans == "B" || ans == "C" || ans == "D")
+                        {
+                            q.CorrectAnswer = ans;
+                            break;
+                        }
+
+                        Console.WriteLine("Invalid option! Enter A, B, C or D.");
+                    }
+                }
+                else
+                {
+                    q.IsMCQ = false;
+
+                    Console.Write("Enter Expected Answer: ");
+                    q.CorrectAnswer = Console.ReadLine();
+                }
+
+                Console.Write("Enter Total Marks: ");
+                int.TryParse(Console.ReadLine(), out int marks);
+                q.TotalMarks = marks;
+
+                teacher.Quizzes.Add(q);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nQuestion added successfully!");
+
+                Console.ResetColor();
+
+                Console.Write("\nDo you want to add another question? (yes/no): ");
+                string more = Console.ReadLine().ToLower();
+
+                if (more != "yes")
+                    break;
             }
-            else
-            {
-                q.IsMCQ = false;
-
-                Console.Write("Enter Expected Answer (for reference): ");
-                q.CorrectAnswer = Console.ReadLine();
-            }
-
-            Console.Write("Enter Total Marks: ");
-            int.TryParse(Console.ReadLine(), out int marks);
-            q.TotalMarks = marks;
-
-            teacher.Quizzes.Add(q);
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nQuiz uploaded successfully!");
-            Console.ReadKey();
         }
 
         static void ViewStudentSubmissions(Teacher teacher)
@@ -617,29 +700,25 @@ namespace StudentManagementSystem
                 Console.Clear();
                 Console.WriteLine($"Welcome, {student.Name} (Student)\n");
 
-                Console.WriteLine("1. View Assignments");
-                Console.WriteLine("2. Submit Assignment");
-                Console.WriteLine("3. View Quizzes");
-                Console.WriteLine("4. Solve Quiz");
-                Console.WriteLine("5. View Marks");
-                Console.WriteLine("6. Logout\n");
+                Console.WriteLine("1. Submit Assignment");
+                Console.WriteLine("2. Submit Quiz");
+                Console.WriteLine("3. View Marks");
+                Console.WriteLine("4. Logout\n");
 
                 Console.Write("Enter choice: ");
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
-                    case "1": ViewAssignments(student); break;
-                    case "2": SubmitAssignment(student); break;
-                    case "3": ViewQuizzes(student); break;
-                    case "4": SolveQuiz(student); break;
-                    case "5": ViewMarks(student); break;
-                    case "6": ShowWelcomeScreen(); break;
+                    case "1": SubmitAssignment(student); break;
+                    case "2": SolveQuiz(student); break;
+                    case "3": ViewMarks(student); break;
+                    case "4": ShowWelcomeScreen(); break;
                 }
             }
         }
 
-        static void ViewAssignments(Student student)
+        static void SubmitAssignment(Student student)
         {
             Console.Clear();
             Console.WriteLine("======= ASSIGNMENTS =======\n");
@@ -651,97 +730,45 @@ namespace StudentManagementSystem
                 return;
             }
 
-            if (student.AssignedTeacher.Assignments.Count == 0)
-            {
-                Console.WriteLine("No assignments uploaded yet!");
-                Console.ReadKey();
-                return;
-            }
-
-            foreach (var a in student.AssignedTeacher.Assignments)
-                Console.WriteLine($"ID: {a.ID} Title: {a.Title} - Description: {a.Description} - Marks: {a.TotalMarks}");
-
-            Console.ReadKey();
-        }
-
-        static void SubmitAssignment(Student student)
-        {
-            Console.Clear();
-            Console.WriteLine("======= SUBMIT ASSIGNMENT =======\n");
-
-            if (student.AssignedTeacher == null)
-            {
-                Console.WriteLine("No teacher assigned yet!");
-                Console.ReadKey();
-                return;
-            }
-
+            // Sirf wo assignments jo abhi submit nahi hue
             var assignments = student.AssignedTeacher.Assignments
                 .Where(a => !student.AssignmentSubmissions.Any(sub => sub.Assignment.ID == a.ID))
+                .OrderBy(a => a.ID)
                 .ToList();
 
             if (assignments.Count == 0)
             {
-                Console.WriteLine("No new assignments available to submit.");
+                Console.WriteLine("No new assignments available.");
                 Console.ReadKey();
                 return;
             }
 
-            foreach (var a in assignments)
-                Console.WriteLine($"ID: {a.ID} Title: {a.Title}");
-
-            Console.Write("Enter Assignment ID to submit: ");
-            if (!int.TryParse(Console.ReadLine(), out int id))
+            foreach (var assignment in assignments)
             {
-                Console.WriteLine("Invalid input!");
+                Console.Clear();
+                Console.WriteLine($"Assignment ID: {assignment.ID}");
+                Console.WriteLine($"Title: {assignment.Title}");
+                Console.WriteLine($"Description: {assignment.Description}");
+                Console.WriteLine($"Total Marks: {assignment.TotalMarks}\n");
+
+                Console.Write("Enter your submission text: ");
+                string submissionText = Console.ReadLine();
+
+                student.AssignmentSubmissions.Add(new AssignmentSubmission
+                {
+                    Assignment = assignment,
+                    SubmissionText = submissionText
+                });
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nAssignment submitted successfully!");
+                Console.ResetColor();
+
+                Console.WriteLine("\nPress any key to go to next assignment...");
                 Console.ReadKey();
-                return;
             }
 
-            var assignment = assignments.FirstOrDefault(a => a.ID == id);
-            if (assignment == null)
-            {
-                Console.WriteLine("Invalid Assignment ID or already submitted!");
-                Console.ReadKey();
-                return;
-            }
-
-            Console.Write("Enter your submission text: ");
-            string submission = Console.ReadLine();
-
-            student.AssignmentSubmissions.Add(new AssignmentSubmission
-            {
-                Assignment = assignment,
-                SubmissionText = submission
-            });
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Assignment submitted successfully!");
-            Console.ReadKey();
-        }
-
-        static void ViewQuizzes(Student student)
-        {
-            Console.Clear();
-            Console.WriteLine("======= QUIZZES =======\n");
-
-            if (student.AssignedTeacher == null)
-            {
-                Console.WriteLine("No teacher assigned yet!");
-                Console.ReadKey();
-                return;
-            }
-
-            if (student.AssignedTeacher.Quizzes.Count == 0)
-            {
-                Console.WriteLine("No quizzes uploaded yet!");
-                Console.ReadKey();
-                return;
-            }
-
-            foreach (var q in student.AssignedTeacher.Quizzes)
-                Console.WriteLine($"ID: {q.ID} Question: {q.Question} - Marks: {q.TotalMarks}");
-
+            Console.WriteLine("\nAll assignments submitted!");
             Console.ReadKey();
         }
 
@@ -759,6 +786,7 @@ namespace StudentManagementSystem
 
             var quizzes = student.AssignedTeacher.Quizzes
                 .Where(q => !student.QuizSubmissions.Any(sub => sub.Quiz.ID == q.ID))
+                .OrderBy(q => q.ID)
                 .ToList();
 
             if (quizzes.Count == 0)
@@ -768,63 +796,62 @@ namespace StudentManagementSystem
                 return;
             }
 
-            foreach (var q in quizzes)
-                Console.WriteLine($"ID: {q.ID} Question: {q.Question}");
+            int totalMarks = 0;
+            int obtainedMarks = 0;
 
-            Console.Write("Enter Quiz ID: ");
-            int.TryParse(Console.ReadLine(), out int id);
-
-            var quiz = quizzes.FirstOrDefault(q => q.ID == id);
-
-            if (quiz == null)
+            foreach (var quiz in quizzes)
             {
-                Console.WriteLine("Invalid Quiz ID!");
+                Console.Clear();
+                Console.WriteLine($"Question ID: {quiz.ID}");
+                Console.WriteLine(quiz.Question);
+
+                if (quiz.IsMCQ)
+                {
+                    Console.WriteLine($"A) {quiz.OptionA}");
+                    Console.WriteLine($"B) {quiz.OptionB}");
+                    Console.WriteLine($"C) {quiz.OptionC}");
+                    Console.WriteLine($"D) {quiz.OptionD}");
+
+                    Console.Write("Enter answer (A/B/C/D): ");
+                    string answer = Console.ReadLine().ToUpper();
+
+                    int marks = 0;
+                    if (answer == quiz.CorrectAnswer)
+                        marks = quiz.TotalMarks;
+
+                    obtainedMarks += marks;
+                    totalMarks += quiz.TotalMarks;
+
+                    student.QuizSubmissions.Add(new QuizSubmission
+                    {
+                        Quiz = quiz,
+                        Answer = answer,
+                        MarksObtained = marks
+                    });
+                }
+                else
+                {
+                    Console.Write("Enter descriptive answer: ");
+                    string answer = Console.ReadLine();
+
+                    totalMarks += quiz.TotalMarks;
+
+                    student.QuizSubmissions.Add(new QuizSubmission
+                    {
+                        Quiz = quiz,
+                        Answer = answer
+                    });
+                }
+
+                Console.WriteLine("\nPress any key for next question...");
                 Console.ReadKey();
-                return;
             }
 
-            if (quiz.IsMCQ)
-            {
-                Console.WriteLine($"\nA) {quiz.OptionA}");
-                Console.WriteLine($"B) {quiz.OptionB}");
-                Console.WriteLine($"C) {quiz.OptionC}");
-                Console.WriteLine($"D) {quiz.OptionD}");
-
-                Console.Write("Enter your answer (A/B/C/D): ");
-                string answer = Console.ReadLine().ToUpper();
-
-                int marks = 0;
-
-                if (answer == quiz.CorrectAnswer)
-                    marks = quiz.TotalMarks;
-
-                student.QuizSubmissions.Add(new QuizSubmission
-                {
-                    Quiz = quiz,
-                    Answer = answer,
-                    MarksObtained = marks
-                });
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Quiz submitted! Marks: {marks}/{quiz.TotalMarks}");
-            }
-            else
-            {
-                Console.Write("Enter your descriptive answer: ");
-                string answer = Console.ReadLine();
-
-                student.QuizSubmissions.Add(new QuizSubmission
-                {
-                    Quiz = quiz,
-                    Answer = answer
-                });
-
-                Console.WriteLine("Answer submitted! Teacher will grade it.");
-            }
-
+            Console.Clear();
+            Console.WriteLine("Quiz Completed!");
+            Console.WriteLine($"Total Marks: {obtainedMarks}/{totalMarks}");
             Console.ReadKey();
         }
-
         static void ViewMarks(Student student)
         {
             Console.Clear();
