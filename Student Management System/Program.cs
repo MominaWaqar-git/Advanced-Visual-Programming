@@ -23,7 +23,7 @@ namespace StudentManagementSystem
 
     class Student : User
     {
-        public Teacher AssignedTeacher { get; set; }
+        public List<Teacher> AssignedTeachers = new List<Teacher>();
         public List<AssignmentSubmission> AssignmentSubmissions = new List<AssignmentSubmission>();
         public List<QuizSubmission> QuizSubmissions = new List<QuizSubmission>();
     }
@@ -286,6 +286,12 @@ namespace StudentManagementSystem
             var teacher = teachers.FirstOrDefault(t => t.ID == id);
             if (teacher != null)
             {
+                foreach (var s in students)
+                {
+                    if (s.AssignedTeachers.Contains(teacher))
+                        s.AssignedTeachers.Remove(teacher);
+                }
+
                 teachers.Remove(teacher);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Teacher deleted successfully!");
@@ -368,7 +374,7 @@ namespace StudentManagementSystem
             Console.WriteLine("\nID\tName\tAge\tAssigned Teacher\tUsername");
             foreach (var s in list)
             {
-                string teacherName = s.AssignedTeacher != null ? s.AssignedTeacher.Name : "Not Assigned";
+                string teacherName = s.AssignedTeachers.Count > 0 ? string.Join(", ", s.AssignedTeachers.Select(t => t.Name)) : "Not Assigned";
                 Console.WriteLine($"{s.ID}\t{s.Name}\t{s.Age}\t{teacherName}\t{s.Username}");
             }
             Console.ReadKey();
@@ -434,7 +440,7 @@ namespace StudentManagementSystem
                 return;
             }
 
-            student.AssignedTeacher = teacher;
+            student.AssignedTeachers.Add(teacher);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Teacher {teacher.Name} assigned to Student {student.Name} successfully!");
             Console.ReadKey();
@@ -516,7 +522,10 @@ namespace StudentManagementSystem
                 Console.Write("Enter Question Description: ");
                 string question = Console.ReadLine();
 
-                assignment.Description += "\n- " + question;
+                if (string.IsNullOrEmpty(assignment.Description))
+                    assignment.Description = "- " + question;
+                else
+                    assignment.Description += "\n- " + question;
 
                 Console.Write("Add another question? (yes/no): ");
                 string more = Console.ReadLine().ToLower();
@@ -609,7 +618,7 @@ namespace StudentManagementSystem
             Console.Clear();
             Console.WriteLine("======= STUDENT SUBMISSIONS =======\n");
 
-            var myStudents = students.Where(s => s.AssignedTeacher == teacher).ToList();
+            var myStudents = students.Where(s => s.AssignedTeachers.Contains(teacher)).ToList();
             if (myStudents.Count == 0)
             {
                 Console.WriteLine("No assigned students found!");
@@ -621,10 +630,10 @@ namespace StudentManagementSystem
             {
                 Console.WriteLine($"Student: {s.Name}");
                 foreach (var sub in s.AssignmentSubmissions)
-                    if (teacher.Assignments.Contains(sub.Assignment))
+                    if (teacher.Assignments.Any(a => a.ID == sub.Assignment.ID))
                         Console.WriteLine($"Assignment: {sub.Assignment.Title} - Submitted: {sub.SubmissionText} - Marks: {(sub.MarksObtained==-1 ? "Not Graded" : sub.MarksObtained.ToString())}");
                 foreach (var qsub in s.QuizSubmissions)
-                    if (teacher.Quizzes.Contains(qsub.Quiz))
+                    if (teacher.Quizzes.Any(q => q.ID == qsub.Quiz.ID))
                         Console.WriteLine($"Quiz: {qsub.Quiz.Question} - Answer: {qsub.Answer} - Marks: {(qsub.MarksObtained==-1 ? "Not Graded" : qsub.MarksObtained.ToString())}");
                 Console.WriteLine();
             }
@@ -636,7 +645,7 @@ namespace StudentManagementSystem
             Console.Clear();
             Console.WriteLine("======= GRADE SUBMISSIONS =======\n");
 
-            var myStudents = students.Where(s => s.AssignedTeacher == teacher).ToList();
+            var myStudents = students.Where(s => s.AssignedTeachers.Contains(teacher)).ToList();
             foreach (var s in myStudents)
             {
                 foreach (var sub in s.AssignmentSubmissions)
@@ -723,7 +732,7 @@ namespace StudentManagementSystem
             Console.Clear();
             Console.WriteLine("======= ASSIGNMENTS =======\n");
 
-            if (student.AssignedTeacher == null)
+            if (student.AssignedTeachers.Count == 0)
             {
                 Console.WriteLine("No teacher assigned yet!");
                 Console.ReadKey();
@@ -731,9 +740,8 @@ namespace StudentManagementSystem
             }
 
             // Sirf wo assignments jo abhi submit nahi hue
-            var assignments = student.AssignedTeacher.Assignments
-                .Where(a => !student.AssignmentSubmissions.Any(sub => sub.Assignment.ID == a.ID))
-                .OrderBy(a => a.ID)
+            var assignments = student.AssignedTeachers
+                .SelectMany(t => t.Assignments)
                 .ToList();
 
             if (assignments.Count == 0)
@@ -777,16 +785,15 @@ namespace StudentManagementSystem
             Console.Clear();
             Console.WriteLine("======= SOLVE QUIZ =======\n");
 
-            if (student.AssignedTeacher == null)
+            if (student.AssignedTeachers.Count == 0)
             {
                 Console.WriteLine("No teacher assigned yet!");
                 Console.ReadKey();
                 return;
             }
 
-            var quizzes = student.AssignedTeacher.Quizzes
-                .Where(q => !student.QuizSubmissions.Any(sub => sub.Quiz.ID == q.ID))
-                .OrderBy(q => q.ID)
+            var quizzes = student.AssignedTeachers
+                .SelectMany(t => t.Quizzes)
                 .ToList();
 
             if (quizzes.Count == 0)
