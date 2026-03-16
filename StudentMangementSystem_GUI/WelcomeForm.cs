@@ -48,5 +48,12 @@ namespace StudentManagementSystem
         {
 
         }
+
+        private void next_Click(object sender, EventArgs e)
+        {
+            StudentLoginForm student = new StudentLoginForm();
+            student.Show();
+            this.Hide();
+        }
     }
 }
