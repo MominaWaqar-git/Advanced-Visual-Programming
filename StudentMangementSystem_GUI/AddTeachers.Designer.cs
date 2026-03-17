@@ -37,7 +37,6 @@
             this.txtAge = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSubject = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtCNIC = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,11 +46,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPhoneNumber = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -103,6 +103,7 @@
             this.back.BackColor = System.Drawing.Color.Navy;
             this.back.FlatAppearance.BorderSize = 0;
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.White;
             this.back.Location = new System.Drawing.Point(220, 438);
@@ -120,6 +121,7 @@
             this.save.BackColor = System.Drawing.Color.Navy;
             this.save.FlatAppearance.BorderSize = 0;
             this.save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.save.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.save.ForeColor = System.Drawing.Color.White;
             this.save.Location = new System.Drawing.Point(443, 438);
@@ -157,18 +159,6 @@
             this.txtSubject.Size = new System.Drawing.Size(185, 20);
             this.txtSubject.TabIndex = 34;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(212, 380);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "Password:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // txtCNIC
             // 
             this.txtCNIC.Location = new System.Drawing.Point(317, 160);
@@ -187,7 +177,6 @@
             this.label3.TabIndex = 31;
             this.label3.Text = "CNIC";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label5
             // 
@@ -256,7 +245,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(185, 20);
             this.txtEmail.TabIndex = 48;
-            this.txtEmail.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // txtPhoneNumber
             // 
@@ -264,13 +252,6 @@
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(185, 20);
             this.txtPhoneNumber.TabIndex = 49;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(317, 377);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(185, 20);
-            this.txtPassword.TabIndex = 50;
             // 
             // txtUserName
             // 
@@ -309,6 +290,25 @@
             this.txtName.Size = new System.Drawing.Size(185, 20);
             this.txtName.TabIndex = 54;
             // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(317, 377);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(185, 20);
+            this.txtAddress.TabIndex = 50;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label2.Location = new System.Drawing.Point(212, 380);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 17);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Address";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // AddTeachers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,7 +318,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtUserName);
-            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label9);
@@ -359,7 +359,6 @@
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtSubject;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCNIC;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
@@ -369,10 +368,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPhoneNumber;
-        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Label label2;
     }
 }
