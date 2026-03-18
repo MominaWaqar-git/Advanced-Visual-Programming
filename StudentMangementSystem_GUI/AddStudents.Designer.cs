@@ -42,7 +42,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.back = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.txtAge = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.Back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -195,28 +195,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Student Management System";
             // 
-            // back
-            // 
-            this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Navy;
-            this.back.FlatAppearance.BorderSize = 0;
-            this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.back.ForeColor = System.Drawing.Color.White;
-            this.back.Location = new System.Drawing.Point(220, 438);
-            this.back.Name = "back";
-            this.back.Padding = new System.Windows.Forms.Padding(5);
-            this.back.Size = new System.Drawing.Size(70, 37);
-            this.back.TabIndex = 64;
-            this.back.Text = "Back";
-            this.back.UseVisualStyleBackColor = false;
-            // 
             // save
             // 
             this.save.AutoSize = true;
-            this.save.BackColor = System.Drawing.Color.Navy;
+            this.save.BackColor = System.Drawing.Color.Green;
             this.save.FlatAppearance.BorderSize = 0;
             this.save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.save.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.save.ForeColor = System.Drawing.Color.White;
             this.save.Location = new System.Drawing.Point(443, 438);
@@ -305,11 +290,30 @@
             this.label3.Text = "Reg_No:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // Back
+            // 
+            this.Back.AutoSize = true;
+            this.Back.BackColor = System.Drawing.Color.Red;
+            this.Back.FlatAppearance.BorderSize = 0;
+            this.Back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Back.ForeColor = System.Drawing.Color.White;
+            this.Back.Location = new System.Drawing.Point(213, 438);
+            this.Back.Name = "Back";
+            this.Back.Padding = new System.Windows.Forms.Padding(5);
+            this.Back.Size = new System.Drawing.Size(70, 37);
+            this.Back.TabIndex = 77;
+            this.Back.Text = "Back";
+            this.Back.UseVisualStyleBackColor = false;
+//            this.Back.Click += new System.EventHandler(this.Back_Click_1);
+            // 
             // AddStudents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 561);
+            this.Controls.Add(this.Back);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -323,7 +327,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.back);
             this.Controls.Add(this.save);
             this.Controls.Add(this.txtAge);
             this.Controls.Add(this.label4);
@@ -359,7 +362,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button back;
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.Label label4;
@@ -369,5 +371,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button Back;
     }
 }

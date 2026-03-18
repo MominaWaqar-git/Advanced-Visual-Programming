@@ -106,7 +106,13 @@ namespace StudentMangementSystem_GUI
 
         private void back_Click(object sender, EventArgs e)
         {
-            new AdminDashboard().ShowDialog();
+            new AdminDashboard().Show();
+            this.Close();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            new AdminDashboard().Show();
             this.Close();
         }
     }

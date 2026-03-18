@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace StudentMangementSystem_GUI
 {
@@ -40,12 +41,27 @@ namespace StudentMangementSystem_GUI
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT subject FROM teachers", con);
+                MySqlCommand cmd = new MySqlCommand("SELECT subject FROM teachers", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
+
+                HashSet<string> subjects = new HashSet<string>();
 
                 while (dr.Read())
                 {
-                    cmbSubject.Items.Add(dr["subject"].ToString());
+                    string subjectData = dr["subject"].ToString();
+
+                    string[] subList = subjectData.Split(',');
+
+                    foreach (string sub in subList)
+                    {
+                        string cleanSub = sub.Trim();
+
+                        if (!subjects.Contains(cleanSub))
+                        {
+                            subjects.Add(cleanSub);
+                            cmbSubject.Items.Add(cleanSub);
+                        }
+                    }
                 }
             }
         }
@@ -61,10 +77,7 @@ namespace StudentMangementSystem_GUI
             {
                 con.Open();
 
-                string q = "SELECT id, name FROM teachers WHERE subject=@sub";
-                MySqlCommand cmd = new MySqlCommand(q, con);
-                cmd.Parameters.AddWithValue("@sub", cmbSubject.Text);
-
+                MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM teachers", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())

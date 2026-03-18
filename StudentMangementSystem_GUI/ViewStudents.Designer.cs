@@ -61,9 +61,9 @@
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.label1);
             this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(1, 5);
+            this.panel1.Location = new System.Drawing.Point(1, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(801, 69);
+            this.panel1.Size = new System.Drawing.Size(801, 74);
             this.panel1.TabIndex = 49;
             // 
             // btnSearch
@@ -86,7 +86,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtSearch.ForeColor = System.Drawing.SystemColors.GrayText;
             this.txtSearch.Location = new System.Drawing.Point(497, 14);
             this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";

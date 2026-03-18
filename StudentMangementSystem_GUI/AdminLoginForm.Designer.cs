@@ -130,9 +130,10 @@
             // btnLogin_Click
             // 
             this.btnLogin_Click.AutoSize = true;
-            this.btnLogin_Click.BackColor = System.Drawing.Color.Navy;
+            this.btnLogin_Click.BackColor = System.Drawing.Color.Green;
             this.btnLogin_Click.FlatAppearance.BorderSize = 0;
             this.btnLogin_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnLogin_Click.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin_Click.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin_Click.ForeColor = System.Drawing.Color.White;
             this.btnLogin_Click.Location = new System.Drawing.Point(310, 277);
@@ -147,9 +148,10 @@
             // back
             // 
             this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Navy;
+            this.back.BackColor = System.Drawing.Color.Red;
             this.back.FlatAppearance.BorderSize = 0;
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.White;
             this.back.Location = new System.Drawing.Point(423, 277);

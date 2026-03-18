@@ -126,5 +126,43 @@ namespace StudentMangementSystem_GUI
         {
             LoadTeachers();
         }
+
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            btnSearch_Click(sender, e);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+
+            string conn = "server=localhost;user=root;password=;database=student_management_system";
+
+            using (MySqlConnection con = new MySqlConnection(conn))
+            {
+                con.Open();
+
+                string q = @"SELECT id AS ID, name AS Name, regno AS RegNo, age AS Age,
+                     email AS Email, phone AS Phone, course AS Course,
+                     username AS Username, address AS Address 
+                     FROM students
+                     WHERE name LIKE @key OR regno LIKE @key OR course LIKE @key";
+
+                MySqlCommand cmd = new MySqlCommand(q, con);
+                cmd.Parameters.AddWithValue("@key", "%" + keyword + "%");
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridView1.DataSource = dt;
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("No student found!");
+                }
+            }
+        }
     }
 }

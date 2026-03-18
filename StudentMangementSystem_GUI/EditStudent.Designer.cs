@@ -43,7 +43,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.back = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.txtAge = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -206,23 +205,6 @@
             this.panel1.Size = new System.Drawing.Size(801, 69);
             this.panel1.TabIndex = 77;
             // 
-            // back
-            // 
-            this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Red;
-            this.back.FlatAppearance.BorderSize = 0;
-            this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.back.ForeColor = System.Drawing.Color.White;
-            this.back.Location = new System.Drawing.Point(220, 437);
-            this.back.Name = "back";
-            this.back.Padding = new System.Windows.Forms.Padding(5);
-            this.back.Size = new System.Drawing.Size(70, 37);
-            this.back.TabIndex = 86;
-            this.back.Text = "Back";
-            this.back.UseVisualStyleBackColor = false;
-            // 
             // btnUpdate
             // 
             this.btnUpdate.AutoSize = true;
@@ -232,7 +214,7 @@
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(443, 437);
+            this.btnUpdate.Location = new System.Drawing.Point(345, 434);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Padding = new System.Windows.Forms.Padding(5);
             this.btnUpdate.Size = new System.Drawing.Size(72, 37);
@@ -325,7 +307,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.back);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtAge);
             this.Controls.Add(this.label4);
@@ -363,7 +344,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button back;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.Label label4;

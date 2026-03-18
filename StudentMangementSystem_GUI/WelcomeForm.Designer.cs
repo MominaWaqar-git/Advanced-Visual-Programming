@@ -61,8 +61,8 @@
             // 
             this.btnExit_Click.BackColor = System.Drawing.Color.Transparent;
             this.btnExit_Click.FlatAppearance.BorderSize = 0;
-            this.btnExit_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnExit_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExit_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Navy;
+            this.btnExit_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnExit_Click.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit_Click.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit_Click.Location = new System.Drawing.Point(698, 23);
@@ -77,8 +77,8 @@
             // 
             this.btnStudent_Click.BackColor = System.Drawing.Color.Transparent;
             this.btnStudent_Click.FlatAppearance.BorderSize = 0;
-            this.btnStudent_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnStudent_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnStudent_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnStudent_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnStudent_Click.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStudent_Click.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStudent_Click.Location = new System.Drawing.Point(617, 22);
@@ -94,7 +94,7 @@
             this.btnAdmin_Click.BackColor = System.Drawing.Color.Transparent;
             this.btnAdmin_Click.FlatAppearance.BorderSize = 0;
             this.btnAdmin_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnAdmin_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAdmin_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAdmin_Click.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmin_Click.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmin_Click.Location = new System.Drawing.Point(446, 22);
@@ -109,8 +109,8 @@
             // 
             this.btnTeacher_Click.BackColor = System.Drawing.Color.Transparent;
             this.btnTeacher_Click.FlatAppearance.BorderSize = 0;
-            this.btnTeacher_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnTeacher_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnTeacher_Click.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Navy;
+            this.btnTeacher_Click.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnTeacher_Click.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTeacher_Click.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTeacher_Click.Location = new System.Drawing.Point(536, 22);

@@ -96,6 +96,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAnnouncements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAnnouncements.Designer.cs">
+      <DependentUpon>AddAnnouncements.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddStudents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAnnouncements.resx">
+      <DependentUpon>AddAnnouncements.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddStudents.resx">
       <DependentUpon>AddStudents.cs</DependentUpon>
     </EmbeddedResource>

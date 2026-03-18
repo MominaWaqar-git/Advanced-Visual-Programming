@@ -33,6 +33,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.footer = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.addAnnouncements = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.logout = new System.Windows.Forms.Button();
             this.assigned_teachers = new System.Windows.Forms.Button();
@@ -47,22 +48,16 @@
             this.lblTotalTeachers = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblTotalStudents = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dgvAnnouncements = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblTotalSubjects = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAnnouncements)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,7 +87,7 @@
             this.panel2.BackColor = System.Drawing.Color.Navy;
             this.panel2.Controls.Add(this.footer);
             this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(0, 667);
+            this.panel2.Location = new System.Drawing.Point(0, 415);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1068, 84);
@@ -113,6 +108,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Navy;
+            this.panel3.Controls.Add(this.addAnnouncements);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.logout);
             this.panel3.Controls.Add(this.assigned_teachers);
@@ -125,8 +121,25 @@
             this.panel3.Location = new System.Drawing.Point(0, 82);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(197, 588);
+            this.panel3.Size = new System.Drawing.Size(197, 334);
             this.panel3.TabIndex = 17;
+            // 
+            // addAnnouncements
+            // 
+            this.addAnnouncements.BackColor = System.Drawing.Color.Transparent;
+            this.addAnnouncements.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.addAnnouncements.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.addAnnouncements.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addAnnouncements.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addAnnouncements.ForeColor = System.Drawing.Color.White;
+            this.addAnnouncements.Location = new System.Drawing.Point(-7, 205);
+            this.addAnnouncements.Margin = new System.Windows.Forms.Padding(4);
+            this.addAnnouncements.Name = "addAnnouncements";
+            this.addAnnouncements.Size = new System.Drawing.Size(206, 34);
+            this.addAnnouncements.TabIndex = 62;
+            this.addAnnouncements.Text = "Add Announcements";
+            this.addAnnouncements.UseVisualStyleBackColor = false;
+            this.addAnnouncements.Click += new System.EventHandler(this.addAnnouncements_Click);
             // 
             // panel4
             // 
@@ -143,7 +156,7 @@
             this.logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logout.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logout.ForeColor = System.Drawing.Color.White;
-            this.logout.Location = new System.Drawing.Point(-7, 204);
+            this.logout.Location = new System.Drawing.Point(-7, 238);
             this.logout.Margin = new System.Windows.Forms.Padding(4);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(204, 34);
@@ -264,11 +277,11 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.Navy;
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.panel5.Controls.Add(this.total_teachers);
             this.panel5.Controls.Add(this.lblTotalTeachers);
             this.panel5.ForeColor = System.Drawing.Color.White;
-            this.panel5.Location = new System.Drawing.Point(228, 188);
+            this.panel5.Location = new System.Drawing.Point(245, 188);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(10);
             this.panel5.Size = new System.Drawing.Size(163, 91);
@@ -289,20 +302,20 @@
             // 
             this.lblTotalTeachers.AutoSize = true;
             this.lblTotalTeachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTeachers.Location = new System.Drawing.Point(52, 43);
+            this.lblTotalTeachers.Location = new System.Drawing.Point(68, 46);
             this.lblTotalTeachers.Name = "lblTotalTeachers";
-            this.lblTotalTeachers.Size = new System.Drawing.Size(42, 21);
+            this.lblTotalTeachers.Size = new System.Drawing.Size(19, 21);
             this.lblTotalTeachers.TabIndex = 21;
-            this.lblTotalTeachers.Text = "0.0K";
+            this.lblTotalTeachers.Text = "0";
             this.lblTotalTeachers.Click += new System.EventHandler(this.label4_Click);
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.Navy;
+            this.panel6.BackColor = System.Drawing.Color.Red;
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Controls.Add(this.label6);
+            this.panel6.Controls.Add(this.lblTotalStudents);
             this.panel6.ForeColor = System.Drawing.Color.White;
-            this.panel6.Location = new System.Drawing.Point(432, 188);
+            this.panel6.Location = new System.Drawing.Point(507, 188);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(10);
             this.panel6.Size = new System.Drawing.Size(163, 91);
@@ -318,99 +331,54 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "  Total Students";
             // 
-            // label6
+            // lblTotalStudents
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(52, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 21);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "0.0K";
+            this.lblTotalStudents.AutoSize = true;
+            this.lblTotalStudents.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalStudents.Location = new System.Drawing.Point(69, 43);
+            this.lblTotalStudents.Name = "lblTotalStudents";
+            this.lblTotalStudents.Size = new System.Drawing.Size(19, 21);
+            this.lblTotalStudents.TabIndex = 21;
+            this.lblTotalStudents.Text = "0";
             // 
-            // panel7
+            // panel8
             // 
-            this.panel7.BackColor = System.Drawing.Color.Navy;
-            this.panel7.Controls.Add(this.label7);
-            this.panel7.Controls.Add(this.label8);
-            this.panel7.ForeColor = System.Drawing.Color.White;
-            this.panel7.Location = new System.Drawing.Point(640, 188);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(10);
-            this.panel7.Size = new System.Drawing.Size(168, 91);
-            this.panel7.TabIndex = 23;
+            this.panel8.BackColor = System.Drawing.Color.Green;
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Controls.Add(this.lblTotalSubjects);
+            this.panel8.ForeColor = System.Drawing.Color.White;
+            this.panel8.Location = new System.Drawing.Point(759, 188);
+            this.panel8.Name = "panel8";
+            this.panel8.Padding = new System.Windows.Forms.Padding(10);
+            this.panel8.Size = new System.Drawing.Size(168, 91);
+            this.panel8.TabIndex = 23;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(-1, 10);
+            this.label7.Location = new System.Drawing.Point(22, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(169, 21);
+            this.label7.Size = new System.Drawing.Size(116, 21);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Unassigned Teachers";
+            this.label7.Text = "Total Subjects";
             // 
-            // label8
+            // lblTotalSubjects
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(52, 43);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(42, 21);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "0.0K";
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.Navy;
-            this.panel8.Controls.Add(this.label9);
-            this.panel8.Controls.Add(this.label10);
-            this.panel8.ForeColor = System.Drawing.Color.White;
-            this.panel8.Location = new System.Drawing.Point(845, 188);
-            this.panel8.Name = "panel8";
-            this.panel8.Padding = new System.Windows.Forms.Padding(10);
-            this.panel8.Size = new System.Drawing.Size(163, 91);
-            this.panel8.TabIndex = 23;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(-4, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(170, 21);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Unassigned Students";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(52, 43);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 21);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "0.0K";
-            // 
-            // dgvAnnouncements
-            // 
-            this.dgvAnnouncements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAnnouncements.BackgroundColor = System.Drawing.Color.Navy;
-            this.dgvAnnouncements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAnnouncements.GridColor = System.Drawing.Color.White;
-            this.dgvAnnouncements.Location = new System.Drawing.Point(245, 440);
-            this.dgvAnnouncements.Name = "dgvAnnouncements";
-            this.dgvAnnouncements.Size = new System.Drawing.Size(776, 200);
-            this.dgvAnnouncements.TabIndex = 61;
+            this.lblTotalSubjects.AutoSize = true;
+            this.lblTotalSubjects.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSubjects.Location = new System.Drawing.Point(71, 43);
+            this.lblTotalSubjects.Name = "lblTotalSubjects";
+            this.lblTotalSubjects.Size = new System.Drawing.Size(19, 21);
+            this.lblTotalSubjects.TabIndex = 21;
+            this.lblTotalSubjects.Text = "0";
             // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 749);
-            this.Controls.Add(this.dgvAnnouncements);
+            this.ClientSize = new System.Drawing.Size(1067, 496);
             this.Controls.Add(this.panel8);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.label3);
@@ -432,11 +400,8 @@
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAnnouncements)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,13 +428,10 @@
         private System.Windows.Forms.Label lblTotalTeachers;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTotalStudents;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridView dgvAnnouncements;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTotalSubjects;
+        private System.Windows.Forms.Button addAnnouncements;
     }
 }

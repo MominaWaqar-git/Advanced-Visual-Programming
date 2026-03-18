@@ -100,7 +100,7 @@
             // back
             // 
             this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Navy;
+            this.back.BackColor = System.Drawing.Color.Red;
             this.back.FlatAppearance.BorderSize = 0;
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -118,7 +118,7 @@
             // save
             // 
             this.save.AutoSize = true;
-            this.save.BackColor = System.Drawing.Color.Navy;
+            this.save.BackColor = System.Drawing.Color.Green;
             this.save.FlatAppearance.BorderSize = 0;
             this.save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

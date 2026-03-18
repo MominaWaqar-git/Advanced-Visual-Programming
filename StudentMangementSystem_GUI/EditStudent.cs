@@ -123,7 +123,13 @@ namespace StudentMangementSystem_GUI
 
         private void back_Click(object sender, EventArgs e)
         {
-            new AdminDashboard().ShowDialog();
+            new ViewStudents().Show();
+            this.Close();
+        }
+
+        private void btnback_Click(object sender, EventArgs e)
+        {
+            new ViewStudents().Show();
             this.Close();
         }
     }

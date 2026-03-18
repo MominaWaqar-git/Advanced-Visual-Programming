@@ -36,6 +36,8 @@
             this.back = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -44,7 +46,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Navy;
+            this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -85,9 +89,10 @@
             // refresh
             // 
             this.refresh.AutoSize = true;
-            this.refresh.BackColor = System.Drawing.Color.Navy;
+            this.refresh.BackColor = System.Drawing.Color.Green;
             this.refresh.FlatAppearance.BorderSize = 0;
             this.refresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.refresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refresh.ForeColor = System.Drawing.Color.White;
             this.refresh.Location = new System.Drawing.Point(607, 528);
@@ -102,9 +107,10 @@
             // back
             // 
             this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Navy;
+            this.back.BackColor = System.Drawing.Color.Red;
             this.back.FlatAppearance.BorderSize = 0;
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.White;
             this.back.Location = new System.Drawing.Point(89, 528);
@@ -141,6 +147,33 @@
             this.dataGridView1.TabIndex = 48;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.AutoSize = true;
+            this.btnSearch.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(720, 14);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Padding = new System.Windows.Forms.Padding(5);
+            this.btnSearch.Size = new System.Drawing.Size(68, 37);
+            this.btnSearch.TabIndex = 58;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.txtSearch.Location = new System.Drawing.Point(509, 14);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(279, 37);
+            this.txtSearch.TabIndex = 57;
+            this.txtSearch.Text = "  Search Here";
+            // 
             // ViewTeachers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +187,7 @@
             this.Controls.Add(this.back);
             this.Name = "ViewTeachers";
             this.Text = "ViewTeachers";
+           // this.Load += new System.EventHandler(this.ViewTeachers_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -174,5 +208,7 @@
         private System.Windows.Forms.Button back;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

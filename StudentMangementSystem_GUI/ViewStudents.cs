@@ -12,7 +12,7 @@ namespace StudentMangementSystem_GUI
         {
             InitializeComponent();
 
-            // 🔥 EVENTS FIX
+           
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
         }
