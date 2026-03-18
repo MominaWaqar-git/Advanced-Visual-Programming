@@ -44,7 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.total_teachers = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblTotalTeachers = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.dgvAnnouncements = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,6 +62,7 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAnnouncements)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -90,7 +92,7 @@
             this.panel2.BackColor = System.Drawing.Color.Navy;
             this.panel2.Controls.Add(this.footer);
             this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(0, 470);
+            this.panel2.Location = new System.Drawing.Point(0, 667);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1068, 84);
@@ -123,7 +125,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 82);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(197, 389);
+            this.panel3.Size = new System.Drawing.Size(197, 588);
             this.panel3.TabIndex = 17;
             // 
             // panel4
@@ -264,9 +266,9 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.Navy;
             this.panel5.Controls.Add(this.total_teachers);
-            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.lblTotalTeachers);
             this.panel5.ForeColor = System.Drawing.Color.White;
-            this.panel5.Location = new System.Drawing.Point(228, 229);
+            this.panel5.Location = new System.Drawing.Point(228, 188);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(10);
             this.panel5.Size = new System.Drawing.Size(163, 91);
@@ -283,15 +285,16 @@
             this.total_teachers.Text = "  Total Teachers";
             this.total_teachers.Click += new System.EventHandler(this.total_teachers_Click);
             // 
-            // label4
+            // lblTotalTeachers
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(52, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 21);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "0.0K";
+            this.lblTotalTeachers.AutoSize = true;
+            this.lblTotalTeachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTeachers.Location = new System.Drawing.Point(52, 43);
+            this.lblTotalTeachers.Name = "lblTotalTeachers";
+            this.lblTotalTeachers.Size = new System.Drawing.Size(42, 21);
+            this.lblTotalTeachers.TabIndex = 21;
+            this.lblTotalTeachers.Text = "0.0K";
+            this.lblTotalTeachers.Click += new System.EventHandler(this.label4_Click);
             // 
             // panel6
             // 
@@ -299,7 +302,7 @@
             this.panel6.Controls.Add(this.label5);
             this.panel6.Controls.Add(this.label6);
             this.panel6.ForeColor = System.Drawing.Color.White;
-            this.panel6.Location = new System.Drawing.Point(433, 229);
+            this.panel6.Location = new System.Drawing.Point(432, 188);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(10);
             this.panel6.Size = new System.Drawing.Size(163, 91);
@@ -331,7 +334,7 @@
             this.panel7.Controls.Add(this.label7);
             this.panel7.Controls.Add(this.label8);
             this.panel7.ForeColor = System.Drawing.Color.White;
-            this.panel7.Location = new System.Drawing.Point(641, 229);
+            this.panel7.Location = new System.Drawing.Point(640, 188);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(10);
             this.panel7.Size = new System.Drawing.Size(168, 91);
@@ -363,7 +366,7 @@
             this.panel8.Controls.Add(this.label9);
             this.panel8.Controls.Add(this.label10);
             this.panel8.ForeColor = System.Drawing.Color.White;
-            this.panel8.Location = new System.Drawing.Point(847, 229);
+            this.panel8.Location = new System.Drawing.Point(845, 188);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(10);
             this.panel8.Size = new System.Drawing.Size(163, 91);
@@ -389,11 +392,23 @@
             this.label10.TabIndex = 21;
             this.label10.Text = "0.0K";
             // 
+            // dgvAnnouncements
+            // 
+            this.dgvAnnouncements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAnnouncements.BackgroundColor = System.Drawing.Color.Navy;
+            this.dgvAnnouncements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAnnouncements.GridColor = System.Drawing.Color.White;
+            this.dgvAnnouncements.Location = new System.Drawing.Point(245, 440);
+            this.dgvAnnouncements.Name = "dgvAnnouncements";
+            this.dgvAnnouncements.Size = new System.Drawing.Size(776, 200);
+            this.dgvAnnouncements.TabIndex = 61;
+            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1067, 749);
+            this.Controls.Add(this.dgvAnnouncements);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
@@ -406,6 +421,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AdminDashboard";
             this.Text = "AdminDashboard";
+            this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -420,6 +436,7 @@
             this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAnnouncements)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,7 +460,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label total_teachers;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTotalTeachers;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -453,5 +470,6 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridView dgvAnnouncements;
     }
 }

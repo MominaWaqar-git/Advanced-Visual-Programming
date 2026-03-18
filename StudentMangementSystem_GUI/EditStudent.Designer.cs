@@ -209,9 +209,10 @@
             // back
             // 
             this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Navy;
+            this.back.BackColor = System.Drawing.Color.Red;
             this.back.FlatAppearance.BorderSize = 0;
             this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.White;
             this.back.Location = new System.Drawing.Point(220, 437);
@@ -225,9 +226,10 @@
             // btnUpdate
             // 
             this.btnUpdate.AutoSize = true;
-            this.btnUpdate.BackColor = System.Drawing.Color.Navy;
+            this.btnUpdate.BackColor = System.Drawing.Color.Green;
             this.btnUpdate.FlatAppearance.BorderSize = 0;
             this.btnUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Location = new System.Drawing.Point(443, 437);
@@ -334,6 +336,7 @@
             this.Controls.Add(this.label3);
             this.Name = "EditStudent";
             this.Text = "EditStudent";
+            this.Load += new System.EventHandler(this.EditStudent_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

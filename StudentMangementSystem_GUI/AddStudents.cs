@@ -11,7 +11,7 @@ namespace StudentMangementSystem_GUI
         {
             InitializeComponent();
 
-            // 🔥 Event fix
+            
             save.Click += save_Click;
         }
 
@@ -106,7 +106,7 @@ namespace StudentMangementSystem_GUI
 
         private void back_Click(object sender, EventArgs e)
         {
-            new AdminDashboard().Show();
+            new AdminDashboard().ShowDialog();
             this.Close();
         }
     }

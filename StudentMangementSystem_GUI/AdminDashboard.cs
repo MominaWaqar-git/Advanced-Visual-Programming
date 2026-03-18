@@ -74,5 +74,15 @@ namespace StudentMangementSystem_GUI
                 this.Hide();
             }
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AdminDashboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
