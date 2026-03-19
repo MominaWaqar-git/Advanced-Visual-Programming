@@ -26,7 +26,7 @@ namespace StudentManagementSystem
 
         private void btnTeacher_Click_Click(object sender, EventArgs e)
         {
-            TeacherLoginForm teacher = new TeacherLoginForm();
+            TeacherLogin teacher = new TeacherLogin();
             teacher.Show();
             this.Hide();
         

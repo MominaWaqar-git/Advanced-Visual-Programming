@@ -1,6 +1,6 @@
 ﻿namespace StudentMangementSystem_GUI
 {
-    partial class ViewStudents
+    partial class ViewStudentsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,13 +34,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.footer = new System.Windows.Forms.Label();
+            this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
-            this.refresh = new System.Windows.Forms.Button();
-            this.back = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -50,10 +51,10 @@
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.label1);
             this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Location = new System.Drawing.Point(0, -2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(801, 74);
-            this.panel1.TabIndex = 49;
+            this.panel1.Size = new System.Drawing.Size(801, 70);
+            this.panel1.TabIndex = 117;
             // 
             // btnSearch
             // 
@@ -71,7 +72,6 @@
             this.btnSearch.TabIndex = 56;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -98,10 +98,10 @@
             this.panel2.BackColor = System.Drawing.Color.Navy;
             this.panel2.Controls.Add(this.footer);
             this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(1, 597);
+            this.panel2.Location = new System.Drawing.Point(0, 595);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(801, 68);
-            this.panel2.TabIndex = 50;
+            this.panel2.Size = new System.Drawing.Size(801, 93);
+            this.panel2.TabIndex = 118;
             // 
             // footer
             // 
@@ -114,98 +114,115 @@
             this.footer.Text = " © 2026 Student Management System | All Right Reserved";
             this.footer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // dgvStudents
+            // 
+            this.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStudents.BackgroundColor = System.Drawing.Color.Navy;
+            this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStudents.GridColor = System.Drawing.Color.White;
+            this.dgvStudents.Location = new System.Drawing.Point(11, 175);
+            this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.Size = new System.Drawing.Size(776, 238);
+            this.dgvStudents.TabIndex = 122;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(318, 93);
+            this.label8.Location = new System.Drawing.Point(317, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(175, 32);
-            this.label8.TabIndex = 53;
+            this.label8.TabIndex = 121;
             this.label8.Text = "View Students";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // refresh
+            // btnRefresh
             // 
-            this.refresh.AutoSize = true;
-            this.refresh.BackColor = System.Drawing.Color.Green;
-            this.refresh.FlatAppearance.BorderSize = 0;
-            this.refresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refresh.ForeColor = System.Drawing.Color.White;
-            this.refresh.Location = new System.Drawing.Point(608, 533);
-            this.refresh.Name = "refresh";
-            this.refresh.Padding = new System.Windows.Forms.Padding(5);
-            this.refresh.Size = new System.Drawing.Size(74, 37);
-            this.refresh.TabIndex = 52;
-            this.refresh.Text = "Refresh";
-            this.refresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.Color.Green;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(607, 531);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Padding = new System.Windows.Forms.Padding(5);
+            this.btnRefresh.Size = new System.Drawing.Size(74, 37);
+            this.btnRefresh.TabIndex = 120;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // back
+            // btnBack
             // 
-            this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Red;
-            this.back.FlatAppearance.BorderSize = 0;
-            this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.back.ForeColor = System.Drawing.Color.White;
-            this.back.Location = new System.Drawing.Point(90, 533);
-            this.back.Name = "back";
-            this.back.Padding = new System.Windows.Forms.Padding(5);
-            this.back.Size = new System.Drawing.Size(70, 37);
-            this.back.TabIndex = 51;
-            this.back.Text = "Back";
-            this.back.UseVisualStyleBackColor = false;
+            this.btnBack.AutoSize = true;
+            this.btnBack.BackColor = System.Drawing.Color.Red;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(89, 531);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Padding = new System.Windows.Forms.Padding(5);
+            this.btnBack.Size = new System.Drawing.Size(70, 37);
+            this.btnBack.TabIndex = 119;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+           // this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // dataGridView1
+            // lblMessage
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Navy;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.Color.White;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 177);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 299);
-            this.dataGridView1.TabIndex = 116;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.BackColor = System.Drawing.Color.Transparent;
+            this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.Navy;
+            this.lblMessage.Location = new System.Drawing.Point(317, 463);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(25, 32);
+            this.lblMessage.TabIndex = 123;
+            this.lblMessage.Text = "*";
+            this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ViewStudents
+            // ViewStudentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 661);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.dgvStudents);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.refresh);
-            this.Controls.Add(this.back);
-            this.Name = "ViewStudents";
-            this.Text = "View Students";
-            this.Load += new System.EventHandler(this.ViewStudents_Load);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnBack);
+            this.Name = "ViewStudentsForm";
+            this.Text = "ViewStudentsForm";
+            this.Load += new System.EventHandler(this.ViewStudentsForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label footer;
+        private System.Windows.Forms.DataGridView dgvStudents;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.Button back;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblMessage;
     }
 }
