@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTotalSubjects = new System.Windows.Forms.Label();
+            this.lblTotalQuizzes = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblTotalStudents = new System.Windows.Forms.Label();
+            this.lblTotalLecture = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnViewStudent = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -40,7 +38,6 @@
             this.assigned_teachers = new System.Windows.Forms.Button();
             this.view_students = new System.Windows.Forms.Button();
             this.btnUploadQuiz = new System.Windows.Forms.Button();
-            this.total_teachers = new System.Windows.Forms.Label();
             this.lblTotalTeachers = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnUploadAssignment = new System.Windows.Forms.Button();
@@ -53,73 +50,60 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lblUploadAssignments = new System.Windows.Forms.Label();
+            this.total_teachers = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblTotalSubjects
+            // lblTotalQuizzes
             // 
-            this.lblTotalSubjects.AutoSize = true;
-            this.lblTotalSubjects.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSubjects.Location = new System.Drawing.Point(71, 43);
-            this.lblTotalSubjects.Name = "lblTotalSubjects";
-            this.lblTotalSubjects.Size = new System.Drawing.Size(19, 21);
-            this.lblTotalSubjects.TabIndex = 21;
-            this.lblTotalSubjects.Text = "0";
+            this.lblTotalQuizzes.AutoSize = true;
+            this.lblTotalQuizzes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalQuizzes.Location = new System.Drawing.Point(74, 46);
+            this.lblTotalQuizzes.Name = "lblTotalQuizzes";
+            this.lblTotalQuizzes.Size = new System.Drawing.Size(19, 21);
+            this.lblTotalQuizzes.TabIndex = 21;
+            this.lblTotalQuizzes.Text = "0";
             // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.Green;
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Controls.Add(this.lblTotalSubjects);
+            this.panel8.Controls.Add(this.label6);
+            this.panel8.Controls.Add(this.lblTotalQuizzes);
             this.panel8.ForeColor = System.Drawing.Color.White;
-            this.panel8.Location = new System.Drawing.Point(758, 187);
+            this.panel8.Location = new System.Drawing.Point(754, 187);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(10);
             this.panel8.Size = new System.Drawing.Size(168, 91);
             this.panel8.TabIndex = 30;
             // 
-            // label7
+            // lblTotalLecture
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(22, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(148, 21);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Uploaded Quizzes";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(13, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(152, 21);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Uploaded Lectures";
-            // 
-            // lblTotalStudents
-            // 
-            this.lblTotalStudents.AutoSize = true;
-            this.lblTotalStudents.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalStudents.Location = new System.Drawing.Point(69, 43);
-            this.lblTotalStudents.Name = "lblTotalStudents";
-            this.lblTotalStudents.Size = new System.Drawing.Size(19, 21);
-            this.lblTotalStudents.TabIndex = 21;
-            this.lblTotalStudents.Text = "0";
+            this.lblTotalLecture.AutoSize = true;
+            this.lblTotalLecture.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalLecture.Location = new System.Drawing.Point(66, 46);
+            this.lblTotalLecture.Name = "lblTotalLecture";
+            this.lblTotalLecture.Size = new System.Drawing.Size(19, 21);
+            this.lblTotalLecture.TabIndex = 21;
+            this.lblTotalLecture.Text = "0";
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Red;
-            this.panel6.Controls.Add(this.label5);
-            this.panel6.Controls.Add(this.lblTotalStudents);
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Controls.Add(this.lblTotalLecture);
             this.panel6.ForeColor = System.Drawing.Color.White;
-            this.panel6.Location = new System.Drawing.Point(506, 187);
+            this.panel6.Location = new System.Drawing.Point(392, 187);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(10);
             this.panel6.Size = new System.Drawing.Size(163, 91);
@@ -216,16 +200,6 @@
             this.btnUploadQuiz.UseVisualStyleBackColor = false;
             this.btnUploadQuiz.Click += new System.EventHandler(this.btnUploadQuiz_Click);
             // 
-            // total_teachers
-            // 
-            this.total_teachers.AutoSize = true;
-            this.total_teachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total_teachers.Location = new System.Drawing.Point(13, 10);
-            this.total_teachers.Name = "total_teachers";
-            this.total_teachers.Size = new System.Drawing.Size(127, 21);
-            this.total_teachers.TabIndex = 0;
-            this.total_teachers.Text = "  Total Students";
-            // 
             // lblTotalTeachers
             // 
             this.lblTotalTeachers.AutoSize = true;
@@ -242,7 +216,7 @@
             this.panel5.Controls.Add(this.total_teachers);
             this.panel5.Controls.Add(this.lblTotalTeachers);
             this.panel5.ForeColor = System.Drawing.Color.White;
-            this.panel5.Location = new System.Drawing.Point(244, 187);
+            this.panel5.Location = new System.Drawing.Point(214, 187);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(10);
             this.panel5.Size = new System.Drawing.Size(163, 91);
@@ -388,11 +362,75 @@
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DeepPink;
+            this.panel7.Controls.Add(this.label5);
+            this.panel7.Controls.Add(this.lblUploadAssignments);
+            this.panel7.ForeColor = System.Drawing.Color.White;
+            this.panel7.Location = new System.Drawing.Point(570, 187);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(10);
+            this.panel7.Size = new System.Drawing.Size(168, 91);
+            this.panel7.TabIndex = 31;
+            // 
+            // lblUploadAssignments
+            // 
+            this.lblUploadAssignments.AutoSize = true;
+            this.lblUploadAssignments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadAssignments.Location = new System.Drawing.Point(78, 46);
+            this.lblUploadAssignments.Name = "lblUploadAssignments";
+            this.lblUploadAssignments.Size = new System.Drawing.Size(19, 21);
+            this.lblUploadAssignments.TabIndex = 21;
+            this.lblUploadAssignments.Text = "0";
+            // 
+            // total_teachers
+            // 
+            this.total_teachers.AutoSize = true;
+            this.total_teachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total_teachers.Location = new System.Drawing.Point(42, 13);
+            this.total_teachers.Name = "total_teachers";
+            this.total_teachers.Size = new System.Drawing.Size(77, 21);
+            this.total_teachers.TabIndex = 22;
+            this.total_teachers.Text = "Students";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(44, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 21);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Lectures";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(37, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 21);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Assignment";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(46, 13);
+            this.label6.Name = "label6";
+            this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label6.Size = new System.Drawing.Size(69, 21);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Quizzes";
+            // 
             // TeacherDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 496);
+            this.ClientSize = new System.Drawing.Size(934, 496);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -415,6 +453,8 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,11 +462,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblTotalSubjects;
+        private System.Windows.Forms.Label lblTotalQuizzes;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblTotalStudents;
+        private System.Windows.Forms.Label lblTotalLecture;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnViewStudent;
         private System.Windows.Forms.Panel panel4;
@@ -434,7 +472,6 @@
         private System.Windows.Forms.Button assigned_teachers;
         private System.Windows.Forms.Button view_students;
         private System.Windows.Forms.Button btnUploadQuiz;
-        private System.Windows.Forms.Label total_teachers;
         private System.Windows.Forms.Label lblTotalTeachers;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnUploadAssignment;
@@ -447,5 +484,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lblUploadAssignments;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label total_teachers;
+        private System.Windows.Forms.Label label5;
     }
 }

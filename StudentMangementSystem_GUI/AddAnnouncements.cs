@@ -49,7 +49,7 @@ namespace StudentMangementSystem_GUI
             using (MySqlConnection con = new MySqlConnection(conn))
             {
                 con.Open();
-                string q = "INSERT INTO announcements (message, audience) VALUES (@msg, @aud)";
+                string q = "INSERT INTO announcements (message, audience, created_by) VALUES (@msg, @aud, 'admin')";
                 MySqlCommand cmd = new MySqlCommand(q, con);
 
                 cmd.Parameters.AddWithValue("@msg", txtMessage.Text.Trim());

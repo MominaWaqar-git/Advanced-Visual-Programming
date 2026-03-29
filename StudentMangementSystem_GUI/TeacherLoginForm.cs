@@ -111,5 +111,10 @@ namespace StudentMangementSystem_GUI
             welcome.Show();
             this.Hide();
         }
+
+        private void TeacherLogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

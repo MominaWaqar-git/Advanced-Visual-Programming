@@ -284,6 +284,7 @@
             this.Controls.Add(this.label3);
             this.Name = "TeacherLogin";
             this.Text = "TeacherLoginForm";
+            this.Load += new System.EventHandler(this.TeacherLogin_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
