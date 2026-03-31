@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentMangementSystem_GUI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sentiment Analysis", "Sentiment Analysis\Sentiment Analysis.csproj", "{11C225FF-97F0-4914-9EA5-E858CC8335EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scientific Calculator", "Scientific Calulator\Scientific Calculator.csproj", "{4B667CC0-2C92-4D15-887E-2030B6BAA00C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{11C225FF-97F0-4914-9EA5-E858CC8335EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C225FF-97F0-4914-9EA5-E858CC8335EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C225FF-97F0-4914-9EA5-E858CC8335EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B667CC0-2C92-4D15-887E-2030B6BAA00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B667CC0-2C92-4D15-887E-2030B6BAA00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B667CC0-2C92-4D15-887E-2030B6BAA00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B667CC0-2C92-4D15-887E-2030B6BAA00C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -115,5 +115,10 @@ namespace StudentMangementSystem_GUI
             new AdminDashboard().Show();
             this.Close();
         }
+
+        private void Back_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

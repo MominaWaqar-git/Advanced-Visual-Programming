@@ -204,5 +204,10 @@ namespace SentimentApp
                 e.Graphics.FillRectangle(brush, panel2.ClientRectangle);
             }
         }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -306,7 +306,7 @@
             this.Back.TabIndex = 77;
             this.Back.Text = "Back";
             this.Back.UseVisualStyleBackColor = false;
-//            this.Back.Click += new System.EventHandler(this.Back_Click_1);
+            this.Back.Click += new System.EventHandler(this.Back_Click_1);
             // 
             // AddStudents
             // 

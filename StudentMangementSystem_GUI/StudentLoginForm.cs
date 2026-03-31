@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using StudentManagementSystem;
 using System;
-using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -12,7 +11,7 @@ namespace StudentMangementSystem_GUI
     {
         string conn = "server=localhost;user=root;password=;database=student_management_system";
 
-        public StudentLogin()
+        public StudentLoginForm()
         {
             InitializeComponent();
             btnLogin.Click += BtnLogin_Click;
@@ -29,11 +28,16 @@ namespace StudentMangementSystem_GUI
                 return;
             }
 
+            if (string.IsNullOrEmpty(pass))
+            {
+                lblMessage.Text = "Enter password.";
+                return;
+            }
+
             using (MySqlConnection con = new MySqlConnection(conn))
             {
                 con.Open();
 
-                // 🔁 CHANGED: teachers → students
                 string query = "SELECT id, password FROM students WHERE username=@user OR email=@user LIMIT 1";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@user", user);
@@ -46,18 +50,11 @@ namespace StudentMangementSystem_GUI
                     string savedPass = dr["password"].ToString();
                     dr.Close();
 
-                    // -------- FIRST-TIME PASSWORD SET --------
+                    // ===== FIRST TIME PASSWORD SET =====
                     if (string.IsNullOrEmpty(savedPass))
                     {
-                        if (string.IsNullOrEmpty(pass))
-                        {
-                            lblMessage.Text = "Enter a new password to set.";
-                            return;
-                        }
-
                         string hashed = HashPassword(pass);
 
-                        // 🔁 CHANGED: teachers → students
                         MySqlCommand update = new MySqlCommand(
                             "UPDATE students SET password=@pass WHERE id=@id", con);
                         update.Parameters.AddWithValue("@pass", hashed);
@@ -66,16 +63,14 @@ namespace StudentMangementSystem_GUI
 
                         MessageBox.Show("Password set successfully! Please login again.");
                         txtPassword.Clear();
-                        lblMessage.Text = "";
                         return;
                     }
 
-                    // -------- NORMAL LOGIN --------
+                    // ===== NORMAL LOGIN =====
                     if (VerifyPassword(pass, savedPass))
                     {
                         MessageBox.Show("Login successful!");
 
-                        // 🔁 CHANGED: TeacherDashboard → StudentDashboard
                         StudentDashboard sd = new StudentDashboard(id);
                         sd.Show();
                         this.Hide();
@@ -87,38 +82,33 @@ namespace StudentMangementSystem_GUI
                 }
                 else
                 {
-                    lblMessage.Text = "Student not found."; // 🔁 message updated
+                    lblMessage.Text = "User not found.";
                 }
             }
         }
 
+        // ===== HASH PASSWORD =====
         private string HashPassword(string password)
         {
             using (SHA256 sha = SHA256.Create())
             {
-                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder sb = new StringBuilder();
-                foreach (byte b in bytes)
-                    sb.Append(b.ToString("x2"));
-                return sb.ToString();
+                string salted = "student123" + password; // simple salt
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(salted));
+                return Convert.ToBase64String(bytes);
             }
         }
 
+        // ===== VERIFY PASSWORD =====
         private bool VerifyPassword(string entered, string stored)
         {
             return HashPassword(entered) == stored;
         }
 
-        private void back_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             WelcomeForm welcome = new WelcomeForm();
             welcome.Show();
             this.Hide();
-        }
-
-        private void StudentLogin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -169,6 +169,7 @@
             this.Controls.Add(this.label4);
             this.Name = "Home";
             this.Text = "Home";
+            this.Load += new System.EventHandler(this.Home_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
