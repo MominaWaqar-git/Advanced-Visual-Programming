@@ -30,7 +30,7 @@
         {
             this.lblMessage = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.back = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsernameEmail = new System.Windows.Forms.TextBox();
@@ -73,22 +73,23 @@
             this.label8.Text = "Student Login";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // back
+            // btnBack
             // 
-            this.back.AutoSize = true;
-            this.back.BackColor = System.Drawing.Color.Red;
-            this.back.FlatAppearance.BorderSize = 0;
-            this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.back.ForeColor = System.Drawing.Color.White;
-            this.back.Location = new System.Drawing.Point(424, 276);
-            this.back.Name = "back";
-            this.back.Padding = new System.Windows.Forms.Padding(5);
-            this.back.Size = new System.Drawing.Size(70, 37);
-            this.back.TabIndex = 106;
-            this.back.Text = "Back";
-            this.back.UseVisualStyleBackColor = false;
+            this.btnBack.AutoSize = true;
+            this.btnBack.BackColor = System.Drawing.Color.Red;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(424, 276);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Padding = new System.Windows.Forms.Padding(5);
+            this.btnBack.Size = new System.Drawing.Size(70, 37);
+            this.btnBack.TabIndex = 106;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnLogin
             // 
@@ -251,7 +252,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.back);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsernameEmail);
@@ -265,6 +266,7 @@
             this.Controls.Add(this.label2);
             this.Name = "StudentLoginForm";
             this.Text = "StudentLoginForm";
+            this.Click += new System.EventHandler(this.btnBack_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -278,7 +280,7 @@
 
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button back;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsernameEmail;

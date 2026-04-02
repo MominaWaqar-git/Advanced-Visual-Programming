@@ -203,6 +203,12 @@
     <Compile Include="TeacherAnnouncementsForm.Designer.cs">
       <DependentUpon>TeacherAnnouncementsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeacherAssignments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeacherAssignments.Designer.cs">
+      <DependentUpon>TeacherAssignments.cs</DependentUpon>
+    </Compile>
     <Compile Include="TeacherDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -314,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherAnnouncementsForm.resx">
       <DependentUpon>TeacherAnnouncementsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherAssignments.resx">
+      <DependentUpon>TeacherAssignments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.cs</DependentUpon>

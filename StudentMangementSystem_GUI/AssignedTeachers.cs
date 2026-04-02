@@ -77,12 +77,18 @@ namespace StudentMangementSystem_GUI
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM teachers", con);
+                string query = "SELECT id, name, subject FROM teachers";
+                MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())
                 {
-                    cmbTeacher.Items.Add(new ComboItem(dr["name"].ToString(), dr["id"].ToString()));
+                    string subjects = dr["subject"].ToString();
+
+                    if (subjects.ToLower().Contains(cmbSubject.Text.ToLower()))
+                    {
+                        cmbTeacher.Items.Add(new ComboItem(dr["name"].ToString(), dr["id"].ToString()));
+                    }
                 }
             }
         }

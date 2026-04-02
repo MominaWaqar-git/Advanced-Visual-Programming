@@ -30,16 +30,19 @@
         {
             this.lblTotalQuizzes = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblTotalLecture = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnViewStudent = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAnnouncements = new System.Windows.Forms.Button();
             this.assigned_teachers = new System.Windows.Forms.Button();
-            this.view_students = new System.Windows.Forms.Button();
+            this.mark_assignment = new System.Windows.Forms.Button();
             this.btnUploadQuiz = new System.Windows.Forms.Button();
             this.lblTotalTeachers = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.total_teachers = new System.Windows.Forms.Label();
             this.btnUploadAssignment = new System.Windows.Forms.Button();
             this.btnUploadLecture = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,11 +54,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.lblUploadAssignments = new System.Windows.Forms.Label();
-            this.total_teachers = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblUploadAssignments = new System.Windows.Forms.Label();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -87,6 +87,17 @@
             this.panel8.Size = new System.Drawing.Size(168, 91);
             this.panel8.TabIndex = 30;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(46, 13);
+            this.label6.Name = "label6";
+            this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label6.Size = new System.Drawing.Size(69, 21);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Quizzes";
+            // 
             // lblTotalLecture
             // 
             this.lblTotalLecture.AutoSize = true;
@@ -108,6 +119,16 @@
             this.panel6.Padding = new System.Windows.Forms.Padding(10);
             this.panel6.Size = new System.Drawing.Size(163, 91);
             this.panel6.TabIndex = 29;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(44, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 21);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Lectures";
             // 
             // btnViewStudent
             // 
@@ -166,22 +187,23 @@
             this.assigned_teachers.Text = "Mark Quizzes";
             this.assigned_teachers.UseVisualStyleBackColor = false;
             // 
-            // view_students
+            // mark_assignment
             // 
-            this.view_students.BackColor = System.Drawing.Color.Transparent;
-            this.view_students.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.view_students.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.view_students.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.view_students.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.view_students.ForeColor = System.Drawing.Color.White;
-            this.view_students.Location = new System.Drawing.Point(-7, 139);
-            this.view_students.Margin = new System.Windows.Forms.Padding(4);
-            this.view_students.Name = "view_students";
-            this.view_students.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.view_students.Size = new System.Drawing.Size(204, 34);
-            this.view_students.TabIndex = 20;
-            this.view_students.Text = "Mark Assignment";
-            this.view_students.UseVisualStyleBackColor = false;
+            this.mark_assignment.BackColor = System.Drawing.Color.Transparent;
+            this.mark_assignment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.mark_assignment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.mark_assignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mark_assignment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mark_assignment.ForeColor = System.Drawing.Color.White;
+            this.mark_assignment.Location = new System.Drawing.Point(-7, 139);
+            this.mark_assignment.Margin = new System.Windows.Forms.Padding(4);
+            this.mark_assignment.Name = "mark_assignment";
+            this.mark_assignment.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mark_assignment.Size = new System.Drawing.Size(204, 34);
+            this.mark_assignment.TabIndex = 20;
+            this.mark_assignment.Text = "Mark Assignment";
+            this.mark_assignment.UseVisualStyleBackColor = false;
+            this.mark_assignment.Click += new System.EventHandler(this.mark_assignment_Click);
             // 
             // btnUploadQuiz
             // 
@@ -221,6 +243,16 @@
             this.panel5.Padding = new System.Windows.Forms.Padding(10);
             this.panel5.Size = new System.Drawing.Size(163, 91);
             this.panel5.TabIndex = 28;
+            // 
+            // total_teachers
+            // 
+            this.total_teachers.AutoSize = true;
+            this.total_teachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total_teachers.Location = new System.Drawing.Point(42, 13);
+            this.total_teachers.Name = "total_teachers";
+            this.total_teachers.Size = new System.Drawing.Size(77, 21);
+            this.total_teachers.TabIndex = 22;
+            this.total_teachers.Text = "Students";
             // 
             // btnUploadAssignment
             // 
@@ -275,7 +307,7 @@
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.btnAnnouncements);
             this.panel3.Controls.Add(this.assigned_teachers);
-            this.panel3.Controls.Add(this.view_students);
+            this.panel3.Controls.Add(this.mark_assignment);
             this.panel3.Controls.Add(this.btnUploadQuiz);
             this.panel3.Controls.Add(this.btnUploadAssignment);
             this.panel3.Controls.Add(this.btnUploadLecture);
@@ -374,36 +406,6 @@
             this.panel7.Size = new System.Drawing.Size(168, 91);
             this.panel7.TabIndex = 31;
             // 
-            // lblUploadAssignments
-            // 
-            this.lblUploadAssignments.AutoSize = true;
-            this.lblUploadAssignments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUploadAssignments.Location = new System.Drawing.Point(78, 46);
-            this.lblUploadAssignments.Name = "lblUploadAssignments";
-            this.lblUploadAssignments.Size = new System.Drawing.Size(19, 21);
-            this.lblUploadAssignments.TabIndex = 21;
-            this.lblUploadAssignments.Text = "0";
-            // 
-            // total_teachers
-            // 
-            this.total_teachers.AutoSize = true;
-            this.total_teachers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total_teachers.Location = new System.Drawing.Point(42, 13);
-            this.total_teachers.Name = "total_teachers";
-            this.total_teachers.Size = new System.Drawing.Size(77, 21);
-            this.total_teachers.TabIndex = 22;
-            this.total_teachers.Text = "Students";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(44, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 21);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Lectures";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -414,16 +416,15 @@
             this.label5.TabIndex = 23;
             this.label5.Text = "Assignment";
             // 
-            // label6
+            // lblUploadAssignments
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(46, 13);
-            this.label6.Name = "label6";
-            this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label6.Size = new System.Drawing.Size(69, 21);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Quizzes";
+            this.lblUploadAssignments.AutoSize = true;
+            this.lblUploadAssignments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadAssignments.Location = new System.Drawing.Point(78, 46);
+            this.lblUploadAssignments.Name = "lblUploadAssignments";
+            this.lblUploadAssignments.Size = new System.Drawing.Size(19, 21);
+            this.lblUploadAssignments.TabIndex = 21;
+            this.lblUploadAssignments.Text = "0";
             // 
             // TeacherDashboard
             // 
@@ -470,7 +471,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnAnnouncements;
         private System.Windows.Forms.Button assigned_teachers;
-        private System.Windows.Forms.Button view_students;
+        private System.Windows.Forms.Button mark_assignment;
         private System.Windows.Forms.Button btnUploadQuiz;
         private System.Windows.Forms.Label lblTotalTeachers;
         private System.Windows.Forms.Panel panel5;

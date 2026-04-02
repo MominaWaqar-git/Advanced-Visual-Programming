@@ -15,6 +15,7 @@ namespace StudentMangementSystem_GUI
         {
             InitializeComponent();
             btnLogin.Click += BtnLogin_Click;
+          //  btnBack.Click() += btnBack_Click;
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)

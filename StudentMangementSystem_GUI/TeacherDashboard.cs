@@ -121,5 +121,12 @@ namespace StudentMangementSystem_GUI
                 this.Hide();
             }
         }
+
+        private void mark_assignment_Click(object sender, EventArgs e)
+        {
+            TeacherAssignments teacherAssignments = new TeacherAssignments(teacherId);
+            teacherAssignments.Show();
+            this.Hide();
+        }
     }
 }
