@@ -10,8 +10,16 @@ namespace StudentManagementSystem
         public int ID { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+
+        public string CNIC { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+
         public string Username { get; set; }
         public string Password { get; set; }
+
+        public bool IsFirstLogin { get; set; } = true;
     }
 
     class Teacher : User
@@ -91,6 +99,62 @@ namespace StudentManagementSystem
             ShowWelcomeScreen();
         }
 
+        static string GetValidInput(string fieldName)
+        {
+            while (true)
+            {
+                Console.Write($"Enter {fieldName}: ");
+                string input = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(input))
+                    return input;
+
+                Console.WriteLine($"{fieldName} cannot be empty!");
+            }
+        }
+
+        static string GetValidEmail()
+        {
+            while (true)
+            {
+                Console.Write("Enter Email: ");
+                string email = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(email) && email.Contains("@"))
+                    return email;
+
+                Console.WriteLine("Invalid Email! Must contain '@'");
+            }
+        }
+
+        static string GetValidCNIC()
+        {
+            while (true)
+            {
+                Console.Write("Enter CNIC (13 digits): ");
+                string cnic = Console.ReadLine();
+
+                if (cnic.Length == 13 && cnic.All(char.IsDigit))
+                    return cnic;
+
+                Console.WriteLine("Invalid CNIC! Must be 13 digits only.");
+            }
+        }
+
+        static string GetValidPhone()
+        {
+            while (true)
+            {
+                Console.Write("Enter Phone (11 digits): ");
+                string phone = Console.ReadLine();
+
+                if (phone.Length == 11 && phone.All(char.IsDigit))
+                    return phone;
+
+                Console.WriteLine("Invalid Phone! Must be 11 digits.");
+            }
+        }
+
         // ================= WELCOME SCREEN =================
         static void ShowWelcomeScreen()
         {
@@ -167,12 +231,14 @@ namespace StudentManagementSystem
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("1. Add Teacher");
                 Console.WriteLine("2. View/Search Teachers");
-                Console.WriteLine("3. Delete Teacher");
-                Console.WriteLine("4. Add Student");
-                Console.WriteLine("5. View/Search Students");
-                Console.WriteLine("6. Delete Student");
-                Console.WriteLine("7. Assign Teacher to Student");
-                Console.WriteLine("8. Logout\n");
+                Console.WriteLine("3. Update Teacher");
+                Console.WriteLine("4. Delete Teacher");
+                Console.WriteLine("5. Add Student");
+                Console.WriteLine("6. View/Search Students");
+                Console.WriteLine("7. Update Student");
+                Console.WriteLine("8. Delete Student");
+                Console.WriteLine("9. Assign Teacher to Student");
+                Console.WriteLine("10. Logout\n");
 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter choice: ");
@@ -182,12 +248,14 @@ namespace StudentManagementSystem
                 {
                     case "1": AddTeacher(); break;
                     case "2": ViewSearchTeachers(); break;
-                    case "3": DeleteTeacher(); break;
-                    case "4": AddStudent(); break;
-                    case "5": ViewSearchStudents(); break;
-                    case "6": DeleteStudent(); break;
-                    case "7": AssignTeacherToStudent(); break;
-                    case "8": ShowWelcomeScreen(); break;
+                    case "3": UpdateTeacher(); break;
+                    case "4": DeleteTeacher(); break;
+                    case "5": AddStudent(); break;
+                    case "6": ViewSearchStudents(); break;
+                    case "7": UpdateStudent(); break;
+                    case "8": DeleteStudent(); break;
+                    case "9": AssignTeacherToStudent(); break;
+                    case "10": ShowWelcomeScreen(); break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid choice! Press any key...");
@@ -206,49 +274,30 @@ namespace StudentManagementSystem
             Teacher t = new Teacher();
             t.ID = teachers.Count + 1;
 
-            Console.Write("Enter Name: ");
-            t.Name = Console.ReadLine();
+            t.Name = GetValidInput("Name");
 
             Console.Write("Enter Age: ");
             int.TryParse(Console.ReadLine(), out int age);
             t.Age = age;
 
-            Console.Write("Enter Subject: ");
-            t.Subject = Console.ReadLine();
+            t.CNIC = GetValidCNIC();
+            t.Address = GetValidInput("Address");
+            t.Phone = GetValidPhone();
+            t.Email = GetValidEmail();
+            t.Subject = GetValidInput("Subject");
 
-            while (true)
-            {
-                Console.Write("Set Username for login: ");
-                string username = Console.ReadLine();
+            t.Username = GetValidInput("Username");
 
-                if (!string.IsNullOrWhiteSpace(username))
-                {
-                    t.Username = username;
-                    break;
-                }
-
-                Console.WriteLine("Username cannot be empty!");
-            }
-
-            while (true)
-            {
-                Console.Write("Set Password: ");
-                string password = Console.ReadLine();
-
-                if (!string.IsNullOrWhiteSpace(password))
-                {
-                    t.Password = password;
-                    break;
-                }
-
-                Console.WriteLine("Password cannot be empty!");
-            }
+            t.Password = "";
+            t.IsFirstLogin = true;
 
             teachers.Add(t);
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nTeacher added successfully!");
             Console.ReadKey();
         }
+        
 
         static void ViewSearchTeachers()
         {
@@ -262,45 +311,152 @@ namespace StudentManagementSystem
                 return;
             }
 
-            Console.WriteLine("Search by Name or press ENTER to view all:");
+            Console.Write("Search by Name or press ENTER to view all: ");
             string search = Console.ReadLine().ToLower();
 
             var list = string.IsNullOrEmpty(search) ? teachers :
                 teachers.Where(t => t.Name.ToLower().Contains(search)).ToList();
 
-            Console.WriteLine("\nID\tName\tAge\tSubject\tUsername");
+            Console.WriteLine("\nID\t\tName\t\tAge\t\tSubject\t\tPhone\t\tEmail\t\tUsername");
+
             foreach (var t in list)
-                Console.WriteLine($"{t.ID}\t{t.Name}\t{t.Age}\t{t.Subject}\t{t.Username}");
+            {
+                Console.WriteLine($"{t.ID}\t{t.Name}\t{t.Age}\t{t.Subject}\t{t.Phone}\t{t.Email}\t{t.Username}");
+            }
+
             Console.ReadKey();
         }
+
+        static void UpdateTeacher()
+        {
+            Console.Clear();
+            Console.WriteLine("======== UPDATE TEACHER ========\n");
+
+            foreach (var t in teachers)
+                Console.WriteLine($"ID: {t.ID} | Name: {t.Name}");
+
+            Console.Write("\nEnter Teacher ID: ");
+            int.TryParse(Console.ReadLine(), out int id);
+
+            var teacher = teachers.FirstOrDefault(t => t.ID == id);
+
+            if (teacher == null)
+            {
+                Console.WriteLine("Teacher not found!");
+                Console.ReadKey();
+                return;
+            }
+
+            while (true)
+            {
+                Console.Clear();
+
+                // 🔥 FULL INFO SHOW
+                Console.WriteLine("---- CURRENT TEACHER INFO ----\n");
+                Console.WriteLine($"1. Name: {teacher.Name}");
+                Console.WriteLine($"2. Age: {teacher.Age}");
+                Console.WriteLine($"3. CNIC: {teacher.CNIC}");
+                Console.WriteLine($"4. Address: {teacher.Address}");
+                Console.WriteLine($"5. Phone: {teacher.Phone}");
+                Console.WriteLine($"6. Email: {teacher.Email}");
+                Console.WriteLine($"7. Subject: {teacher.Subject}");
+                Console.WriteLine("8. Exit Update\n");
+
+                Console.Write("Select field to update: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        teacher.Name = GetValidInput("Name");
+                        break;
+
+                    case "2":
+                        Console.Write("Enter Age: ");
+                        int.TryParse(Console.ReadLine(), out int age);
+                        teacher.Age = age;
+                        break;
+
+                    case "3":
+                        teacher.CNIC = GetValidCNIC();
+                        break;
+
+                    case "4":
+                        teacher.Address = GetValidInput("Address");
+                        break;
+
+                    case "5":
+                        teacher.Phone = GetValidPhone();
+                        break;
+
+                    case "6":
+                        teacher.Email = GetValidEmail();
+                        break;
+
+                    case "7":
+                        teacher.Subject = GetValidInput("Subject");
+                        break;
+
+                    case "8":
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice!");
+                        break;
+                }
+
+                Console.WriteLine("\nUpdated successfully!");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+            }
+        }
+
 
         static void DeleteTeacher()
         {
             Console.Clear();
             Console.WriteLine("======== DELETE TEACHER ========\n");
 
-            ViewSearchTeachers();
-            Console.Write("Enter Teacher ID to delete: ");
+            if (teachers.Count == 0)
+            {
+                Console.WriteLine("No teachers found.");
+                Console.ReadKey();
+                return;
+            }
+
+            foreach (var t in teachers)
+            {
+                Console.WriteLine($"ID: {t.ID}");
+                Console.WriteLine($"Name: {t.Name}");
+                Console.WriteLine($"Age: {t.Age}");
+                Console.WriteLine($"CNIC: {t.CNIC}");
+                Console.WriteLine($"Phone: {t.Phone}");
+                Console.WriteLine($"Email: {t.Email}");
+                Console.WriteLine($"Subject: {t.Subject}");
+                Console.WriteLine("---------------------------");
+            }
+
+            Console.Write("\nEnter Teacher ID to delete: ");
             int.TryParse(Console.ReadLine(), out int id);
 
             var teacher = teachers.FirstOrDefault(t => t.ID == id);
+
             if (teacher != null)
             {
-                foreach (var s in students)
-                {
-                    if (s.AssignedTeachers.Contains(teacher))
-                        s.AssignedTeachers.Remove(teacher);
-                }
+                Console.Write("Are you sure? (yes/no): ");
+                string confirm = Console.ReadLine().ToLower();
 
-                teachers.Remove(teacher);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Teacher deleted successfully!");
+                if (confirm == "yes")
+                {
+                    teachers.Remove(teacher);
+                    Console.WriteLine("Teacher deleted successfully!");
+                }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Teacher not found!");
             }
+
             Console.ReadKey();
         }
 
@@ -312,42 +468,24 @@ namespace StudentManagementSystem
             Student s = new Student();
             s.ID = students.Count + 1;
 
-            Console.Write("Enter Name: ");
-            s.Name = Console.ReadLine();
+            s.Name = GetValidInput("Name");
 
             Console.Write("Enter Age: ");
             int.TryParse(Console.ReadLine(), out int age);
             s.Age = age;
 
-            while (true)
-            {
-                Console.Write("Set Username for login: ");
-                string username = Console.ReadLine();
+            s.CNIC = GetValidCNIC();
+            s.Address = GetValidInput("Address");
+            s.Phone = GetValidPhone();
+            s.Email = GetValidEmail();
 
-                if (!string.IsNullOrWhiteSpace(username))
-                {
-                    s.Username = username;
-                    break;
-                }
+            s.Username = GetValidInput("Username");
 
-                Console.WriteLine("Username cannot be empty!");
-            }
-
-            while (true)
-            {
-                Console.Write("Set Password: ");
-                string password = Console.ReadLine();
-
-                if (!string.IsNullOrWhiteSpace(password))
-                {
-                    s.Password = password;
-                    break;
-                }
-
-                Console.WriteLine("Password cannot be empty!");
-            }
+            s.Password = "";
+            s.IsFirstLogin = true;
 
             students.Add(s);
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nStudent added successfully!");
             Console.ReadKey();
@@ -365,42 +503,149 @@ namespace StudentManagementSystem
                 return;
             }
 
-            Console.WriteLine("Search by Name or press ENTER to view all:");
+            Console.Write("Search by Name or press ENTER to view all: ");
             string search = Console.ReadLine().ToLower();
 
             var list = string.IsNullOrEmpty(search) ? students :
                 students.Where(s => s.Name.ToLower().Contains(search)).ToList();
 
-            Console.WriteLine("\nID\tName\tAge\tAssigned Teacher\tUsername");
+            Console.WriteLine("\nID\tName\tAge\tPhone\tEmail\tAssigned Teacher");
+
             foreach (var s in list)
             {
-                string teacherName = s.AssignedTeachers.Count > 0 ? string.Join(", ", s.AssignedTeachers.Select(t => t.Name)) : "Not Assigned";
-                Console.WriteLine($"{s.ID}\t{s.Name}\t{s.Age}\t{teacherName}\t{s.Username}");
+                string teacherName = s.AssignedTeachers.Count > 0
+                    ? string.Join(", ", s.AssignedTeachers.Select(t => t.Name))
+                    : "Not Assigned";
+
+                Console.WriteLine($"{s.ID}\t{s.Name}\t{s.Age}\t{s.Phone}\t{s.Email}\t{teacherName}");
             }
+
             Console.ReadKey();
         }
 
+        static void UpdateStudent()
+        {
+            Console.Clear();
+            Console.WriteLine("======== UPDATE STUDENT ========\n");
+
+            foreach (var s in students)
+                Console.WriteLine($"ID: {s.ID} | Name: {s.Name}");
+
+            Console.Write("\nEnter Student ID: ");
+            int.TryParse(Console.ReadLine(), out int id);
+
+            var student = students.FirstOrDefault(s => s.ID == id);
+
+            if (student == null)
+            {
+                Console.WriteLine("Student not found!");
+                Console.ReadKey();
+                return;
+            }
+
+            while (true)
+            {
+                Console.Clear();
+
+                // 🔥 FULL INFO SHOW
+                Console.WriteLine("---- CURRENT STUDENT INFO ----\n");
+                Console.WriteLine($"1. Name: {student.Name}");
+                Console.WriteLine($"2. Age: {student.Age}");
+                Console.WriteLine($"3. CNIC: {student.CNIC}");
+                Console.WriteLine($"4. Address: {student.Address}");
+                Console.WriteLine($"5. Phone: {student.Phone}");
+                Console.WriteLine($"6. Email: {student.Email}");
+                Console.WriteLine("7. Exit Update\n");
+
+                Console.Write("Select field to update: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        student.Name = GetValidInput("Name");
+                        break;
+
+                    case "2":
+                        Console.Write("Enter Age: ");
+                        int.TryParse(Console.ReadLine(), out int age);
+                        student.Age = age;
+                        break;
+
+                    case "3":
+                        student.CNIC = GetValidCNIC();
+                        break;
+
+                    case "4":
+                        student.Address = GetValidInput("Address");
+                        break;
+
+                    case "5":
+                        student.Phone = GetValidPhone();
+                        break;
+
+                    case "6":
+                        student.Email = GetValidEmail();
+                        break;
+
+                    case "7":
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice!");
+                        break;
+                }
+
+                Console.WriteLine("\nUpdated successfully!");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+            }
+        }
         static void DeleteStudent()
         {
             Console.Clear();
             Console.WriteLine("======== DELETE STUDENT ========\n");
 
-            ViewSearchStudents();
-            Console.Write("Enter Student ID to delete: ");
+            if (students.Count == 0)
+            {
+                Console.WriteLine("No students found.");
+                Console.ReadKey();
+                return;
+            }
+
+            foreach (var s in students)
+            {
+                Console.WriteLine($"ID: {s.ID}");
+                Console.WriteLine($"Name: {s.Name}");
+                Console.WriteLine($"Age: {s.Age}");
+                Console.WriteLine($"CNIC: {s.CNIC}");
+                Console.WriteLine($"Phone: {s.Phone}");
+                Console.WriteLine($"Email: {s.Email}");
+                Console.WriteLine($"Address: {s.Address}");
+                Console.WriteLine("---------------------------");
+            }
+
+            Console.Write("\nEnter Student ID to delete: ");
             int.TryParse(Console.ReadLine(), out int id);
 
             var student = students.FirstOrDefault(s => s.ID == id);
+
             if (student != null)
             {
-                students.Remove(student);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Student deleted successfully!");
+                Console.Write("Are you sure? (yes/no): ");
+                string confirm = Console.ReadLine().ToLower();
+
+                if (confirm == "yes")
+                {
+                    students.Remove(student);
+                    Console.WriteLine("Student deleted successfully!");
+                }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Student not found!");
             }
+
             Console.ReadKey();
         }
 
@@ -416,8 +661,11 @@ namespace StudentManagementSystem
                 return;
             }
 
-            ViewSearchStudents();
-            Console.Write("Enter Student ID to assign teacher: ");
+            Console.WriteLine("---- STUDENTS LIST ----");
+            foreach (var s in students)
+                Console.WriteLine($"ID: {s.ID} | Name: {s.Name} | Phone: {s.Phone}");
+
+            Console.Write("\nEnter Student ID: ");
             int.TryParse(Console.ReadLine(), out int studentId);
 
             var student = students.FirstOrDefault(s => s.ID == studentId);
@@ -428,8 +676,11 @@ namespace StudentManagementSystem
                 return;
             }
 
-            ViewSearchTeachers();
-            Console.Write("Enter Teacher ID to assign: ");
+            Console.WriteLine("\n---- TEACHERS LIST ----");
+            foreach (var t in teachers)
+                Console.WriteLine($"ID: {t.ID} | Name: {t.Name} | Subject: {t.Subject}");
+
+            Console.Write("\nEnter Teacher ID: ");
             int.TryParse(Console.ReadLine(), out int teacherId);
 
             var teacher = teachers.FirstOrDefault(t => t.ID == teacherId);
@@ -440,9 +691,18 @@ namespace StudentManagementSystem
                 return;
             }
 
-            student.AssignedTeachers.Add(teacher);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Teacher {teacher.Name} assigned to Student {student.Name} successfully!");
+            // duplicate assign na ho
+            if (student.AssignedTeachers.Contains(teacher))
+            {
+                Console.WriteLine("Teacher already assigned!");
+            }
+            else
+            {
+                student.AssignedTeachers.Add(teacher);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Teacher {teacher.Name} assigned to {student.Name}!");
+            }
+
             Console.ReadKey();
         }
 
@@ -454,23 +714,43 @@ namespace StudentManagementSystem
 
             Console.Write("Enter Username: ");
             string username = Console.ReadLine();
-            Console.Write("Enter Password: ");
-            string password = Console.ReadLine();
 
-            var teacher = teachers.FirstOrDefault(t => t.Username == username && t.Password == password);
-            if (teacher != null)
+            var teacher = teachers.FirstOrDefault(t => t.Username == username);
+
+            if (teacher == null)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nLogin Successful!");
+                Console.WriteLine("User not found!");
+                Console.ReadKey();
+                return;
+            }
+
+            if (teacher.IsFirstLogin)
+            {
+                Console.WriteLine("First time login - Set your password:");
+                Console.Write("Enter new password: ");
+                teacher.Password = Console.ReadLine();
+                teacher.IsFirstLogin = false;
+
+                Console.WriteLine("Password set successfully!");
                 Console.ReadKey();
                 TeacherPanel(teacher);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nInvalid Credentials! Press any key...");
-                Console.ReadKey();
-                ShowWelcomeScreen();
+                Console.Write("Enter Password: ");
+                string password = Console.ReadLine();
+
+                if (teacher.Password == password)
+                {
+                    Console.WriteLine("Login Successful!");
+                    Console.ReadKey();
+                    TeacherPanel(teacher);
+                }
+                else
+                {
+                    Console.WriteLine("Wrong Password!");
+                    Console.ReadKey();
+                }
             }
         }
 
@@ -682,23 +962,43 @@ namespace StudentManagementSystem
 
             Console.Write("Enter Username: ");
             string username = Console.ReadLine();
-            Console.Write("Enter Password: ");
-            string password = Console.ReadLine();
 
-            var student = students.FirstOrDefault(s => s.Username == username && s.Password == password);
-            if (student != null)
+            var student = students.FirstOrDefault(s => s.Username == username);
+
+            if (student == null)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nLogin Successful!");
+                Console.WriteLine("User not found!");
+                Console.ReadKey();
+                return;
+            }
+
+            if (student.IsFirstLogin)
+            {
+                Console.WriteLine("First time login - Set your password:");
+                Console.Write("Enter new password: ");
+                student.Password = Console.ReadLine();
+                student.IsFirstLogin = false;
+
+                Console.WriteLine("Password set successfully!");
                 Console.ReadKey();
                 StudentPanel(student);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nInvalid Credentials! Press any key...");
-                Console.ReadKey();
-                ShowWelcomeScreen();
+                Console.Write("Enter Password: ");
+                string password = Console.ReadLine();
+
+                if (student.Password == password)
+                {
+                    Console.WriteLine("Login Successful!");
+                    Console.ReadKey();
+                    StudentPanel(student);
+                }
+                else
+                {
+                    Console.WriteLine("Wrong Password!");
+                    Console.ReadKey();
+                }
             }
         }
 

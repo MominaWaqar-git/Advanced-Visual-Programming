@@ -53,7 +53,7 @@
             this.dgvAnnouncements.GridColor = System.Drawing.Color.White;
             this.dgvAnnouncements.Location = new System.Drawing.Point(12, 244);
             this.dgvAnnouncements.Name = "dgvAnnouncements";
-            this.dgvAnnouncements.Size = new System.Drawing.Size(776, 172);
+            this.dgvAnnouncements.Size = new System.Drawing.Size(776, 253);
             this.dgvAnnouncements.TabIndex = 84;
             // 
             // panel1
@@ -148,7 +148,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(541, 465);
+            this.btnRefresh.Location = new System.Drawing.Point(702, 162);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Padding = new System.Windows.Forms.Padding(5);
             this.btnRefresh.Size = new System.Drawing.Size(74, 37);
@@ -165,7 +165,7 @@
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(53, 452);
+            this.btnBack.Location = new System.Drawing.Point(18, 162);
             this.btnBack.Name = "btnBack";
             this.btnBack.Padding = new System.Windows.Forms.Padding(5);
             this.btnBack.Size = new System.Drawing.Size(70, 37);
@@ -178,7 +178,7 @@
             this.cmbFilter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFilter.ForeColor = System.Drawing.Color.Navy;
             this.cmbFilter.FormattingEnabled = true;
-            this.cmbFilter.Location = new System.Drawing.Point(430, 142);
+            this.cmbFilter.Location = new System.Drawing.Point(355, 166);
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.Size = new System.Drawing.Size(185, 29);
             this.cmbFilter.TabIndex = 90;
@@ -188,7 +188,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(235, 150);
+            this.label2.Location = new System.Drawing.Point(240, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 21);
             this.label2.TabIndex = 89;

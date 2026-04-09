@@ -199,7 +199,7 @@
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.ForeColor = System.Drawing.Color.White;
-            this.btnBrowse.Location = new System.Drawing.Point(528, 237);
+            this.btnBrowse.Location = new System.Drawing.Point(530, 237);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Padding = new System.Windows.Forms.Padding(5);
             this.btnBrowse.Size = new System.Drawing.Size(74, 37);

@@ -37,7 +37,7 @@
             this.btnViewStudent = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAnnouncements = new System.Windows.Forms.Button();
-            this.assigned_teachers = new System.Windows.Forms.Button();
+            this.quizzes = new System.Windows.Forms.Button();
             this.mark_assignment = new System.Windows.Forms.Button();
             this.btnUploadQuiz = new System.Windows.Forms.Button();
             this.lblTotalTeachers = new System.Windows.Forms.Label();
@@ -171,21 +171,22 @@
             this.btnAnnouncements.UseVisualStyleBackColor = false;
             this.btnAnnouncements.Click += new System.EventHandler(this.btnAnnouncements_Click);
             // 
-            // assigned_teachers
+            // quizzes
             // 
-            this.assigned_teachers.BackColor = System.Drawing.Color.Transparent;
-            this.assigned_teachers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.assigned_teachers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.assigned_teachers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.assigned_teachers.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.assigned_teachers.ForeColor = System.Drawing.Color.White;
-            this.assigned_teachers.Location = new System.Drawing.Point(-7, 172);
-            this.assigned_teachers.Margin = new System.Windows.Forms.Padding(4);
-            this.assigned_teachers.Name = "assigned_teachers";
-            this.assigned_teachers.Size = new System.Drawing.Size(204, 34);
-            this.assigned_teachers.TabIndex = 20;
-            this.assigned_teachers.Text = "Mark Quizzes";
-            this.assigned_teachers.UseVisualStyleBackColor = false;
+            this.quizzes.BackColor = System.Drawing.Color.Transparent;
+            this.quizzes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.quizzes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.quizzes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quizzes.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quizzes.ForeColor = System.Drawing.Color.White;
+            this.quizzes.Location = new System.Drawing.Point(-7, 172);
+            this.quizzes.Margin = new System.Windows.Forms.Padding(4);
+            this.quizzes.Name = "quizzes";
+            this.quizzes.Size = new System.Drawing.Size(204, 34);
+            this.quizzes.TabIndex = 20;
+            this.quizzes.Text = "Mark Quizzes";
+            this.quizzes.UseVisualStyleBackColor = false;
+            //this.quizzes.Click += new System.EventHandler(this.quizzes_Click);
             // 
             // mark_assignment
             // 
@@ -306,7 +307,7 @@
             this.panel3.Controls.Add(this.btnViewStudent);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.btnAnnouncements);
-            this.panel3.Controls.Add(this.assigned_teachers);
+            this.panel3.Controls.Add(this.quizzes);
             this.panel3.Controls.Add(this.mark_assignment);
             this.panel3.Controls.Add(this.btnUploadQuiz);
             this.panel3.Controls.Add(this.btnUploadAssignment);
@@ -470,7 +471,7 @@
         private System.Windows.Forms.Button btnViewStudent;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnAnnouncements;
-        private System.Windows.Forms.Button assigned_teachers;
+        private System.Windows.Forms.Button quizzes;
         private System.Windows.Forms.Button mark_assignment;
         private System.Windows.Forms.Button btnUploadQuiz;
         private System.Windows.Forms.Label lblTotalTeachers;

@@ -60,6 +60,7 @@
     <Reference Include="Microsoft.ML.DataView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ML.DataView.2.0.1\lib\netstandard2.0\Microsoft.ML.DataView.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=9.6.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.9.6.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
@@ -203,12 +204,6 @@
     <Compile Include="TeacherAnnouncementsForm.Designer.cs">
       <DependentUpon>TeacherAnnouncementsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TeacherAssignments.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeacherAssignments.Designer.cs">
-      <DependentUpon>TeacherAssignments.cs</DependentUpon>
-    </Compile>
     <Compile Include="TeacherDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +215,12 @@
     </Compile>
     <Compile Include="TeacherLoginForm.Designer.cs">
       <DependentUpon>TeacherLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherSubmissionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeacherSubmissionsForm.Designer.cs">
+      <DependentUpon>TeacherSubmissionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UploadAssignmentForm.cs">
       <SubType>Form</SubType>
@@ -321,14 +322,14 @@
     <EmbeddedResource Include="TeacherAnnouncementsForm.resx">
       <DependentUpon>TeacherAnnouncementsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TeacherAssignments.resx">
-      <DependentUpon>TeacherAssignments.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherLoginForm.resx">
       <DependentUpon>TeacherLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherSubmissionsForm.resx">
+      <DependentUpon>TeacherSubmissionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UploadAssignmentForm.resx">
       <DependentUpon>UploadAssignmentForm.cs</DependentUpon>

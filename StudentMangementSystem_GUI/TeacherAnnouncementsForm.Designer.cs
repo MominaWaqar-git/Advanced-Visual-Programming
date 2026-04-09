@@ -189,7 +189,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(607, 538);
+            this.btnRefresh.Location = new System.Drawing.Point(702, 276);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Padding = new System.Windows.Forms.Padding(5);
             this.btnRefresh.Size = new System.Drawing.Size(74, 37);
@@ -206,7 +206,7 @@
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(89, 538);
+            this.btnBack.Location = new System.Drawing.Point(53, 283);
             this.btnBack.Name = "btnBack";
             this.btnBack.Padding = new System.Windows.Forms.Padding(5);
             this.btnBack.Size = new System.Drawing.Size(70, 37);
@@ -242,7 +242,6 @@
             this.Controls.Add(this.btnBack);
             this.Name = "TeacherAnnouncementsForm";
             this.Text = "TeacherAnnouncementsForm";
-           // this.Load += new System.EventHandler(this.TeacherAnnouncementsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnnouncements)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

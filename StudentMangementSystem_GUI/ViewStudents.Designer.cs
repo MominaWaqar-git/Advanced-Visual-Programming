@@ -136,7 +136,7 @@
             this.refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.refresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refresh.ForeColor = System.Drawing.Color.White;
-            this.refresh.Location = new System.Drawing.Point(608, 533);
+            this.refresh.Location = new System.Drawing.Point(709, 134);
             this.refresh.Name = "refresh";
             this.refresh.Padding = new System.Windows.Forms.Padding(5);
             this.refresh.Size = new System.Drawing.Size(74, 37);
@@ -153,7 +153,7 @@
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.back.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back.ForeColor = System.Drawing.Color.White;
-            this.back.Location = new System.Drawing.Point(90, 533);
+            this.back.Location = new System.Drawing.Point(12, 134);
             this.back.Name = "back";
             this.back.Padding = new System.Windows.Forms.Padding(5);
             this.back.Size = new System.Drawing.Size(70, 37);

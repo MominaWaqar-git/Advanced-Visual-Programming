@@ -124,9 +124,16 @@ namespace StudentMangementSystem_GUI
 
         private void mark_assignment_Click(object sender, EventArgs e)
         {
-            TeacherAssignments teacherAssignments = new TeacherAssignments(teacherId);
-            teacherAssignments.Show();
+            TeacherSubmissionsForm teacherSubmissions = new TeacherSubmissionsForm(teacherId);
+            teacherSubmissions.Show();
             this.Hide();
         }
+
+       // private void quizzes_Click(object sender, EventArgs e)
+        //{
+          //  TeacherQuizForm quizForm = new TeacherQuizForm(teacherId);
+            //quizForm.Show();
+            //this.Hide();
+        //}
     }
 }

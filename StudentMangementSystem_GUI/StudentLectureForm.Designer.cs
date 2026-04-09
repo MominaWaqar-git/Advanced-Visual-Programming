@@ -123,7 +123,7 @@
             this.dgvLectures.GridColor = System.Drawing.Color.White;
             this.dgvLectures.Location = new System.Drawing.Point(12, 206);
             this.dgvLectures.Name = "dgvLectures";
-            this.dgvLectures.Size = new System.Drawing.Size(776, 278);
+            this.dgvLectures.Size = new System.Drawing.Size(776, 358);
             this.dgvLectures.TabIndex = 54;
             // 
             // label8
@@ -148,7 +148,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(607, 528);
+            this.btnRefresh.Location = new System.Drawing.Point(679, 141);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Padding = new System.Windows.Forms.Padding(5);
             this.btnRefresh.Size = new System.Drawing.Size(74, 37);
@@ -165,21 +165,20 @@
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(89, 528);
+            this.btnBack.Location = new System.Drawing.Point(37, 140);
             this.btnBack.Name = "btnBack";
             this.btnBack.Padding = new System.Windows.Forms.Padding(5);
             this.btnBack.Size = new System.Drawing.Size(70, 37);
             this.btnBack.TabIndex = 51;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
-           // this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(271, 141);
+            this.label3.Location = new System.Drawing.Point(262, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 17);
             this.label3.TabIndex = 110;
@@ -190,7 +189,7 @@
             // 
             this.cmbSubject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSubject.FormattingEnabled = true;
-            this.cmbSubject.Location = new System.Drawing.Point(384, 140);
+            this.cmbSubject.Location = new System.Drawing.Point(347, 149);
             this.cmbSubject.Name = "cmbSubject";
             this.cmbSubject.Size = new System.Drawing.Size(226, 23);
             this.cmbSubject.TabIndex = 112;
