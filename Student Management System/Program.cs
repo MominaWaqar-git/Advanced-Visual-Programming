@@ -102,6 +102,10 @@ namespace StudentManagementSystem
 
     class Program
     {
+        static string HashPassword(string pass)
+        {
+            return pass.GetHashCode().ToString();
+        }
         static void Main(string[] args)
         {
             ShowWelcomeScreen();
@@ -1172,6 +1176,12 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
         {
             Console.Clear();
 
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("==============================================");
+            Console.WriteLine("       STUDENT - TEACHER ASSIGNMENT PANEL");
+            Console.WriteLine("==============================================\n");
+            Console.ResetColor();
+
             using (var conn = DB.GetConnection())
             {
                 conn.Open();
@@ -1182,18 +1192,29 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 Console.ResetColor();
 
                 string qs = @"
-        SELECT s.ID, s.Name, s.Subject,
-               COALESCE(t.Name, 'Not Assigned') AS TeacherName
-        FROM Students s
-        LEFT JOIN StudentTeacher st ON s.ID = st.StudentID
-        LEFT JOIN Teachers t ON t.ID = st.TeacherID";
+SELECT s.ID, s.Name, s.Subject,
+       COALESCE(t.Name, 'Not Assigned') AS TeacherName
+FROM Students s
+LEFT JOIN StudentTeacher st ON s.ID = st.StudentID
+LEFT JOIN Teachers t ON t.ID = st.TeacherID";
 
                 MySqlCommand cmdS = new MySqlCommand(qs, conn);
                 var rs = cmdS.ExecuteReader();
 
                 while (rs.Read())
                 {
-                    Console.WriteLine($"ID: {rs["ID"]} | Name: {rs["Name"]} | Subject: {rs["Subject"]} | Teacher: {rs["TeacherName"]}");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("--------------------------------------------------");
+                    Console.ResetColor();
+
+                    Console.WriteLine($" ID       : {rs["ID"]}");
+                    Console.WriteLine($" Name     : {rs["Name"]}");
+                    Console.WriteLine($" Subject  : {rs["Subject"]}");
+                    Console.WriteLine($" Teacher : {rs["TeacherName"]}");
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("--------------------------------------------------\n");
+                    Console.ResetColor();
                 }
 
                 rs.Close();
@@ -1203,7 +1224,8 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (!int.TryParse(Console.ReadLine(), out int sid))
                 {
                     Console.WriteLine("❌ Invalid Student ID!");
-                    Console.ReadKey();
+                    Console.WriteLine("\nPress Enter to continue...");
+                    Console.ReadLine();
                     return;
                 }
 
@@ -1211,12 +1233,14 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 string stuSub = "";
                 MySqlCommand getStu = new MySqlCommand("SELECT Subject FROM Students WHERE ID=@id", conn);
                 getStu.Parameters.AddWithValue("@id", sid);
+
                 var stuObj = getStu.ExecuteScalar();
 
                 if (stuObj == null)
                 {
                     Console.WriteLine("❌ Student not found!");
-                    Console.ReadKey();
+                    Console.WriteLine("\nPress Enter to continue...");
+                    Console.ReadLine();
                     return;
                 }
 
@@ -1224,7 +1248,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
 
                 Console.Clear();
 
-                // ================= TEACHERS (FILTER BY SUBJECT) =================
+                // ================= TEACHERS =================
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"======= TEACHERS (SUBJECT: {stuSub}) =======\n");
                 Console.ResetColor();
@@ -1240,7 +1264,18 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 while (rt.Read())
                 {
                     hasTeacher = true;
-                    Console.WriteLine($"ID: {rt["ID"]} | Name: {rt["Name"]} | Subject: {rt["Subject"]}");
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("----------------------------------------");
+                    Console.ResetColor();
+
+                    Console.WriteLine($" ID      : {rt["ID"]}");
+                    Console.WriteLine($" Name    : {rt["Name"]}");
+                    Console.WriteLine($" Subject : {rt["Subject"]}");
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("----------------------------------------\n");
+                    Console.ResetColor();
                 }
 
                 rt.Close();
@@ -1250,7 +1285,10 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n❌ No teacher available for this subject!");
                     Console.ResetColor();
-                    Console.ReadKey();
+
+                    Console.WriteLine("\nPress 0 to go back OR Enter to continue...");
+                    if (Console.ReadLine() == "0") return;
+
                     return;
                 }
 
@@ -1259,11 +1297,12 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (!int.TryParse(Console.ReadLine(), out int tid))
                 {
                     Console.WriteLine("❌ Invalid Teacher ID!");
-                    Console.ReadKey();
+                    Console.WriteLine("\nPress Enter to continue...");
+                    Console.ReadLine();
                     return;
                 }
 
-                // VERIFY SUBJECT MATCH
+                // VERIFY TEACHER
                 string checkTeachSub = "SELECT Subject FROM Teachers WHERE ID=@id";
                 MySqlCommand chk = new MySqlCommand(checkTeachSub, conn);
                 chk.Parameters.AddWithValue("@id", tid);
@@ -1273,7 +1312,8 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (tsubObj == null)
                 {
                     Console.WriteLine("❌ Teacher not found!");
-                    Console.ReadKey();
+                    Console.WriteLine("\nPress Enter to continue...");
+                    Console.ReadLine();
                     return;
                 }
 
@@ -1284,304 +1324,285 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("❌ Cannot assign! Subject mismatch.");
                     Console.ResetColor();
-                    Console.ReadKey();
+
+                    Console.WriteLine("\nPress Enter to continue...");
+                    Console.ReadLine();
                     return;
                 }
 
                 // ================= ASSIGN =================
-                string check = "SELECT COUNT(*) FROM StudentTeacher WHERE StudentID=@s";
-                MySqlCommand chk2 = new MySqlCommand(check, conn);
-                chk2.Parameters.AddWithValue("@s", sid);
-
-                int exists = Convert.ToInt32(chk2.ExecuteScalar());
-
-                if (exists > 0)
-                {
-                    string update = "UPDATE StudentTeacher SET TeacherID=@t WHERE StudentID=@s";
-                    MySqlCommand up = new MySqlCommand(update, conn);
-                    up.Parameters.AddWithValue("@t", tid);
-                    up.Parameters.AddWithValue("@s", sid);
-                    up.ExecuteNonQuery();
-                }
-                else
-                {
-                    string insert = "INSERT INTO StudentTeacher (StudentID,TeacherID) VALUES (@s,@t)";
-                    MySqlCommand ins = new MySqlCommand(insert, conn);
-                    ins.Parameters.AddWithValue("@s", sid);
-                    ins.Parameters.AddWithValue("@t", tid);
-                    ins.ExecuteNonQuery();
-                }
+                string insert = "INSERT INTO StudentTeacher (StudentID, TeacherID) VALUES (@s,@t)";
+                MySqlCommand ins = new MySqlCommand(insert, conn);
+                ins.Parameters.AddWithValue("@s", sid);
+                ins.Parameters.AddWithValue("@t", tid);
+                ins.ExecuteNonQuery();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Assigned Successfully (Same Subject Match)");
+                Console.WriteLine("\n✅ Assigned Successfully!");
                 Console.ResetColor();
+
+                Console.WriteLine("\nPress 0 to go back OR Enter to continue...");
+                if (Console.ReadLine() == "0")
+                {
+                    return;
+                }
             }
-
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
         }
-
-
         // ================= TEACHER LOGIN & PANEL =================
         static void TeacherLogin()
-        {
-            Console.Clear();
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("===================================");
-            Console.WriteLine("         TEACHER LOGIN");
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
-
-            Console.Write("Enter Username: ");
-            string username = Console.ReadLine();
-
-            using (var conn = DB.GetConnection())
             {
-                conn.Open();
+                Console.Clear();
 
-                string q = "SELECT * FROM Teachers WHERE Username=@u";
-                MySqlCommand cmd = new MySqlCommand(q, conn);
-                cmd.Parameters.AddWithValue("@u", username);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("===================================");
+                Console.WriteLine("         TEACHER LOGIN");
+                Console.WriteLine("===================================\n");
+                Console.ResetColor();
 
-                var r = cmd.ExecuteReader();
+                Console.Write("Enter Username: ");
+                string username = Console.ReadLine();
 
-                if (!r.Read())
+                using (var conn = DB.GetConnection())
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n❌ User not found!");
-                    Console.ResetColor();
+                    conn.Open();
 
-                    Console.WriteLine("\nPress any key to go back...");
-                    Console.ReadKey();
-                    return;
-                }
+                    string q = "SELECT * FROM Teachers WHERE Username=@u";
+                    MySqlCommand cmd = new MySqlCommand(q, conn);
+                    cmd.Parameters.AddWithValue("@u", username);
 
-                int id = Convert.ToInt32(r["ID"]);
-                string name = r["Name"].ToString();
-                string password = r["Password"].ToString();
+                    var r = cmd.ExecuteReader();
 
-                r.Close();
-
-                // ================= FIRST LOGIN =================
-                if (string.IsNullOrWhiteSpace(password))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n🔐 First Login - Set Your Password");
-                    Console.ResetColor();
-
-                    string newPass;
-
-                    while (true)
+                    if (!r.Read())
                     {
-                        Console.Write("Enter New Password: ");
-                        newPass = Console.ReadLine();
-
-                        if (!string.IsNullOrWhiteSpace(newPass) && newPass.Length >= 4)
-                            break;
-
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Password must be at least 4 characters!");
+                        Console.WriteLine("\n❌ User not found!");
                         Console.ResetColor();
+
+                        Console.WriteLine("\nPress any key to go back...");
+                        Console.ReadKey();
+                        return;
                     }
 
-                    string update = "UPDATE Teachers SET Password=@p WHERE ID=@id";
-                    MySqlCommand up = new MySqlCommand(update, conn);
-                    up.Parameters.AddWithValue("@p", newPass);
-                    up.Parameters.AddWithValue("@id", id);
-                    up.ExecuteNonQuery();
+                    int id = Convert.ToInt32(r["ID"]);
+                    string name = r["Name"].ToString();
+                    string password = r["Password"].ToString();
 
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Password Set Successfully!");
-                    Console.ResetColor();
+                    r.Close();
 
-                    TeacherPanel(id, name);
-                    return;
-                }
-
-                // ================= NORMAL LOGIN =================
-                int attempts = 3;
-
-                while (attempts > 0)
-                {
-                    Console.Write("\nEnter Password: ");
-                    string pass = Console.ReadLine();
-
-                    if (pass == password)
+                    // ================= FIRST LOGIN =================
+                    if (string.IsNullOrWhiteSpace(password))
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n🔐 First Login - Set Your Password");
+                        Console.ResetColor();
+
+                        string newPass;
+
+                        while (true)
+                        {
+                            Console.Write("Enter New Password: ");
+                            newPass = Console.ReadLine();
+
+                            if (!string.IsNullOrWhiteSpace(newPass) && newPass.Length >= 4)
+                                break;
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Password must be at least 4 characters!");
+                            Console.ResetColor();
+                        }
+
+                        string update = "UPDATE Teachers SET Password=@p WHERE ID=@id";
+                        MySqlCommand up = new MySqlCommand(update, conn);
+                        up.Parameters.AddWithValue("@p", newPass);
+                        up.Parameters.AddWithValue("@id", id);
+                        up.ExecuteNonQuery();
+
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Login Successful!");
+                        Console.WriteLine("\n✅ Password Set Successfully!");
                         Console.ResetColor();
 
                         TeacherPanel(id, name);
                         return;
                     }
 
-                    attempts--;
+                    // ================= NORMAL LOGIN =================
+                    int attempts = 3;
 
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                    while (attempts > 0)
+                    {
+                        Console.Write("\nEnter Password: ");
+                        string pass = Console.ReadLine();
+
+                        if (pass == password)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\n✅ Login Successful!");
+                            Console.ResetColor();
+
+                            TeacherPanel(id, name);
+                            return;
+                        }
+
+                        attempts--;
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                        Console.ResetColor();
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\n🚫 Too many failed attempts!");
                     Console.ResetColor();
                 }
 
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("\n🚫 Too many failed attempts!");
-                Console.ResetColor();
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
             }
-
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
-        }
-        static void TeacherPanel(int teacherId, string teacherName)
-        {
-            while (true)
+            static void TeacherPanel(int teacherId, string teacherName)
             {
-                Console.Clear();
-
-                // ===== HEADER =====
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=======================================");
-                Console.WriteLine($"      TEACHER DASHBOARD - {teacherName}");
-                Console.WriteLine("=======================================\n");
-                Console.ResetColor();
-
-                // ===== MENU =====
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("1. Upload Assignment");
-                Console.WriteLine("2. Upload Quiz");
-                Console.WriteLine("3. View Assignments");
-                Console.WriteLine("4. View Quizzes");
-                Console.WriteLine("5. Logout");
-                Console.WriteLine("=======================================\n");
-                Console.ResetColor();
-
-                Console.Write("Enter your choice: ");
-                string ch = Console.ReadLine();
-
-                Console.Clear();
-
-                switch (ch)
+                while (true)
                 {
-                    case "1":
-                        UploadAssignment(teacherId);
-                        break;
+                    Console.Clear();
 
-                    case "2":
-                        UploadQuiz(teacherId);
-                        break;
+                    // ===== HEADER =====
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine($"      TEACHER DASHBOARD - {teacherName}");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
 
-                    case "3":
-                        ViewAssignments(teacherId);
-                        break;
+                    // ===== MENU =====
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("1. Upload Assignment");
+                    Console.WriteLine("2. Upload Quiz");
+                    Console.WriteLine("3. View Assignments");
+                    Console.WriteLine("4. View Quizzes");
+                    Console.WriteLine("5. Logout");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
 
-                    case "4":
-                        ViewQuizzes(teacherId);
-                        break;
+                    Console.Write("Enter your choice: ");
+                    string ch = Console.ReadLine();
 
-                    case "5":
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("👋 Logging out... Goodbye!");
-                        Console.ResetColor();
+                    Console.Clear();
 
-                        Console.WriteLine("\nPress any key...");
-                        Console.ReadKey();
-                        return;
+                    switch (ch)
+                    {
+                        case "1":
+                            UploadAssignment(teacherId);
+                            break;
 
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid choice! Please select 1-6.");
-                        Console.ResetColor();
+                        case "2":
+                            UploadQuiz(teacherId);
+                            break;
 
-                        Console.WriteLine("\nPress any key to continue...");
-                        Console.ReadKey();
-                        break;
+                        case "3":
+                            ViewAssignments(teacherId);
+                            break;
+
+                        case "4":
+                            ViewQuizzes(teacherId);
+                            break;
+
+                        case "5":
+                            ShowWelcomeScreen();
+                            return;
+
+                        default:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Invalid choice! Please select 1-6.");
+                            Console.ResetColor();
+
+                            Console.WriteLine("\nPress any key to continue...");
+                            Console.ReadKey();
+                            break;
+                    }
                 }
             }
-        }
 
-        static void UploadAssignment(int teacherId)
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("========= UPLOAD ASSIGNMENT =========\n");
-            Console.ResetColor();
-
-            Console.Write("Title: ");
-            string title = Console.ReadLine();
-
-            int marks;
-
-            while (true)
+            static void UploadAssignment(int teacherId)
             {
-                Console.Write("Total Marks: ");
-                if (int.TryParse(Console.ReadLine(), out marks) && marks > 0)
-                    break;
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid marks! Enter a valid number.");
-                Console.ResetColor();
-            }
-
-            string desc = "";
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nEnter Questions (type 'done' to finish):");
-            Console.ResetColor();
-
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                if (input.ToLower() == "done")
-                    break;
-
-                if (!string.IsNullOrWhiteSpace(input))
-                    desc += "- " + input + "\n";
-            }
-
-            using (var conn = DB.GetConnection())
-            {
-                conn.Open();
-
-                string q = @"INSERT INTO Assignments 
-        (TeacherID, Title, Description, TotalMarks)
-        VALUES (@t, @ti, @d, @m)";
-
-                MySqlCommand cmd = new MySqlCommand(q, conn);
-
-                cmd.Parameters.AddWithValue("@t", teacherId);
-                cmd.Parameters.AddWithValue("@ti", title);
-                cmd.Parameters.AddWithValue("@d", desc);
-                cmd.Parameters.AddWithValue("@m", marks);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n✅ Assignment Added Successfully!");
-            Console.ResetColor();
-
-            Console.WriteLine("\nPress any key...");
-            Console.ReadKey();
-        }
-        static void ViewAssignments(int teacherId)
-        {
-            while (true) // 🔁 refresh loop
-            {
-                Console.Clear();
-
-                // ===== HEADER =====
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=======================================");
-                Console.WriteLine("     ASSIGNMENTS + SUBMISSIONS");
-                Console.WriteLine("=======================================\n");
+                Console.WriteLine("========= UPLOAD ASSIGNMENT =========\n");
                 Console.ResetColor();
+
+                Console.Write("Title: ");
+                string title = Console.ReadLine();
+
+                int marks;
+
+                while (true)
+                {
+                    Console.Write("Total Marks: ");
+                    if (int.TryParse(Console.ReadLine(), out marks) && marks > 0)
+                        break;
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("❌ Invalid marks! Enter a valid number.");
+                    Console.ResetColor();
+                }
+
+                string desc = "";
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nEnter Questions (type 'done' to finish):");
+                Console.ResetColor();
+
+                while (true)
+                {
+                    string input = Console.ReadLine();
+
+                    if (input.ToLower() == "done")
+                        break;
+
+                    if (!string.IsNullOrWhiteSpace(input))
+                        desc += "- " + input + "\n";
+                }
 
                 using (var conn = DB.GetConnection())
                 {
                     conn.Open();
 
-                    // 🔥 FIX: sub.ID added
-                    string q = @"
+                    string q = @"INSERT INTO Assignments 
+        (TeacherID, Title, Description, TotalMarks)
+        VALUES (@t, @ti, @d, @m)";
+
+                    MySqlCommand cmd = new MySqlCommand(q, conn);
+
+                    cmd.Parameters.AddWithValue("@t", teacherId);
+                    cmd.Parameters.AddWithValue("@ti", title);
+                    cmd.Parameters.AddWithValue("@d", desc);
+                    cmd.Parameters.AddWithValue("@m", marks);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n✅ Assignment Added Successfully!");
+                Console.ResetColor();
+
+                Console.WriteLine("\nPress any key...");
+                Console.ReadKey();
+            }
+            static void ViewAssignments(int teacherId)
+            {
+                while (true) // 🔁 refresh loop
+                {
+                    Console.Clear();
+
+                    // ===== HEADER =====
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine("     ASSIGNMENTS + SUBMISSIONS");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
+
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        // 🔥 FIX: sub.ID added
+                        string q = @"
 SELECT sub.ID AS SubID, a.ID AS AID, a.Title, a.Description, a.TotalMarks,
        s.Name AS StudentName,
        sub.SubmissionText,
@@ -1592,288 +1613,288 @@ LEFT JOIN Students s ON s.ID = sub.StudentID
 WHERE a.TeacherID = @t
 ORDER BY a.ID";
 
-                    MySqlCommand cmd = new MySqlCommand(q, conn);
-                    cmd.Parameters.AddWithValue("@t", teacherId);
+                        MySqlCommand cmd = new MySqlCommand(q, conn);
+                        cmd.Parameters.AddWithValue("@t", teacherId);
 
-                    var r = cmd.ExecuteReader();
+                        var r = cmd.ExecuteReader();
 
-                    int currentAssignment = -1;
-                    bool found = false;
+                        int currentAssignment = -1;
+                        bool found = false;
 
-                    while (r.Read())
-                    {
-                        found = true;
-
-                        int aid = Convert.ToInt32(r["AID"]);
-
-                        // ===== NEW ASSIGNMENT HEADER =====
-                        if (aid != currentAssignment)
+                        while (r.Read())
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"\n📌 Assignment ID: {aid}");
-                            Console.WriteLine($"Title       : {r["Title"]}");
-                            Console.WriteLine($"Question    : {r["Description"]}");
-                            Console.WriteLine($"Total Marks : {r["TotalMarks"]}");
-                            Console.ResetColor();
+                            found = true;
 
-                            Console.WriteLine("\n--- Submissions ---");
-                            currentAssignment = aid;
+                            int aid = Convert.ToInt32(r["AID"]);
+
+                            // ===== NEW ASSIGNMENT HEADER =====
+                            if (aid != currentAssignment)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"\n📌 Assignment ID: {aid}");
+                                Console.WriteLine($"Title       : {r["Title"]}");
+                                Console.WriteLine($"Question    : {r["Description"]}");
+                                Console.WriteLine($"Total Marks : {r["TotalMarks"]}");
+                                Console.ResetColor();
+
+                                Console.WriteLine("\n--- Submissions ---");
+                                currentAssignment = aid;
+                            }
+
+                            // ===== SUBMISSIONS =====
+                            if (r["StudentName"] != DBNull.Value)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
+                                Console.ResetColor();
+
+                                Console.WriteLine($"👨‍🎓 Student   : {r["StudentName"]}");
+                                Console.WriteLine($"📝 Answer    : {r["SubmissionText"]}");
+                                Console.WriteLine($"🎯 Marks     : {r["MarksObtained"]}");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                Console.WriteLine("No submissions yet.");
+                                Console.ResetColor();
+                            }
                         }
 
-                        // ===== SUBMISSIONS =====
-                        if (r["StudentName"] != DBNull.Value)
+                        r.Close();
+
+                        // ===== NO DATA =====
+                        if (!found)
                         {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ No assignments found!");
                             Console.ResetColor();
-
-                            Console.WriteLine($"👨‍🎓 Student   : {r["StudentName"]}");
-                            Console.WriteLine($"📝 Answer    : {r["SubmissionText"]}");
-                            Console.WriteLine($"🎯 Marks     : {r["MarksObtained"]}");
+                            Console.ReadKey();
+                            return;
                         }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.WriteLine("No submissions yet.");
-                            Console.ResetColor();
-                        }
-                    }
 
-                    r.Close();
-
-                    // ===== NO DATA =====
-                    if (!found)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ No assignments found!");
+                        // ===== EDIT OPTION =====
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n=======================================");
+                        Console.WriteLine("Enter Submission ID to edit marks");
+                        Console.WriteLine("Press 0 to go back");
+                        Console.WriteLine("=======================================");
                         Console.ResetColor();
-                        Console.ReadKey();
-                        return;
-                    }
 
-                    // ===== EDIT OPTION =====
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n=======================================");
-                    Console.WriteLine("Enter Submission ID to edit marks");
-                    Console.WriteLine("Press 0 to go back");
-                    Console.WriteLine("=======================================");
-                    Console.ResetColor();
+                        int subId;
+                        Console.Write("\nEnter ID: ");
 
-                    int subId;
-                    Console.Write("\nEnter ID: ");
+                        if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
+                        {
+                            Console.WriteLine("❌ Invalid input!");
+                            Console.ReadKey();
+                            continue;
+                        }
 
-                    if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
-                    {
-                        Console.WriteLine("❌ Invalid input!");
-                        Console.ReadKey();
-                        continue;
-                    }
+                        if (subId == 0)
+                            return;
 
-                    if (subId == 0)
-                        return;
-
-                    // ===== GET TOTAL MARKS =====
-                    string getMarksQ = @"
+                        // ===== GET TOTAL MARKS =====
+                        string getMarksQ = @"
 SELECT a.TotalMarks 
 FROM AssignmentSubmissions sub
 JOIN Assignments a ON a.ID = sub.AssignmentID
 WHERE sub.ID = @id";
 
-                    MySqlCommand getCmd = new MySqlCommand(getMarksQ, conn);
-                    getCmd.Parameters.AddWithValue("@id", subId);
+                        MySqlCommand getCmd = new MySqlCommand(getMarksQ, conn);
+                        getCmd.Parameters.AddWithValue("@id", subId);
 
-                    var totalObj = getCmd.ExecuteScalar();
+                        var totalObj = getCmd.ExecuteScalar();
 
-                    if (totalObj == null)
-                    {
-                        Console.WriteLine("❌ Submission not found!");
-                        Console.ReadKey();
-                        continue;
-                    }
+                        if (totalObj == null)
+                        {
+                            Console.WriteLine("❌ Submission not found!");
+                            Console.ReadKey();
+                            continue;
+                        }
 
-                    int totalMarks = Convert.ToInt32(totalObj);
+                        int totalMarks = Convert.ToInt32(totalObj);
 
-                    // ===== ENTER NEW MARKS =====
-                    int newMarks;
-
-                    while (true)
-                    {
-                        Console.Write($"Enter Marks (0 - {totalMarks}): ");
-
-                        if (int.TryParse(Console.ReadLine(), out newMarks) &&
-                            newMarks >= 0 && newMarks <= totalMarks)
-                            break;
-
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid marks!");
-                        Console.ResetColor();
-                    }
-
-                    // ===== UPDATE =====
-                    string updateQ = "UPDATE AssignmentSubmissions SET MarksObtained=@m WHERE ID=@id";
-                    MySqlCommand updateCmd = new MySqlCommand(updateQ, conn);
-
-                    updateCmd.Parameters.AddWithValue("@m", newMarks);
-                    updateCmd.Parameters.AddWithValue("@id", subId);
-
-                    updateCmd.ExecuteNonQuery();
-
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Marks updated successfully!");
-                    Console.ResetColor();
-
-                    Console.WriteLine("\nPress any key to refresh...");
-                    Console.ReadKey();
-                }
-            }
-        }
-        static void UploadQuiz(int teacherId)
-        {
-            Console.Clear();
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("===================================");
-            Console.WriteLine("          UPLOAD QUIZ");
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
-
-            using (var conn = DB.GetConnection())
-            {
-                conn.Open();
-
-                while (true)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n--- NEW QUESTION ---");
-                    Console.ResetColor();
-
-                    Console.Write("Enter Question: ");
-                    string question = Console.ReadLine();
-
-                    if (string.IsNullOrWhiteSpace(question))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Question cannot be empty!");
-                        Console.ResetColor();
-                        continue;
-                    }
-
-                    Console.Write("Is this MCQ? (yes/no): ");
-                    string type = Console.ReadLine().ToLower();
-
-                    string optionA = "", optionB = "", optionC = "", optionD = "";
-                    string correctAnswer = "";
-                    bool isMCQ = false;
-
-                    if (type == "yes")
-                    {
-                        isMCQ = true;
-
-                        Console.Write("Option A: ");
-                        optionA = Console.ReadLine();
-
-                        Console.Write("Option B: ");
-                        optionB = Console.ReadLine();
-
-                        Console.Write("Option C: ");
-                        optionC = Console.ReadLine();
-
-                        Console.Write("Option D: ");
-                        optionD = Console.ReadLine();
+                        // ===== ENTER NEW MARKS =====
+                        int newMarks;
 
                         while (true)
                         {
-                            Console.Write("Correct Answer (A/B/C/D): ");
-                            string ans = Console.ReadLine().ToUpper();
+                            Console.Write($"Enter Marks (0 - {totalMarks}): ");
 
-                            if (ans == "A" || ans == "B" || ans == "C" || ans == "D")
-                            {
-                                correctAnswer = ans;
+                            if (int.TryParse(Console.ReadLine(), out newMarks) &&
+                                newMarks >= 0 && newMarks <= totalMarks)
                                 break;
-                            }
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid option! Choose A, B, C or D.");
+                            Console.WriteLine("❌ Invalid marks!");
                             Console.ResetColor();
                         }
-                    }
-                    else
-                    {
-                        Console.Write("Enter Expected Answer: ");
-                        correctAnswer = Console.ReadLine();
-                    }
 
-                    // ===== MARKS VALIDATION =====
-                    int marks;
+                        // ===== UPDATE =====
+                        string updateQ = "UPDATE AssignmentSubmissions SET MarksObtained=@m WHERE ID=@id";
+                        MySqlCommand updateCmd = new MySqlCommand(updateQ, conn);
 
-                    while (true)
-                    {
-                        Console.Write("Enter Total Marks: ");
-                        if (int.TryParse(Console.ReadLine(), out marks) && marks > 0)
-                            break;
+                        updateCmd.Parameters.AddWithValue("@m", newMarks);
+                        updateCmd.Parameters.AddWithValue("@id", subId);
 
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid marks! Enter a valid number.");
+                        updateCmd.ExecuteNonQuery();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n✅ Marks updated successfully!");
                         Console.ResetColor();
+
+                        Console.WriteLine("\nPress any key to refresh...");
+                        Console.ReadKey();
                     }
-
-                    // ===== DATABASE INSERT =====
-                    string query = @"INSERT INTO Quizzes 
-            (TeacherID, Question, OptionA, OptionB, OptionC, OptionD, CorrectAnswer, IsMCQ, TotalMarks)
-            VALUES (@TeacherID, @Question, @A, @B, @C, @D, @Correct, @IsMCQ, @Marks)";
-
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                    cmd.Parameters.AddWithValue("@TeacherID", teacherId);
-                    cmd.Parameters.AddWithValue("@Question", question);
-                    cmd.Parameters.AddWithValue("@A", optionA);
-                    cmd.Parameters.AddWithValue("@B", optionB);
-                    cmd.Parameters.AddWithValue("@C", optionC);
-                    cmd.Parameters.AddWithValue("@D", optionD);
-                    cmd.Parameters.AddWithValue("@Correct", correctAnswer);
-                    cmd.Parameters.AddWithValue("@IsMCQ", isMCQ);
-                    cmd.Parameters.AddWithValue("@Marks", marks);
-
-                    cmd.ExecuteNonQuery();
-
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Quiz added successfully!");
-                    Console.ResetColor();
-
-                    Console.Write("\n➕ Add another question? (yes/no): ");
-                    string again = Console.ReadLine().ToLower();
-
-                    if (again != "yes")
-                        break;
                 }
             }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n🎯 Quiz Upload Completed!");
-            Console.ResetColor();
-
-            Console.WriteLine("\nPress any key...");
-            Console.ReadKey();
-        }
-
-        static void ViewQuizzes(int teacherId)
-        {
-            while (true) // 🔁 refresh loop
+            static void UploadQuiz(int teacherId)
             {
                 Console.Clear();
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=======================================");
-                Console.WriteLine("        QUIZZES + RESULTS");
-                Console.WriteLine("=======================================\n");
+                Console.WriteLine("===================================");
+                Console.WriteLine("          UPLOAD QUIZ");
+                Console.WriteLine("===================================\n");
                 Console.ResetColor();
 
                 using (var conn = DB.GetConnection())
                 {
                     conn.Open();
 
-                    // 🔥 FIX: sub.ID included (important)
-                    string q = @"
+                    while (true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n--- NEW QUESTION ---");
+                        Console.ResetColor();
+
+                        Console.Write("Enter Question: ");
+                        string question = Console.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(question))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Question cannot be empty!");
+                            Console.ResetColor();
+                            continue;
+                        }
+
+                        Console.Write("Is this MCQ? (yes/no): ");
+                        string type = Console.ReadLine().ToLower();
+
+                        string optionA = "", optionB = "", optionC = "", optionD = "";
+                        string correctAnswer = "";
+                        bool isMCQ = false;
+
+                        if (type == "yes")
+                        {
+                            isMCQ = true;
+
+                            Console.Write("Option A: ");
+                            optionA = Console.ReadLine();
+
+                            Console.Write("Option B: ");
+                            optionB = Console.ReadLine();
+
+                            Console.Write("Option C: ");
+                            optionC = Console.ReadLine();
+
+                            Console.Write("Option D: ");
+                            optionD = Console.ReadLine();
+
+                            while (true)
+                            {
+                                Console.Write("Correct Answer (A/B/C/D): ");
+                                string ans = Console.ReadLine().ToUpper();
+
+                                if (ans == "A" || ans == "B" || ans == "C" || ans == "D")
+                                {
+                                    correctAnswer = ans;
+                                    break;
+                                }
+
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("❌ Invalid option! Choose A, B, C or D.");
+                                Console.ResetColor();
+                            }
+                        }
+                        else
+                        {
+                            Console.Write("Enter Expected Answer: ");
+                            correctAnswer = Console.ReadLine();
+                        }
+
+                        // ===== MARKS VALIDATION =====
+                        int marks;
+
+                        while (true)
+                        {
+                            Console.Write("Enter Total Marks: ");
+                            if (int.TryParse(Console.ReadLine(), out marks) && marks > 0)
+                                break;
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Invalid marks! Enter a valid number.");
+                            Console.ResetColor();
+                        }
+
+                        // ===== DATABASE INSERT =====
+                        string query = @"INSERT INTO Quizzes 
+            (TeacherID, Question, OptionA, OptionB, OptionC, OptionD, CorrectAnswer, IsMCQ, TotalMarks)
+            VALUES (@TeacherID, @Question, @A, @B, @C, @D, @Correct, @IsMCQ, @Marks)";
+
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                        cmd.Parameters.AddWithValue("@TeacherID", teacherId);
+                        cmd.Parameters.AddWithValue("@Question", question);
+                        cmd.Parameters.AddWithValue("@A", optionA);
+                        cmd.Parameters.AddWithValue("@B", optionB);
+                        cmd.Parameters.AddWithValue("@C", optionC);
+                        cmd.Parameters.AddWithValue("@D", optionD);
+                        cmd.Parameters.AddWithValue("@Correct", correctAnswer);
+                        cmd.Parameters.AddWithValue("@IsMCQ", isMCQ);
+                        cmd.Parameters.AddWithValue("@Marks", marks);
+
+                        cmd.ExecuteNonQuery();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n✅ Quiz added successfully!");
+                        Console.ResetColor();
+
+                        Console.Write("\n➕ Add another question? (yes/no): ");
+                        string again = Console.ReadLine().ToLower();
+
+                        if (again != "yes")
+                            break;
+                    }
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n🎯 Quiz Upload Completed!");
+                Console.ResetColor();
+
+                Console.WriteLine("\nPress any key...");
+                Console.ReadKey();
+            }
+
+            static void ViewQuizzes(int teacherId)
+            {
+                while (true) // 🔁 refresh loop
+                {
+                    Console.Clear();
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine("        QUIZZES + RESULTS");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
+
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        // 🔥 FIX: sub.ID included (important)
+                        string q = @"
 SELECT sub.ID AS SubID, q.ID AS QID, q.Question, q.TotalMarks,
        s.Name AS StudentName,
        sub.Answer,
@@ -1884,331 +1905,327 @@ LEFT JOIN Students s ON s.ID = sub.StudentID
 WHERE q.TeacherID = @t
 ORDER BY q.ID";
 
-                    MySqlCommand cmd = new MySqlCommand(q, conn);
-                    cmd.Parameters.AddWithValue("@t", teacherId);
+                        MySqlCommand cmd = new MySqlCommand(q, conn);
+                        cmd.Parameters.AddWithValue("@t", teacherId);
 
-                    var r = cmd.ExecuteReader();
+                        var r = cmd.ExecuteReader();
 
-                    int currentQuiz = -1;
-                    bool found = false;
+                        int currentQuiz = -1;
+                        bool found = false;
 
-                    while (r.Read())
-                    {
-                        found = true;
-
-                        int qid = Convert.ToInt32(r["QID"]);
-
-                        // ===== NEW QUIZ HEADER =====
-                        if (qid != currentQuiz)
+                        while (r.Read())
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"\n📌 Quiz ID: {qid}");
-                            Console.WriteLine($"Question   : {r["Question"]}");
-                            Console.WriteLine($"Total Marks: {r["TotalMarks"]}");
-                            Console.ResetColor();
+                            found = true;
 
-                            Console.WriteLine("\n--- Student Attempts ---");
-                            currentQuiz = qid;
+                            int qid = Convert.ToInt32(r["QID"]);
+
+                            // ===== NEW QUIZ HEADER =====
+                            if (qid != currentQuiz)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"\n📌 Quiz ID: {qid}");
+                                Console.WriteLine($"Question   : {r["Question"]}");
+                                Console.WriteLine($"Total Marks: {r["TotalMarks"]}");
+                                Console.ResetColor();
+
+                                Console.WriteLine("\n--- Student Attempts ---");
+                                currentQuiz = qid;
+                            }
+
+                            // ===== ATTEMPTS =====
+                            if (r["StudentName"] != DBNull.Value)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
+                                Console.ResetColor();
+
+                                Console.WriteLine($"👨‍🎓 Student: {r["StudentName"]}");
+                                Console.WriteLine($"📝 Answer: {r["Answer"]}");
+                                Console.WriteLine($"🎯 Marks: {r["MarksObtained"]}");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                Console.WriteLine("No attempts yet.");
+                                Console.ResetColor();
+                            }
                         }
 
-                        // ===== ATTEMPTS =====
-                        if (r["StudentName"] != DBNull.Value)
+                        r.Close();
+
+                        // ===== NO DATA =====
+                        if (!found)
                         {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ No quizzes found!");
                             Console.ResetColor();
-
-                            Console.WriteLine($"👨‍🎓 Student: {r["StudentName"]}");
-                            Console.WriteLine($"📝 Answer: {r["Answer"]}");
-                            Console.WriteLine($"🎯 Marks: {r["MarksObtained"]}");
+                            Console.ReadKey();
+                            return;
                         }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.WriteLine("No attempts yet.");
-                            Console.ResetColor();
-                        }
-                    }
 
-                    r.Close();
-
-                    // ===== NO DATA =====
-                    if (!found)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ No quizzes found!");
+                        // ===== EDIT OPTION =====
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n=======================================");
+                        Console.WriteLine("Enter Submission ID to edit marks");
+                        Console.WriteLine("Press 0 to go back");
+                        Console.WriteLine("=======================================");
                         Console.ResetColor();
-                        Console.ReadKey();
-                        return;
-                    }
 
-                    // ===== EDIT OPTION =====
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n=======================================");
-                    Console.WriteLine("Enter Submission ID to edit marks");
-                    Console.WriteLine("Press 0 to go back");
-                    Console.WriteLine("=======================================");
-                    Console.ResetColor();
+                        int subId;
+                        Console.Write("\nEnter ID: ");
 
-                    int subId;
-                    Console.Write("\nEnter ID: ");
+                        if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
+                        {
+                            Console.WriteLine("❌ Invalid input!");
+                            Console.ReadKey();
+                            continue;
+                        }
 
-                    if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
-                    {
-                        Console.WriteLine("❌ Invalid input!");
-                        Console.ReadKey();
-                        continue;
-                    }
+                        if (subId == 0)
+                            return;
 
-                    if (subId == 0)
-                        return;
-
-                    // ===== GET TOTAL MARKS =====
-                    string getMarksQ = @"
+                        // ===== GET TOTAL MARKS =====
+                        string getMarksQ = @"
 SELECT q.TotalMarks 
 FROM QuizSubmissions sub
 JOIN Quizzes q ON q.ID = sub.QuizID
 WHERE sub.ID = @id";
 
-                    MySqlCommand getCmd = new MySqlCommand(getMarksQ, conn);
-                    getCmd.Parameters.AddWithValue("@id", subId);
+                        MySqlCommand getCmd = new MySqlCommand(getMarksQ, conn);
+                        getCmd.Parameters.AddWithValue("@id", subId);
 
-                    var totalObj = getCmd.ExecuteScalar();
+                        var totalObj = getCmd.ExecuteScalar();
 
-                    if (totalObj == null)
-                    {
-                        Console.WriteLine("❌ Submission not found!");
-                        Console.ReadKey();
-                        continue;
-                    }
+                        if (totalObj == null)
+                        {
+                            Console.WriteLine("❌ Submission not found!");
+                            Console.ReadKey();
+                            continue;
+                        }
 
-                    int totalMarks = Convert.ToInt32(totalObj);
+                        int totalMarks = Convert.ToInt32(totalObj);
 
-                    // ===== ENTER MARKS =====
-                    int newMarks;
+                        // ===== ENTER MARKS =====
+                        int newMarks;
 
-                    while (true)
-                    {
-                        Console.Write($"Enter Marks (0 - {totalMarks}): ");
+                        while (true)
+                        {
+                            Console.Write($"Enter Marks (0 - {totalMarks}): ");
 
-                        if (int.TryParse(Console.ReadLine(), out newMarks) &&
-                            newMarks >= 0 && newMarks <= totalMarks)
-                            break;
+                            if (int.TryParse(Console.ReadLine(), out newMarks) &&
+                                newMarks >= 0 && newMarks <= totalMarks)
+                                break;
 
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid marks!");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Invalid marks!");
+                            Console.ResetColor();
+                        }
+
+                        // ===== UPDATE =====
+                        string updateQ = "UPDATE QuizSubmissions SET MarksObtained=@m WHERE ID=@id";
+                        MySqlCommand updateCmd = new MySqlCommand(updateQ, conn);
+
+                        updateCmd.Parameters.AddWithValue("@m", newMarks);
+                        updateCmd.Parameters.AddWithValue("@id", subId);
+
+                        updateCmd.ExecuteNonQuery();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n✅ Marks updated successfully!");
                         Console.ResetColor();
+
+                        Console.WriteLine("\nPress any key to refresh...");
+                        Console.ReadKey();
                     }
-
-                    // ===== UPDATE =====
-                    string updateQ = "UPDATE QuizSubmissions SET MarksObtained=@m WHERE ID=@id";
-                    MySqlCommand updateCmd = new MySqlCommand(updateQ, conn);
-
-                    updateCmd.Parameters.AddWithValue("@m", newMarks);
-                    updateCmd.Parameters.AddWithValue("@id", subId);
-
-                    updateCmd.ExecuteNonQuery();
-
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Marks updated successfully!");
-                    Console.ResetColor();
-
-                    Console.WriteLine("\nPress any key to refresh...");
-                    Console.ReadKey();
                 }
             }
-        }
 
-        // ================= STUDENT LOGIN & PANEL =================
-        static void StudentLogin()
-        {
-            Console.Clear();
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("===================================");
-            Console.WriteLine("         STUDENT LOGIN");
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
-
-            Console.Write("Enter Username: ");
-            string username = Console.ReadLine();
-
-            using (var conn = DB.GetConnection())
+            // ================= STUDENT LOGIN & PANEL =================
+            static void StudentLogin()
             {
-                conn.Open();
+                Console.Clear();
 
-                string q = "SELECT * FROM Students WHERE Username=@u";
-                MySqlCommand cmd = new MySqlCommand(q, conn);
-                cmd.Parameters.AddWithValue("@u", username);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("===================================");
+                Console.WriteLine("         STUDENT LOGIN");
+                Console.WriteLine("===================================\n");
+                Console.ResetColor();
 
-                var r = cmd.ExecuteReader();
+                Console.Write("Enter Username: ");
+                string username = Console.ReadLine();
 
-                if (!r.Read())
+                using (var conn = DB.GetConnection())
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n❌ User not found!");
-                    Console.ResetColor();
+                    conn.Open();
 
-                    Console.WriteLine("\nPress any key...");
-                    Console.ReadKey();
-                    return;
-                }
+                    string q = "SELECT * FROM Students WHERE Username=@u";
+                    MySqlCommand cmd = new MySqlCommand(q, conn);
+                    cmd.Parameters.AddWithValue("@u", username);
 
-                int id = Convert.ToInt32(r["ID"]);
-                string name = r["Name"].ToString();
-                string password = r["Password"].ToString();
+                    var r = cmd.ExecuteReader();
 
-                r.Close();
-
-                // ===== FIRST LOGIN =====
-                if (string.IsNullOrWhiteSpace(password))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n🔐 First Login - Set Password");
-                    Console.ResetColor();
-
-                    string newPass;
-
-                    while (true)
+                    if (!r.Read())
                     {
-                        Console.Write("Enter New Password: ");
-                        newPass = Console.ReadLine();
-
-                        if (!string.IsNullOrWhiteSpace(newPass) && newPass.Length >= 4)
-                            break;
-
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Password must be at least 4 characters!");
-                        Console.ResetColor();
-                    }
-
-                    string update = "UPDATE Students SET Password=@p WHERE ID=@id";
-                    MySqlCommand up = new MySqlCommand(update, conn);
-                    up.Parameters.AddWithValue("@p", newPass);
-                    up.Parameters.AddWithValue("@id", id);
-                    up.ExecuteNonQuery();
-
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Password Set Successfully!");
-                    Console.ResetColor();
-
-                    StudentPanel(id, name);
-                    return;
-                }
-
-                // ===== NORMAL LOGIN =====
-                int attempts = 3;
-
-                while (attempts > 0)
-                {
-                    Console.Write("\nEnter Password: ");
-                    string pass = Console.ReadLine();
-
-                    if (pass == password)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Login Successful!");
+                        Console.WriteLine("\n❌ User not found!");
                         Console.ResetColor();
 
                         Console.WriteLine("\nPress any key...");
                         Console.ReadKey();
+                        return;
+                    }
+
+                    int id = Convert.ToInt32(r["ID"]);
+                    string name = r["Name"].ToString();
+                    string password = r["Password"].ToString();
+
+                    r.Close();
+
+                    // ===== FIRST LOGIN =====
+                    if (string.IsNullOrWhiteSpace(password))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n🔐 First Login - Set Password");
+                        Console.ResetColor();
+
+                        string newPass;
+
+                        while (true)
+                        {
+                            Console.Write("Enter New Password: ");
+                            newPass = Console.ReadLine();
+
+                            if (!string.IsNullOrWhiteSpace(newPass) && newPass.Length >= 4)
+                                break;
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Password must be at least 4 characters!");
+                            Console.ResetColor();
+                        }
+
+                        string update = "UPDATE Students SET Password=@p WHERE ID=@id";
+                        MySqlCommand up = new MySqlCommand(update, conn);
+                        up.Parameters.AddWithValue("@p", newPass);
+                        up.Parameters.AddWithValue("@id", id);
+                        up.ExecuteNonQuery();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n✅ Password Set Successfully!");
+                        Console.ResetColor();
 
                         StudentPanel(id, name);
                         return;
                     }
 
-                    attempts--;
+                    // ===== NORMAL LOGIN =====
+                    int attempts = 3;
 
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                    while (attempts > 0)
+                    {
+                        Console.Write("\nEnter Password: ");
+                        string pass = Console.ReadLine();
+
+
+                        if (pass == password)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\n✅ Login Successful!");
+                            Console.ResetColor();
+
+                            Console.WriteLine("\nPress any key...");
+                            Console.ReadKey();
+
+                            StudentPanel(id, name);
+                            return;
+                        }
+
+                        attempts--;
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                        Console.ResetColor();
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\n🚫 Too many failed attempts!");
                     Console.ResetColor();
                 }
 
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("\n🚫 Too many failed attempts!");
-                Console.ResetColor();
+                Console.WriteLine("\nPress any key...");
+                Console.ReadKey();
             }
 
-            Console.WriteLine("\nPress any key...");
-            Console.ReadKey();
-        }
-
-        static void StudentPanel(int studentId, string studentName)
-        {
-            while (true)
+            static void StudentPanel(int studentId, string studentName)
             {
-                Console.Clear();
-
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=======================================");
-                Console.WriteLine($"     STUDENT DASHBOARD - {studentName}");
-                Console.WriteLine("=======================================\n");
-                Console.ResetColor();
-
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("1. Submit Assignment");
-                Console.WriteLine("2. Solve Quiz");
-                Console.WriteLine("3. View Marks");
-                Console.WriteLine("4. Logout");
-                Console.WriteLine("=======================================\n");
-                Console.ResetColor();
-
-                Console.Write("Enter your choice: ");
-                string choice = Console.ReadLine();
-
-                Console.Clear();
-
-                switch (choice)
+                while (true)
                 {
-                    case "1":
-                        SubmitAssignment(studentId);
-                        break;
+                    Console.Clear();
 
-                    case "2":
-                        SolveQuiz(studentId);
-                        break;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine($"     STUDENT DASHBOARD - {studentName}");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
 
-                    case "3":
-                        ViewMarks(studentId);
-                        break;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("1. Submit Assignment");
+                    Console.WriteLine("2. Solve Quiz");
+                    Console.WriteLine("3. View Marks");
+                    Console.WriteLine("4. Logout");
+                    Console.WriteLine("=======================================\n");
+                    Console.ResetColor();
 
-                    case "4":
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("👋 Logging out... Goodbye!");
-                        Console.ResetColor();
+                    Console.Write("Enter your choice: ");
+                    string choice = Console.ReadLine();
 
-                        Console.WriteLine("\nPress any key...");
-                        Console.ReadKey();
-                        return;
+                    Console.Clear();
+
+                    switch (choice)
+                    {
+                        case "1":
+                            SubmitAssignment(studentId);
+                            break;
+
+                        case "2":
+                            SolveQuiz(studentId);
+                            break;
+
+                        case "3":
+                            ViewMarks(studentId);
+                            break;
+
+                        case "4":
+                            ShowWelcomeScreen();
+                            return;
 
                     default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid choice! Please select 1-4.");
-                        Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("❌ Invalid choice! Please select 1-4.");
+                            Console.ResetColor();
 
-                        Console.WriteLine("\nPress any key...");
-                        Console.ReadKey();
-                        break;
+                            Console.WriteLine("\nPress any key...");
+                            Console.ReadKey();
+                            break;
+                    }
                 }
             }
-        }
-        static void SubmitAssignment(int studentId)
-        {
-            Console.Clear();
-
-            // ===== HEADER =====
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("=======================================");
-            Console.WriteLine("         SUBMIT ASSIGNMENT");
-            Console.WriteLine("=======================================\n");
-            Console.ResetColor();
-
-            using (var conn = DB.GetConnection())
+            static void SubmitAssignment(int studentId)
             {
-                conn.Open();
+                Console.Clear();
 
-                // ❌ FIX: already submitted assignments exclude
-                string q = @"
+                // ===== HEADER =====
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=======================================");
+                Console.WriteLine("         SUBMIT ASSIGNMENT");
+                Console.WriteLine("=======================================\n");
+                Console.ResetColor();
+
+                using (var conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    // ❌ FIX: already submitted assignments exclude
+                    string q = @"
             SELECT a.ID, a.Title, a.Description
             FROM Assignments a
             JOIN StudentTeacher st ON st.TeacherID = a.TeacherID
@@ -2219,125 +2236,125 @@ WHERE sub.ID = @id";
                 AND sub.AssignmentID = a.ID
             )";
 
-                MySqlCommand cmd = new MySqlCommand(q, conn);
-                cmd.Parameters.AddWithValue("@sid", studentId);
+                    MySqlCommand cmd = new MySqlCommand(q, conn);
+                    cmd.Parameters.AddWithValue("@sid", studentId);
 
-                var r = cmd.ExecuteReader();
+                    var r = cmd.ExecuteReader();
 
-                bool found = false;
-                List<int> ids = new List<int>();
+                    bool found = false;
+                    List<int> ids = new List<int>();
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Available Assignments:\n");
-                Console.ResetColor();
-
-                while (r.Read())
-                {
-                    found = true;
-
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine($"ID: {r["ID"]}");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Available Assignments:\n");
                     Console.ResetColor();
 
-                    Console.WriteLine($"Title    : {r["Title"]}");
-                    Console.WriteLine($"Question : {r["Description"]}");
-                    Console.WriteLine("-----------------------------------");
-
-                    ids.Add(Convert.ToInt32(r["ID"]));
-                }
-
-                r.Close();
-
-                // ===== NO ASSIGNMENT =====
-                if (!found)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n🎉 No pending assignments! All submitted.");
-                    Console.ResetColor();
-
-                    Console.ReadKey();
-                    return;
-                }
-
-                // ===== VALID ID =====
-                int aid;
-
-                while (true)
-                {
-                    Console.Write("\nEnter Assignment ID (or 0 to cancel): ");
-
-                    if (int.TryParse(Console.ReadLine(), out aid))
+                    while (r.Read())
                     {
-                        if (aid == 0)
-                        {
-                            Console.WriteLine("Submission cancelled.");
-                            Console.ReadKey();
-                            return;
-                        }
+                        found = true;
 
-                        if (ids.Contains(aid))
-                            break;
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"ID: {r["ID"]}");
+                        Console.ResetColor();
+
+                        Console.WriteLine($"Title    : {r["Title"]}");
+                        Console.WriteLine($"Question : {r["Description"]}");
+                        Console.WriteLine("-----------------------------------");
+
+                        ids.Add(Convert.ToInt32(r["ID"]));
                     }
 
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Invalid Assignment ID!");
-                    Console.ResetColor();
-                }
+                    r.Close();
 
-                // ===== SUBMISSION TEXT =====
-                string text;
+                    // ===== NO ASSIGNMENT =====
+                    if (!found)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n🎉 No pending assignments! All submitted.");
+                        Console.ResetColor();
 
-                while (true)
-                {
-                    Console.Write("Enter your submission: ");
-                    text = Console.ReadLine();
+                        Console.ReadKey();
+                        return;
+                    }
 
-                    if (!string.IsNullOrWhiteSpace(text))
-                        break;
+                    // ===== VALID ID =====
+                    int aid;
 
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Submission cannot be empty!");
-                    Console.ResetColor();
-                }
+                    while (true)
+                    {
+                        Console.Write("\nEnter Assignment ID (or 0 to cancel): ");
 
-                // ===== INSERT =====
-                string insert = @"INSERT INTO AssignmentSubmissions
+                        if (int.TryParse(Console.ReadLine(), out aid))
+                        {
+                            if (aid == 0)
+                            {
+                                Console.WriteLine("Submission cancelled.");
+                                Console.ReadKey();
+                                return;
+                            }
+
+                            if (ids.Contains(aid))
+                                break;
+                        }
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("❌ Invalid Assignment ID!");
+                        Console.ResetColor();
+                    }
+
+                    // ===== SUBMISSION TEXT =====
+                    string text;
+
+                    while (true)
+                    {
+                        Console.Write("Enter your submission: ");
+                        text = Console.ReadLine();
+
+                        if (!string.IsNullOrWhiteSpace(text))
+                            break;
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("❌ Submission cannot be empty!");
+                        Console.ResetColor();
+                    }
+
+                    // ===== INSERT =====
+                    string insert = @"INSERT INTO AssignmentSubmissions
                          (StudentID, AssignmentID, SubmissionText)
                          VALUES (@s, @a, @t)";
 
-                MySqlCommand cmd2 = new MySqlCommand(insert, conn);
-                cmd2.Parameters.AddWithValue("@s", studentId);
-                cmd2.Parameters.AddWithValue("@a", aid);
-                cmd2.Parameters.AddWithValue("@t", text);
+                    MySqlCommand cmd2 = new MySqlCommand(insert, conn);
+                    cmd2.Parameters.AddWithValue("@s", studentId);
+                    cmd2.Parameters.AddWithValue("@a", aid);
+                    cmd2.Parameters.AddWithValue("@t", text);
 
-                cmd2.ExecuteNonQuery();
+                    cmd2.ExecuteNonQuery();
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Assignment submitted successfully!");
-                Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\n✅ Assignment submitted successfully!");
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine("\nPress any key...");
+                Console.ReadKey();
             }
 
-            Console.WriteLine("\nPress any key...");
-            Console.ReadKey();
-        }
-
-        static void SolveQuiz(int studentId)
-        {
-            Console.Clear();
-
-            // ===== HEADER =====
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("=======================================");
-            Console.WriteLine("              QUIZ SECTION");
-            Console.WriteLine("=======================================\n");
-            Console.ResetColor();
-
-            using (var conn = DB.GetConnection())
+            static void SolveQuiz(int studentId)
             {
-                conn.Open();
+                Console.Clear();
 
-                // ❌ FIX: already attempted quizzes exclude
-                string q = @"
+                // ===== HEADER =====
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=======================================");
+                Console.WriteLine("              QUIZ SECTION");
+                Console.WriteLine("=======================================\n");
+                Console.ResetColor();
+
+                using (var conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    // ❌ FIX: already attempted quizzes exclude
+                    string q = @"
             SELECT q.* 
             FROM Quizzes q
             JOIN StudentTeacher st ON st.TeacherID = q.TeacherID
@@ -2349,219 +2366,219 @@ WHERE sub.ID = @id";
                 AND qs.QuizID = q.ID
             )";
 
-                MySqlCommand cmd = new MySqlCommand(q, conn);
-                cmd.Parameters.AddWithValue("@sid", studentId);
+                    MySqlCommand cmd = new MySqlCommand(q, conn);
+                    cmd.Parameters.AddWithValue("@sid", studentId);
 
-                var r = cmd.ExecuteReader();
+                    var r = cmd.ExecuteReader();
 
-                List<Dictionary<string, object>> quizzes = new List<Dictionary<string, object>>();
+                    List<Dictionary<string, object>> quizzes = new List<Dictionary<string, object>>();
 
-                while (r.Read())
-                {
-                    quizzes.Add(new Dictionary<string, object>
+                    while (r.Read())
                     {
-                        ["ID"] = r["ID"],
-                        ["Question"] = r["Question"],
-                        ["A"] = r["OptionA"],
-                        ["B"] = r["OptionB"],
-                        ["C"] = r["OptionC"],
-                        ["D"] = r["OptionD"],
-                        ["Correct"] = r["CorrectAnswer"],
-                        ["IsMCQ"] = r["IsMCQ"],
-                        ["Marks"] = r["TotalMarks"]
-                    });
-                }
-
-                r.Close();
-
-                // ===== NO QUIZ =====
-                if (quizzes.Count == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("🎉 No pending quizzes! You have completed all.");
-                    Console.ResetColor();
-
-                    Console.ReadKey();
-                    return;
-                }
-
-                // ===== QUIZ LOOP =====
-                foreach (var qz in quizzes)
-                {
-                    Console.Clear();
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Question ID: {qz["ID"]}\n");
-                    Console.ResetColor();
-
-                    Console.WriteLine(qz["Question"]);
-
-                    string answer = "";
-                    int marks = 0;
-
-                    // ===== MCQ =====
-                    if (Convert.ToBoolean(qz["IsMCQ"]))
-                    {
-                        Console.WriteLine($"\nA) {qz["A"]}");
-                        Console.WriteLine($"B) {qz["B"]}");
-                        Console.WriteLine($"C) {qz["C"]}");
-                        Console.WriteLine($"D) {qz["D"]}");
-
-                        while (true)
+                        quizzes.Add(new Dictionary<string, object>
                         {
-                            Console.Write("\nEnter (A/B/C/D or 0 to cancel): ");
-                            answer = Console.ReadLine().ToUpper();
-
-                            if (answer == "0")
-                            {
-                                Console.WriteLine("Quiz cancelled.");
-                                Console.ReadKey();
-                                return;
-                            }
-
-                            if (answer == "A" || answer == "B" || answer == "C" || answer == "D")
-                                break;
-
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid option!");
-                            Console.ResetColor();
-                        }
-
-                        marks = (answer == qz["Correct"].ToString())
-                                ? Convert.ToInt32(qz["Marks"])
-                                : 0;
-                    }
-                    else
-                    {
-                        // ===== SHORT ANSWER =====
-                        while (true)
-                        {
-                            Console.Write("\nEnter answer (or 0 to cancel): ");
-                            answer = Console.ReadLine();
-
-                            if (answer == "0")
-                            {
-                                Console.WriteLine("Quiz cancelled.");
-                                Console.ReadKey();
-                                return;
-                            }
-
-                            if (!string.IsNullOrWhiteSpace(answer))
-                                break;
-
-                            Console.WriteLine("❌ Answer cannot be empty!");
-                        }
-
-                        marks = -1;
+                            ["ID"] = r["ID"],
+                            ["Question"] = r["Question"],
+                            ["A"] = r["OptionA"],
+                            ["B"] = r["OptionB"],
+                            ["C"] = r["OptionC"],
+                            ["D"] = r["OptionD"],
+                            ["Correct"] = r["CorrectAnswer"],
+                            ["IsMCQ"] = r["IsMCQ"],
+                            ["Marks"] = r["TotalMarks"]
+                        });
                     }
 
-                    // ===== INSERT =====
-                    string insert = @"INSERT INTO QuizSubmissions
+                    r.Close();
+
+                    // ===== NO QUIZ =====
+                    if (quizzes.Count == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("🎉 No pending quizzes! You have completed all.");
+                        Console.ResetColor();
+
+                        Console.ReadKey();
+                        return;
+                    }
+
+                    // ===== QUIZ LOOP =====
+                    foreach (var qz in quizzes)
+                    {
+                        Console.Clear();
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"Question ID: {qz["ID"]}\n");
+                        Console.ResetColor();
+
+                        Console.WriteLine(qz["Question"]);
+
+                        string answer = "";
+                        int marks = 0;
+
+                        // ===== MCQ =====
+                        if (Convert.ToBoolean(qz["IsMCQ"]))
+                        {
+                            Console.WriteLine($"\nA) {qz["A"]}");
+                            Console.WriteLine($"B) {qz["B"]}");
+                            Console.WriteLine($"C) {qz["C"]}");
+                            Console.WriteLine($"D) {qz["D"]}");
+
+                            while (true)
+                            {
+                                Console.Write("\nEnter (A/B/C/D or 0 to cancel): ");
+                                answer = Console.ReadLine().ToUpper();
+
+                                if (answer == "0")
+                                {
+                                    Console.WriteLine("Quiz cancelled.");
+                                    Console.ReadKey();
+                                    return;
+                                }
+
+                                if (answer == "A" || answer == "B" || answer == "C" || answer == "D")
+                                    break;
+
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("❌ Invalid option!");
+                                Console.ResetColor();
+                            }
+
+                            marks = (answer == qz["Correct"].ToString())
+                                    ? Convert.ToInt32(qz["Marks"])
+                                    : 0;
+                        }
+                        else
+                        {
+                            // ===== SHORT ANSWER =====
+                            while (true)
+                            {
+                                Console.Write("\nEnter answer (or 0 to cancel): ");
+                                answer = Console.ReadLine();
+
+                                if (answer == "0")
+                                {
+                                    Console.WriteLine("Quiz cancelled.");
+                                    Console.ReadKey();
+                                    return;
+                                }
+
+                                if (!string.IsNullOrWhiteSpace(answer))
+                                    break;
+
+                                Console.WriteLine("❌ Answer cannot be empty!");
+                            }
+
+                            marks = -1;
+                        }
+
+                        // ===== INSERT =====
+                        string insert = @"INSERT INTO QuizSubmissions
                              (StudentID, QuizID, Answer, MarksObtained)
                              VALUES (@s, @q, @a, @m)";
 
-                    MySqlCommand cmd2 = new MySqlCommand(insert, conn);
-                    cmd2.Parameters.AddWithValue("@s", studentId);
-                    cmd2.Parameters.AddWithValue("@q", qz["ID"]);
-                    cmd2.Parameters.AddWithValue("@a", answer);
-                    cmd2.Parameters.AddWithValue("@m", marks);
+                        MySqlCommand cmd2 = new MySqlCommand(insert, conn);
+                        cmd2.Parameters.AddWithValue("@s", studentId);
+                        cmd2.Parameters.AddWithValue("@q", qz["ID"]);
+                        cmd2.Parameters.AddWithValue("@a", answer);
+                        cmd2.Parameters.AddWithValue("@m", marks);
 
-                    cmd2.ExecuteNonQuery();
+                        cmd2.ExecuteNonQuery();
 
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Answer submitted!");
-                    Console.ResetColor();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n✅ Answer submitted!");
+                        Console.ResetColor();
 
-                    Console.ReadKey();
+                        Console.ReadKey();
+                    }
                 }
-            }
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n🎉 Quiz completed!");
-            Console.ResetColor();
-
-            Console.ReadKey();
-        }
-        static void ViewMarks(int studentId)
-        {
-            Console.Clear();
-
-            // ===== HEADER =====
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("=======================================");
-            Console.WriteLine("              YOUR MARKS");
-            Console.WriteLine("=======================================\n");
-            Console.ResetColor();
-
-            using (var conn = DB.GetConnection())
-            {
-                conn.Open();
-
-                bool hasData = false;
-
-                // ================= ASSIGNMENT MARKS =================
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("📘 ASSIGNMENT MARKS\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n🎉 Quiz completed!");
                 Console.ResetColor();
 
-                string q1 = @"SELECT a.Title, sub.MarksObtained 
+                Console.ReadKey();
+            }
+            static void ViewMarks(int studentId)
+            {
+                Console.Clear();
+
+                // ===== HEADER =====
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=======================================");
+                Console.WriteLine("              YOUR MARKS");
+                Console.WriteLine("=======================================\n");
+                Console.ResetColor();
+
+                using (var conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    bool hasData = false;
+
+                    // ================= ASSIGNMENT MARKS =================
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("📘 ASSIGNMENT MARKS\n");
+                    Console.ResetColor();
+
+                    string q1 = @"SELECT a.Title, sub.MarksObtained 
                       FROM AssignmentSubmissions sub
                       JOIN Assignments a ON a.ID=sub.AssignmentID
                       WHERE sub.StudentID=@id";
 
-                MySqlCommand cmd1 = new MySqlCommand(q1, conn);
-                cmd1.Parameters.AddWithValue("@id", studentId);
+                    MySqlCommand cmd1 = new MySqlCommand(q1, conn);
+                    cmd1.Parameters.AddWithValue("@id", studentId);
 
-                var r1 = cmd1.ExecuteReader();
+                    var r1 = cmd1.ExecuteReader();
 
-                while (r1.Read())
-                {
-                    hasData = true;
+                    while (r1.Read())
+                    {
+                        hasData = true;
 
-                    Console.WriteLine($"📌 {r1["Title"]}");
-                    Console.WriteLine($"   Marks: {r1["MarksObtained"]}");
-                    Console.WriteLine("----------------------------------");
-                }
+                        Console.WriteLine($"📌 {r1["Title"]}");
+                        Console.WriteLine($"   Marks: {r1["MarksObtained"]}");
+                        Console.WriteLine("----------------------------------");
+                    }
 
-                r1.Close();
+                    r1.Close();
 
-                // ================= QUIZ MARKS =================
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\n📝 QUIZ MARKS\n");
-                Console.ResetColor();
+                    // ================= QUIZ MARKS =================
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\n📝 QUIZ MARKS\n");
+                    Console.ResetColor();
 
-                string q2 = @"SELECT q.Question, sub.MarksObtained 
+                    string q2 = @"SELECT q.Question, sub.MarksObtained 
                       FROM QuizSubmissions sub
                       JOIN Quizzes q ON q.ID=sub.QuizID
                       WHERE sub.StudentID=@id";
 
-                MySqlCommand cmd2 = new MySqlCommand(q2, conn);
-                cmd2.Parameters.AddWithValue("@id", studentId);
+                    MySqlCommand cmd2 = new MySqlCommand(q2, conn);
+                    cmd2.Parameters.AddWithValue("@id", studentId);
 
-                var r2 = cmd2.ExecuteReader();
+                    var r2 = cmd2.ExecuteReader();
 
-                while (r2.Read())
-                {
-                    hasData = true;
+                    while (r2.Read())
+                    {
+                        hasData = true;
 
-                    Console.WriteLine($"📌 {r2["Question"]}");
-                    Console.WriteLine($"   Marks: {r2["MarksObtained"]}");
-                    Console.WriteLine("----------------------------------");
+                        Console.WriteLine($"📌 {r2["Question"]}");
+                        Console.WriteLine($"   Marks: {r2["MarksObtained"]}");
+                        Console.WriteLine("----------------------------------");
+                    }
+
+                    r2.Close();
+
+                    // ================= NO DATA CASE =================
+                    if (!hasData)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("❌ No marks available yet!");
+                        Console.ResetColor();
+                    }
                 }
 
-                r2.Close();
-
-                // ================= NO DATA CASE =================
-                if (!hasData)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ No marks available yet!");
-                    Console.ResetColor();
-                }
+                Console.WriteLine("\nPress any key...");
+                Console.ReadKey();
             }
-
-            Console.WriteLine("\nPress any key...");
-            Console.ReadKey();
         }
     }
-}
