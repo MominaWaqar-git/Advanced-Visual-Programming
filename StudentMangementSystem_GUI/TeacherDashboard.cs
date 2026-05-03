@@ -129,11 +129,13 @@ namespace StudentMangementSystem_GUI
             this.Hide();
         }
 
-       // private void quizzes_Click(object sender, EventArgs e)
-        //{
-          //  TeacherQuizForm quizForm = new TeacherQuizForm(teacherId);
-            //quizForm.Show();
-            //this.Hide();
-        //}
+        private void m_quizzes_Click(object sender, EventArgs e)
+        {
+            MarkQuizForm markQuizForm = new MarkQuizForm(teacherId);
+            markQuizForm.Show();
+            this.Hide();
+        }
+
+        
     }
 }

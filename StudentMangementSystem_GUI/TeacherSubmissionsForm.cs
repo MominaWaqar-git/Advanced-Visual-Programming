@@ -95,10 +95,10 @@ namespace StudentMangementSystem_GUI
             }
         }
 
-        // Button click par marks enter karne ka logic
+        
         private void dgvSubmissions_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Check karein ke teacher ne "Enter Marks" wale button par click kiya hai
+            
             if (e.RowIndex >= 0 && dgvSubmissions.Columns[e.ColumnIndex].Name == "btnGrade")
             {
                 int submissionId = Convert.ToInt32(dgvSubmissions.Rows[e.RowIndex].Cells["id"].Value);
@@ -163,6 +163,11 @@ namespace StudentMangementSystem_GUI
             this.Hide();
             TeacherDashboard dash = new TeacherDashboard(teacherId);
             dash.Show();
+        }
+
+        private void panelTop_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

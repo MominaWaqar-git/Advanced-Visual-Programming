@@ -166,6 +166,12 @@
     <Compile Include="EditTeacher.Designer.cs">
       <DependentUpon>EditTeacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="MarkQuizForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarkQuizForm.Designer.cs">
+      <DependentUpon>MarkQuizForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentAnnouncementsForm.cs">
@@ -197,6 +203,12 @@
     </Compile>
     <Compile Include="StudentLoginForm.Designer.cs">
       <DependentUpon>StudentLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentQuizForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentQuizForm.Designer.cs">
+      <DependentUpon>StudentQuizForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TeacherAnnouncementsForm.cs">
       <SubType>Form</SubType>
@@ -294,6 +306,9 @@
     <EmbeddedResource Include="EditTeacher.resx">
       <DependentUpon>EditTeacher.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MarkQuizForm.resx">
+      <DependentUpon>MarkQuizForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -318,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StudentLoginForm.resx">
       <DependentUpon>StudentLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentQuizForm.resx">
+      <DependentUpon>StudentQuizForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherAnnouncementsForm.resx">
       <DependentUpon>TeacherAnnouncementsForm.cs</DependentUpon>

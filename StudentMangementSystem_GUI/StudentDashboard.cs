@@ -1,12 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using MySql.Data.MySqlClient;
 using StudentMangementSystem_GUI;
+using System;
+using System.Windows.Forms;
 
 namespace StudentMangementSystem_GUI
 {
     public partial class StudentDashboard : Form
     {
         int studentId;
+        string conn = "server=localhost;user=root;password=;database=student_management_system";
 
         public StudentDashboard(int id)
         {
@@ -30,7 +32,7 @@ namespace StudentMangementSystem_GUI
 
         private void StudentDashboard_Load(object sender, EventArgs e)
         {
-
+        
         }
 
         private void btnAssignment_Click(object sender, EventArgs e)
@@ -53,5 +55,14 @@ namespace StudentMangementSystem_GUI
             stu.Show();
             this.Hide();
         }
+
+        private void quizz_Click(object sender, EventArgs e)
+        {
+            StudentQuizForm stu = new StudentQuizForm(studentId);
+            stu.Show();
+            this.Hide();
+        }
+
+        
     }
 }

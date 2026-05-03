@@ -168,5 +168,10 @@ namespace StudentMangementSystem_GUI
                 }
             }
         }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

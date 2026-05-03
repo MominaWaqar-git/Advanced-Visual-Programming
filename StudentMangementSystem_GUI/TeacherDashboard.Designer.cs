@@ -37,7 +37,7 @@
             this.btnViewStudent = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAnnouncements = new System.Windows.Forms.Button();
-            this.quizzes = new System.Windows.Forms.Button();
+            this.m_quizzes = new System.Windows.Forms.Button();
             this.mark_assignment = new System.Windows.Forms.Button();
             this.btnUploadQuiz = new System.Windows.Forms.Button();
             this.lblTotalTeachers = new System.Windows.Forms.Label();
@@ -171,22 +171,22 @@
             this.btnAnnouncements.UseVisualStyleBackColor = false;
             this.btnAnnouncements.Click += new System.EventHandler(this.btnAnnouncements_Click);
             // 
-            // quizzes
+            // m_quizzes
             // 
-            this.quizzes.BackColor = System.Drawing.Color.Transparent;
-            this.quizzes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.quizzes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.quizzes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.quizzes.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quizzes.ForeColor = System.Drawing.Color.White;
-            this.quizzes.Location = new System.Drawing.Point(-7, 172);
-            this.quizzes.Margin = new System.Windows.Forms.Padding(4);
-            this.quizzes.Name = "quizzes";
-            this.quizzes.Size = new System.Drawing.Size(204, 34);
-            this.quizzes.TabIndex = 20;
-            this.quizzes.Text = "Mark Quizzes";
-            this.quizzes.UseVisualStyleBackColor = false;
-            //this.quizzes.Click += new System.EventHandler(this.quizzes_Click);
+            this.m_quizzes.BackColor = System.Drawing.Color.Transparent;
+            this.m_quizzes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.m_quizzes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.m_quizzes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.m_quizzes.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_quizzes.ForeColor = System.Drawing.Color.White;
+            this.m_quizzes.Location = new System.Drawing.Point(-7, 172);
+            this.m_quizzes.Margin = new System.Windows.Forms.Padding(4);
+            this.m_quizzes.Name = "m_quizzes";
+            this.m_quizzes.Size = new System.Drawing.Size(204, 34);
+            this.m_quizzes.TabIndex = 20;
+            this.m_quizzes.Text = "Mark Quizzes";
+            this.m_quizzes.UseVisualStyleBackColor = false;
+            this.m_quizzes.Click += new System.EventHandler(this.m_quizzes_Click);
             // 
             // mark_assignment
             // 
@@ -307,7 +307,7 @@
             this.panel3.Controls.Add(this.btnViewStudent);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.btnAnnouncements);
-            this.panel3.Controls.Add(this.quizzes);
+            this.panel3.Controls.Add(this.m_quizzes);
             this.panel3.Controls.Add(this.mark_assignment);
             this.panel3.Controls.Add(this.btnUploadQuiz);
             this.panel3.Controls.Add(this.btnUploadAssignment);
@@ -382,14 +382,14 @@
             this.btnLogout.BackColor = System.Drawing.Color.Transparent;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(683, 20);
+            this.btnLogout.Location = new System.Drawing.Point(805, 20);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(204, 34);
+            this.btnLogout.Size = new System.Drawing.Size(82, 34);
             this.btnLogout.TabIndex = 63;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -471,7 +471,7 @@
         private System.Windows.Forms.Button btnViewStudent;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnAnnouncements;
-        private System.Windows.Forms.Button quizzes;
+        private System.Windows.Forms.Button m_quizzes;
         private System.Windows.Forms.Button mark_assignment;
         private System.Windows.Forms.Button btnUploadQuiz;
         private System.Windows.Forms.Label lblTotalTeachers;
