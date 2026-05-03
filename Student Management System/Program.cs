@@ -214,7 +214,7 @@ namespace StudentManagementSystem
 
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n❌ Invalid Choice! Try again...");
+                    Console.WriteLine("\n Invalid Choice! Try again...");
                     Console.ResetColor();
                     Console.ReadKey();
                     ShowWelcomeScreen();
@@ -241,7 +241,7 @@ namespace StudentManagementSystem
             if (u == "admin" && p == "admin123")
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Login Successful!");
+                Console.WriteLine("\n Login Successful!");
                 Console.ResetColor();
                 Console.ReadKey();
                 AdminPanel();
@@ -249,7 +249,7 @@ namespace StudentManagementSystem
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n❌ Invalid Username or Password!");
+                Console.WriteLine("\n Invalid Username or Password!");
                 Console.ResetColor();
                 Console.ReadKey();
                 ShowWelcomeScreen();
@@ -337,7 +337,7 @@ namespace StudentManagementSystem
 
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n❌ Invalid Choice! Try again...");
+                        Console.WriteLine("\n Invalid Choice! Try again...");
                         Console.ResetColor();
                         Console.ReadKey();
                         break;
@@ -367,14 +367,14 @@ namespace StudentManagementSystem
                 Console.Write("Enter Age: ");
                 string input = Console.ReadLine();
 
-                if (int.TryParse(input, out int age) && age > 0)
+                if (int.TryParse(input, out int age) && age > 3)
                 {
                     t.Age = age;
                     break;
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid Age! Enter a valid number.");
+                Console.WriteLine(" Invalid Age! Enter a valid number.");
                 Console.ResetColor();
             }
 
@@ -409,7 +409,7 @@ namespace StudentManagementSystem
 
             // ✅ Success Message
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n✅ Teacher Added Successfully!");
+            Console.WriteLine("\n Teacher Added Successfully!");
             Console.ResetColor();
 
             Console.WriteLine("\nPress any key to continue...");
@@ -556,7 +556,7 @@ namespace StudentManagementSystem
                 if (!r.Read())
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Teacher not found!");
+                    Console.WriteLine(" Teacher not found!");
                     Console.ResetColor();
                     Console.ReadKey();
                     return;
@@ -611,7 +611,7 @@ namespace StudentManagementSystem
                                     value = age;
                                     break;
                                 }
-                                Console.WriteLine("❌ Invalid Age!");
+                                Console.WriteLine(" Invalid Age!");
                             }
                             break;
 
@@ -645,7 +645,7 @@ namespace StudentManagementSystem
 
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid choice!");
+                            Console.WriteLine("Invalid choice!");
                             Console.ResetColor();
                             continue;
                     }
@@ -660,7 +660,7 @@ namespace StudentManagementSystem
                     updateCmd.ExecuteNonQuery();
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("✅ Updated Successfully!");
+                    Console.WriteLine("Updated Successfully!");
                     Console.ResetColor();
 
                     // 🔁 Ask again
@@ -687,7 +687,7 @@ namespace StudentManagementSystem
                     break;
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid ID!");
+                Console.WriteLine(" Invalid ID!");
                 Console.ResetColor();
             }
 
@@ -705,7 +705,7 @@ namespace StudentManagementSystem
                 if (!r.Read())
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Teacher not found!");
+                    Console.WriteLine(" Teacher not found!");
                     Console.ResetColor();
                     Console.ReadKey();
                     return;
@@ -733,7 +733,7 @@ namespace StudentManagementSystem
 
                 if (confirm != "yes")
                 {
-                    Console.WriteLine("\n❌ Deletion Cancelled!");
+                    Console.WriteLine("\nDeletion Cancelled!");
                     Console.ReadKey();
                     return;
                 }
@@ -746,7 +746,7 @@ namespace StudentManagementSystem
                 deleteCmd.ExecuteNonQuery();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Teacher Deleted Successfully!");
+                Console.WriteLine("\nTeacher Deleted Successfully!");
                 Console.ResetColor();
             }
 
@@ -782,7 +782,7 @@ namespace StudentManagementSystem
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid Age! Please enter a valid number.");
+                Console.WriteLine(" Invalid Age! Please enter a valid number.");
                 Console.ResetColor();
             }
 
@@ -820,7 +820,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n✅ Student Added Successfully!");
+            Console.WriteLine("\nStudent Added Successfully!");
             Console.ResetColor();
 
             Console.WriteLine("\nPress any key to continue...");
@@ -933,7 +933,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (!found)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ No student found with this name!");
+                    Console.WriteLine("No student found with this name!");
                     Console.ResetColor();
                 }
             }
@@ -954,7 +954,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                     break;
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid ID!");
+                Console.WriteLine("Invalid ID!");
                 Console.ResetColor();
             }
 
@@ -971,7 +971,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (!r.Read())
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Student not found!");
+                    Console.WriteLine("Student not found!");
                     Console.ResetColor();
                     Console.ReadKey();
                     return;
@@ -1030,7 +1030,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                                     value = age;
                                     break;
                                 }
-                                Console.WriteLine("❌ Invalid Age!");
+                                Console.WriteLine("Invalid Age!");
                             }
                             break;
 
@@ -1061,13 +1061,13 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
 
                         case "8":
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\n🔙 Returning to Admin Panel...");
+                            Console.WriteLine("\nReturning to Admin Panel...");
                             Console.ResetColor();
                             return;
 
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid choice!");
+                            Console.WriteLine("Invalid choice!");
                             Console.ResetColor();
                             continue;
                     }
@@ -1081,7 +1081,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                     updateCmd.ExecuteNonQuery();
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("✅ Updated Successfully!");
+                    Console.WriteLine("Updated Successfully!");
                     Console.ResetColor();
                 }
             }
@@ -1118,7 +1118,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 if (!r.Read())
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Student not found!");
+                    Console.WriteLine("Student not found!");
                     Console.ResetColor();
                     Console.ReadKey();
                     return;
@@ -1148,7 +1148,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
 
                 if (confirm != "yes")
                 {
-                    Console.WriteLine("\n❌ Deletion Cancelled!");
+                    Console.WriteLine("\nDeletion Cancelled!");
                     Console.ReadKey();
                     return;
                 }
@@ -1161,7 +1161,7 @@ VALUES (@Name,@Age,@CNIC,@Address,@Phone,@Email,@Username,'',@Subject)";
                 deleteCmd.ExecuteNonQuery();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Student Deleted Successfully!");
+                Console.WriteLine("\nStudent Deleted Successfully!");
                 Console.ResetColor();
             }
 
@@ -1223,7 +1223,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 Console.Write("\nEnter Student ID: ");
                 if (!int.TryParse(Console.ReadLine(), out int sid))
                 {
-                    Console.WriteLine("❌ Invalid Student ID!");
+                    Console.WriteLine("Invalid Student ID!");
                     Console.WriteLine("\nPress Enter to continue...");
                     Console.ReadLine();
                     return;
@@ -1238,7 +1238,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
 
                 if (stuObj == null)
                 {
-                    Console.WriteLine("❌ Student not found!");
+                    Console.WriteLine("Student not found!");
                     Console.WriteLine("\nPress Enter to continue...");
                     Console.ReadLine();
                     return;
@@ -1283,7 +1283,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 if (!hasTeacher)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n❌ No teacher available for this subject!");
+                    Console.WriteLine("\nNo teacher available for this subject!");
                     Console.ResetColor();
 
                     Console.WriteLine("\nPress 0 to go back OR Enter to continue...");
@@ -1296,7 +1296,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 Console.Write("\nEnter Teacher ID: ");
                 if (!int.TryParse(Console.ReadLine(), out int tid))
                 {
-                    Console.WriteLine("❌ Invalid Teacher ID!");
+                    Console.WriteLine("Invalid Teacher ID!");
                     Console.WriteLine("\nPress Enter to continue...");
                     Console.ReadLine();
                     return;
@@ -1311,7 +1311,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
 
                 if (tsubObj == null)
                 {
-                    Console.WriteLine("❌ Teacher not found!");
+                    Console.WriteLine("Teacher not found!");
                     Console.WriteLine("\nPress Enter to continue...");
                     Console.ReadLine();
                     return;
@@ -1322,7 +1322,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 if (teacherSub != stuSub)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Cannot assign! Subject mismatch.");
+                    Console.WriteLine("Cannot assign! Subject mismatch.");
                     Console.ResetColor();
 
                     Console.WriteLine("\nPress Enter to continue...");
@@ -1338,7 +1338,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 ins.ExecuteNonQuery();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Assigned Successfully!");
+                Console.WriteLine("\nAssigned Successfully!");
                 Console.ResetColor();
 
                 Console.WriteLine("\nPress 0 to go back OR Enter to continue...");
@@ -1375,7 +1375,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                     if (!r.Read())
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n❌ User not found!");
+                        Console.WriteLine("\nUser not found!");
                         Console.ResetColor();
 
                         Console.WriteLine("\nPress any key to go back...");
@@ -1393,7 +1393,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                     if (string.IsNullOrWhiteSpace(password))
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\n🔐 First Login - Set Your Password");
+                        Console.WriteLine("\nFirst Login - Set Your Password");
                         Console.ResetColor();
 
                         string newPass;
@@ -1407,7 +1407,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                                 break;
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Password must be at least 4 characters!");
+                            Console.WriteLine("Password must be at least 4 characters!");
                             Console.ResetColor();
                         }
 
@@ -1418,7 +1418,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                         up.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Password Set Successfully!");
+                        Console.WriteLine("\nPassword Set Successfully!");
                         Console.ResetColor();
 
                         TeacherPanel(id, name);
@@ -1436,7 +1436,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                         if (pass == password)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\n✅ Login Successful!");
+                            Console.WriteLine("\nLogin Successful!");
                             Console.ResetColor();
 
                             TeacherPanel(id, name);
@@ -1446,12 +1446,12 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                         attempts--;
 
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                        Console.WriteLine($"Wrong Password or Username! Attempts left: {attempts}");
                         Console.ResetColor();
                     }
 
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\n🚫 Too many failed attempts!");
+                    Console.WriteLine("\n Too many failed attempts!");
                     Console.ResetColor();
                 }
 
@@ -1510,7 +1510,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
 
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid choice! Please select 1-6.");
+                            Console.WriteLine(" Invalid choice! Please select 1-5.");
                             Console.ResetColor();
 
                             Console.WriteLine("\nPress any key to continue...");
@@ -1538,7 +1538,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                         break;
 
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("❌ Invalid marks! Enter a valid number.");
+                    Console.WriteLine("Invalid marks! Enter a valid number.");
                     Console.ResetColor();
                 }
 
@@ -1578,7 +1578,7 @@ LEFT JOIN Teachers t ON t.ID = st.TeacherID";
                 }
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n✅ Assignment Added Successfully!");
+                Console.WriteLine("\nAssignment Added Successfully!");
                 Console.ResetColor();
 
                 Console.WriteLine("\nPress any key...");
@@ -1631,7 +1631,7 @@ ORDER BY a.ID";
                             if (aid != currentAssignment)
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine($"\n📌 Assignment ID: {aid}");
+                                Console.WriteLine($"\n Assignment ID: {aid}");
                                 Console.WriteLine($"Title       : {r["Title"]}");
                                 Console.WriteLine($"Question    : {r["Description"]}");
                                 Console.WriteLine($"Total Marks : {r["TotalMarks"]}");
@@ -1648,9 +1648,9 @@ ORDER BY a.ID";
                                 Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
                                 Console.ResetColor();
 
-                                Console.WriteLine($"👨‍🎓 Student   : {r["StudentName"]}");
-                                Console.WriteLine($"📝 Answer    : {r["SubmissionText"]}");
-                                Console.WriteLine($"🎯 Marks     : {r["MarksObtained"]}");
+                                Console.WriteLine($" Student   : {r["StudentName"]}");
+                                Console.WriteLine($" Answer    : {r["SubmissionText"]}");
+                                Console.WriteLine($" Marks     : {r["MarksObtained"]}");
                             }
                             else
                             {
@@ -1666,7 +1666,7 @@ ORDER BY a.ID";
                         if (!found)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ No assignments found!");
+                            Console.WriteLine(" No assignments found!");
                             Console.ResetColor();
                             Console.ReadKey();
                             return;
@@ -1685,7 +1685,7 @@ ORDER BY a.ID";
 
                         if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
                         {
-                            Console.WriteLine("❌ Invalid input!");
+                            Console.WriteLine("Invalid input!");
                             Console.ReadKey();
                             continue;
                         }
@@ -1707,7 +1707,7 @@ WHERE sub.ID = @id";
 
                         if (totalObj == null)
                         {
-                            Console.WriteLine("❌ Submission not found!");
+                            Console.WriteLine(" Submission not found!");
                             Console.ReadKey();
                             continue;
                         }
@@ -1726,7 +1726,7 @@ WHERE sub.ID = @id";
                                 break;
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid marks!");
+                            Console.WriteLine("Invalid marks!");
                             Console.ResetColor();
                         }
 
@@ -1740,7 +1740,7 @@ WHERE sub.ID = @id";
                         updateCmd.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Marks updated successfully!");
+                        Console.WriteLine("\nMarks updated successfully!");
                         Console.ResetColor();
 
                         Console.WriteLine("\nPress any key to refresh...");
@@ -1774,7 +1774,7 @@ WHERE sub.ID = @id";
                         if (string.IsNullOrWhiteSpace(question))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Question cannot be empty!");
+                            Console.WriteLine("Question cannot be empty!");
                             Console.ResetColor();
                             continue;
                         }
@@ -1814,7 +1814,7 @@ WHERE sub.ID = @id";
                                 }
 
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("❌ Invalid option! Choose A, B, C or D.");
+                                Console.WriteLine("Invalid option! Choose A, B, C or D.");
                                 Console.ResetColor();
                             }
                         }
@@ -1834,7 +1834,7 @@ WHERE sub.ID = @id";
                                 break;
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid marks! Enter a valid number.");
+                            Console.WriteLine("Invalid marks! Enter a valid number.");
                             Console.ResetColor();
                         }
 
@@ -1858,10 +1858,10 @@ WHERE sub.ID = @id";
                         cmd.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Quiz added successfully!");
+                        Console.WriteLine("\nQuiz added successfully!");
                         Console.ResetColor();
 
-                        Console.Write("\n➕ Add another question? (yes/no): ");
+                        Console.Write("\nAdd another question? (yes/no): ");
                         string again = Console.ReadLine().ToLower();
 
                         if (again != "yes")
@@ -1870,7 +1870,7 @@ WHERE sub.ID = @id";
                 }
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n🎯 Quiz Upload Completed!");
+                Console.WriteLine("\n Quiz Upload Completed!");
                 Console.ResetColor();
 
                 Console.WriteLine("\nPress any key...");
@@ -1893,7 +1893,7 @@ WHERE sub.ID = @id";
                     {
                         conn.Open();
 
-                        // 🔥 FIX: sub.ID included (important)
+                        
                         string q = @"
 SELECT sub.ID AS SubID, q.ID AS QID, q.Question, q.TotalMarks,
        s.Name AS StudentName,
@@ -1923,7 +1923,7 @@ ORDER BY q.ID";
                             if (qid != currentQuiz)
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine($"\n📌 Quiz ID: {qid}");
+                                Console.WriteLine($"\n Quiz ID: {qid}");
                                 Console.WriteLine($"Question   : {r["Question"]}");
                                 Console.WriteLine($"Total Marks: {r["TotalMarks"]}");
                                 Console.ResetColor();
@@ -1939,9 +1939,9 @@ ORDER BY q.ID";
                                 Console.WriteLine($"\nSubmission ID: {r["SubID"]}");
                                 Console.ResetColor();
 
-                                Console.WriteLine($"👨‍🎓 Student: {r["StudentName"]}");
-                                Console.WriteLine($"📝 Answer: {r["Answer"]}");
-                                Console.WriteLine($"🎯 Marks: {r["MarksObtained"]}");
+                                Console.WriteLine($" Student: {r["StudentName"]}");
+                                Console.WriteLine($" Answer: {r["Answer"]}");
+                                Console.WriteLine($" Marks: {r["MarksObtained"]}");
                             }
                             else
                             {
@@ -1957,7 +1957,7 @@ ORDER BY q.ID";
                         if (!found)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ No quizzes found!");
+                            Console.WriteLine("No quizzes found!");
                             Console.ResetColor();
                             Console.ReadKey();
                             return;
@@ -1976,7 +1976,7 @@ ORDER BY q.ID";
 
                         if (!int.TryParse(Console.ReadLine(), out subId) || subId < 0)
                         {
-                            Console.WriteLine("❌ Invalid input!");
+                            Console.WriteLine(" Invalid input!");
                             Console.ReadKey();
                             continue;
                         }
@@ -1998,7 +1998,7 @@ WHERE sub.ID = @id";
 
                         if (totalObj == null)
                         {
-                            Console.WriteLine("❌ Submission not found!");
+                            Console.WriteLine(" Submission not found!");
                             Console.ReadKey();
                             continue;
                         }
@@ -2017,7 +2017,7 @@ WHERE sub.ID = @id";
                                 break;
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid marks!");
+                            Console.WriteLine(" Invalid marks!");
                             Console.ResetColor();
                         }
 
@@ -2031,7 +2031,7 @@ WHERE sub.ID = @id";
                         updateCmd.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Marks updated successfully!");
+                        Console.WriteLine("\n Marks updated successfully!");
                         Console.ResetColor();
 
                         Console.WriteLine("\nPress any key to refresh...");
@@ -2067,7 +2067,7 @@ WHERE sub.ID = @id";
                     if (!r.Read())
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n❌ User not found!");
+                        Console.WriteLine("\n User not found!");
                         Console.ResetColor();
 
                         Console.WriteLine("\nPress any key...");
@@ -2085,7 +2085,7 @@ WHERE sub.ID = @id";
                     if (string.IsNullOrWhiteSpace(password))
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\n🔐 First Login - Set Password");
+                        Console.WriteLine("\n First Login - Set Password");
                         Console.ResetColor();
 
                         string newPass;
@@ -2099,7 +2099,7 @@ WHERE sub.ID = @id";
                                 break;
 
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Password must be at least 4 characters!");
+                            Console.WriteLine(" Password must be at least 4 characters!");
                             Console.ResetColor();
                         }
 
@@ -2110,7 +2110,7 @@ WHERE sub.ID = @id";
                         up.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Password Set Successfully!");
+                        Console.WriteLine("\n Password Set Successfully!");
                         Console.ResetColor();
 
                         StudentPanel(id, name);
@@ -2129,7 +2129,7 @@ WHERE sub.ID = @id";
                         if (pass == password)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\n✅ Login Successful!");
+                            Console.WriteLine("\n Login Successful!");
                             Console.ResetColor();
 
                             Console.WriteLine("\nPress any key...");
@@ -2142,12 +2142,12 @@ WHERE sub.ID = @id";
                         attempts--;
 
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"❌ Wrong Password! Attempts left: {attempts}");
+                        Console.WriteLine($" Wrong Password or Username! Attempts left: {attempts}");
                         Console.ResetColor();
                     }
 
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\n🚫 Too many failed attempts!");
+                    Console.WriteLine("\n Too many failed attempts!");
                     Console.ResetColor();
                 }
 
@@ -2200,7 +2200,7 @@ WHERE sub.ID = @id";
 
                     default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("❌ Invalid choice! Please select 1-4.");
+                            Console.WriteLine(" Invalid choice! Please select 1-4.");
                             Console.ResetColor();
 
                             Console.WriteLine("\nPress any key...");
@@ -2224,7 +2224,7 @@ WHERE sub.ID = @id";
                 {
                     conn.Open();
 
-                    // ❌ FIX: already submitted assignments exclude
+                    //  already submitted assignments exclude
                     string q = @"
             SELECT a.ID, a.Title, a.Description
             FROM Assignments a
@@ -2269,7 +2269,7 @@ WHERE sub.ID = @id";
                     if (!found)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n🎉 No pending assignments! All submitted.");
+                        Console.WriteLine("\nNo pending assignments! All submitted.");
                         Console.ResetColor();
 
                         Console.ReadKey();
@@ -2297,7 +2297,7 @@ WHERE sub.ID = @id";
                         }
 
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Invalid Assignment ID!");
+                        Console.WriteLine("Invalid Assignment ID!");
                         Console.ResetColor();
                     }
 
@@ -2313,7 +2313,7 @@ WHERE sub.ID = @id";
                             break;
 
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ Submission cannot be empty!");
+                        Console.WriteLine("Submission cannot be empty!");
                         Console.ResetColor();
                     }
 
@@ -2330,7 +2330,7 @@ WHERE sub.ID = @id";
                     cmd2.ExecuteNonQuery();
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n✅ Assignment submitted successfully!");
+                    Console.WriteLine("\nAssignment submitted successfully!");
                     Console.ResetColor();
                 }
 
@@ -2353,7 +2353,7 @@ WHERE sub.ID = @id";
                 {
                     conn.Open();
 
-                    // ❌ FIX: already attempted quizzes exclude
+                    //  already attempted quizzes exclude
                     string q = @"
             SELECT q.* 
             FROM Quizzes q
@@ -2395,7 +2395,7 @@ WHERE sub.ID = @id";
                     if (quizzes.Count == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("🎉 No pending quizzes! You have completed all.");
+                        Console.WriteLine("No pending quizzes! You have completed all.");
                         Console.ResetColor();
 
                         Console.ReadKey();
@@ -2440,7 +2440,7 @@ WHERE sub.ID = @id";
                                     break;
 
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("❌ Invalid option!");
+                                Console.WriteLine("Invalid option!");
                                 Console.ResetColor();
                             }
 
@@ -2466,7 +2466,7 @@ WHERE sub.ID = @id";
                                 if (!string.IsNullOrWhiteSpace(answer))
                                     break;
 
-                                Console.WriteLine("❌ Answer cannot be empty!");
+                                Console.WriteLine("Answer cannot be empty!");
                             }
 
                             marks = -1;
@@ -2486,7 +2486,7 @@ WHERE sub.ID = @id";
                         cmd2.ExecuteNonQuery();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n✅ Answer submitted!");
+                        Console.WriteLine("\nAnswer submitted!");
                         Console.ResetColor();
 
                         Console.ReadKey();
@@ -2494,7 +2494,7 @@ WHERE sub.ID = @id";
                 }
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n🎉 Quiz completed!");
+                Console.WriteLine("\nQuiz completed!");
                 Console.ResetColor();
 
                 Console.ReadKey();
@@ -2518,7 +2518,7 @@ WHERE sub.ID = @id";
 
                     // ================= ASSIGNMENT MARKS =================
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("📘 ASSIGNMENT MARKS\n");
+                    Console.WriteLine(" ASSIGNMENT MARKS\n");
                     Console.ResetColor();
 
                     string q1 = @"SELECT a.Title, sub.MarksObtained 
@@ -2535,7 +2535,7 @@ WHERE sub.ID = @id";
                     {
                         hasData = true;
 
-                        Console.WriteLine($"📌 {r1["Title"]}");
+                        Console.WriteLine($" {r1["Title"]}");
                         Console.WriteLine($"   Marks: {r1["MarksObtained"]}");
                         Console.WriteLine("----------------------------------");
                     }
@@ -2561,7 +2561,7 @@ WHERE sub.ID = @id";
                     {
                         hasData = true;
 
-                        Console.WriteLine($"📌 {r2["Question"]}");
+                        Console.WriteLine($"{r2["Question"]}");
                         Console.WriteLine($"   Marks: {r2["MarksObtained"]}");
                         Console.WriteLine("----------------------------------");
                     }
@@ -2572,7 +2572,7 @@ WHERE sub.ID = @id";
                     if (!hasData)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("❌ No marks available yet!");
+                        Console.WriteLine("No marks available yet!");
                         Console.ResetColor();
                     }
                 }
